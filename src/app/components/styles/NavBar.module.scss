@@ -1,6 +1,9 @@
 $navBarMobileHeight: 65px;
 $navBarDesktopHeight: 100px;
 
+$loupeMobileWidth: 220px;
+$loupeMobileHeight: 35px;
+
 .NavBar{
     width: 100vw;
     height: $navBarMobileHeight;
@@ -112,8 +115,7 @@ $navBarDesktopHeight: 100px;
         }
     }
 
-    $loupeMobileWidth: 220px;
-    $loupeMobileHeight: 35px;
+
 
     .loupeContainer{
         background-color: #204745;
@@ -131,13 +133,14 @@ $navBarDesktopHeight: 100px;
         transform: translate(-50%, -50%);
 
         input{
-            width: calc($loupeMobileWidth - 60px);
-            height: 24px;
+            width: calc(100% - 40px);
+            height: 100%;
             border: none;
             padding-left: 10px;
             background-color: transparent;
-            outline: none;
             color: white;
+            border-top-left-radius: 50px;
+            border-bottom-left-radius: 50px;
 
             &::placeholder{
                 color: white;
@@ -149,12 +152,13 @@ $navBarDesktopHeight: 100px;
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 60px;
-            height: $loupeMobileHeight;
+            width: 40px;
+            height: 100%;
             background-color: transparent;
-            outline: none;
             border: none;
             cursor: pointer;
+            border-top-right-radius: 50px;
+            border-bottom-right-radius: 50px;
 
             img{
                 width: calc($loupeMobileHeight - 15px);
@@ -211,3 +215,74 @@ $navBarDesktopHeight: 100px;
 
 }
 
+@media (min-width: 768px){
+    .NavBar{
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+
+        .logoContainer{
+            position: static;
+            transform: none;
+            top: 0;
+            left: 0;
+        }
+
+        .loupeContainer{
+            position: static;
+            transform: none;
+            width: 150px;
+            
+            input{
+            }
+            button.iconContainer{
+            }
+        }
+
+
+        ul{
+            position: static;
+            width: 70%;
+            max-width: 700px;
+            height: 35px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            background-color: transparent;
+            padding: 0;
+
+            a{
+                margin-bottom: 0;
+
+                .iconContainer{
+                    width: 18px;
+                    height: 18px;
+
+                }
+
+                span{
+                    font-size: 15px;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 1000px){
+    .NavBar{
+        padding: 0 60px;
+    }
+}
+
+@media (min-width: 1100px){
+    .NavBar{
+        .loupeContainer{
+            position: static;
+            transform: none;
+            width: $loupeMobileWidth;
+        }
+    }
+}

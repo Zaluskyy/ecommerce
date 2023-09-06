@@ -26,6 +26,8 @@ export default function Home() {
 
     useEffect(()=>{
         setMobile(window.innerWidth<768)
+        setOpenedNav(false)
+        setOpenedLoupe(false)
     }, [resize])
 
     const handleResize = ()=>{
@@ -84,7 +86,7 @@ export default function Home() {
         {/* logoContainer */}
         <AnimatePresence 
         mode={'wait'}>
-        {!openedLoupe&&
+        {(!openedLoupe||!mobile)&&
             <motion.div
             className={style.logoContainer}
             variants={slideSearchInput}
@@ -113,7 +115,7 @@ export default function Home() {
         <AnimatePresence
         mode={"wait"}
         >
-            {openedLoupe&&
+            {(openedLoupe||!mobile)&&
             <motion.form 
             onSubmit={handleSearch} 
             className={style.loupeContainer}
