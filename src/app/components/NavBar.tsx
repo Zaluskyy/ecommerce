@@ -23,6 +23,38 @@ export default function Home() {
     const [openedLoupe, setOpenedLoupe] = useState<boolean>(false)
 
     const [resize, setResize] = useState<boolean>(false)
+    const [scrollDirection, setScrollDirection] = useState<"down" | "up">("up");
+
+
+
+    useEffect(()=>{
+        openedNav?document.body.style.overflow = 'hidden': document.body.style.overflow = 'auto';
+    }, [openedNav])
+
+
+    useEffect(() => {
+    let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    const handleScroll = () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (scrollTop > lastScrollTop) {
+        setScrollDirection('down');
+        } else if (scrollTop < lastScrollTop) {
+        setScrollDirection('up');
+        }
+
+        lastScrollTop = scrollTop;
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+        window.removeEventListener('scroll', handleScroll);
+    };
+    }, []);
+
+
 
     useEffect(()=>{
         setMobile(window.innerWidth<768)
@@ -48,7 +80,7 @@ export default function Home() {
 
     const menuLi = menu.map((item: any)=>{
         return(
-            <Link href={`/${item.name=="terms and conditions"?'terms&conditions':item.name}`} onClick={()=>setOpenedNav(false)} >
+            <Link key={item.name} href={`/${item.name=="terms and conditions"?'terms&conditions':item.name}`} onClick={()=>setOpenedNav(false)} >
                 <div className={style.iconContainer}>
                     <Image src={item.img} alt={item.name}/>
                 </div>
@@ -69,7 +101,10 @@ export default function Home() {
     }
 
   return (
-    <nav className={style.NavBar}>
+    <motion.nav 
+    className={style.NavBar}
+    animate={scrollDirection=='down'?{top: -65}:{top: 0,}}
+    >
         {mobile&&
         <div 
         className={`${style.hamburger} ${openedNav&&style.hamburgerX}`} 
@@ -148,6 +183,6 @@ export default function Home() {
 
         </AnimatePresence>
 
-    </nav>
+    </motion.nav>
   )
 }
