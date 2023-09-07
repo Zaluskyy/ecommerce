@@ -22,7 +22,7 @@ export default function Account(){
                 {loginOrRegister=="LOGIN"?<span>Login</span>:<span>Register</span>}
             </div>
 
-            {loginOrRegister=="LOGIN"?<Login/>:<Register/>}
+            {loginOrRegister=="LOGIN"?<Login setLoginOrRegister={setLoginOrRegister}/>:<Register setLoginOrRegister={setLoginOrRegister}/>}
         </div>
     )
 }

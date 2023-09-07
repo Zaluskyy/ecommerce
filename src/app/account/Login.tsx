@@ -6,7 +6,12 @@ import Image from 'next/image';
 import googleicon from '../../../public/img/icon/google.svg';
 
 
-export default function Login(){
+
+interface LoginProps{
+    setLoginOrRegister: React.Dispatch<React.SetStateAction<'LOGIN' | 'REGISTER'>>;
+}
+
+const Login: React.FC<LoginProps> = ({ setLoginOrRegister }) => {
 
     const handleLogin = ()=>{
 
@@ -44,9 +49,11 @@ export default function Login(){
 
             <div className={style.noAccount}>
                 <span>Don’t you have an account?</span>
-                <span>Sign Up</span>
+                <span onClick={()=>setLoginOrRegister('REGISTER')}>Sign Up</span>
             </div>
 
         </div>
     )
 }
+
+export default Login
