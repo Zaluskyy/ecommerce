@@ -4,9 +4,10 @@ import style from './style/Register.module.scss';
 
 interface RegisterProps{
     setLoginOrRegister: React.Dispatch<React.SetStateAction<'LOGIN' | 'REGISTER'>>;
+    mobile: boolean;
 }
 
-const Register: React.FC<RegisterProps> = ({ setLoginOrRegister }) => {
+const Register: React.FC<RegisterProps> = ({ setLoginOrRegister, mobile }) => {
 
     const handleSignUp = ()=>{
 
@@ -37,10 +38,10 @@ const Register: React.FC<RegisterProps> = ({ setLoginOrRegister }) => {
 
             <button className={style.signUp}>Sign up</button>
 
-            <div className={style.existAccount}>
+            {mobile&&<div className={style.existAccount}>
                 <span>You already have an account?</span>
                 <span onClick={()=>{setLoginOrRegister('LOGIN')}}>Login</span>
-            </div>
+            </div>}
         </form>
     )
 }

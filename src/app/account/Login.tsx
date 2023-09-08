@@ -9,9 +9,10 @@ import googleicon from '../../../public/img/icon/google.svg';
 
 interface LoginProps{
     setLoginOrRegister: React.Dispatch<React.SetStateAction<'LOGIN' | 'REGISTER'>>;
+    mobile: boolean;
 }
 
-const Login: React.FC<LoginProps> = ({ setLoginOrRegister }) => {
+const Login: React.FC<LoginProps> = ({ setLoginOrRegister, mobile }) => {
 
     const handleLogin = ()=>{
 
@@ -47,10 +48,10 @@ const Login: React.FC<LoginProps> = ({ setLoginOrRegister }) => {
                 <span>Google</span>
             </button>
 
-            <div className={style.noAccount}>
+            {mobile&&<div className={style.noAccount}>
                 <span>Don’t you have an account?</span>
                 <span onClick={()=>setLoginOrRegister('REGISTER')}>Sign Up</span>
-            </div>
+            </div>}
 
         </div>
     )

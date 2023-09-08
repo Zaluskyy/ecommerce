@@ -5,6 +5,7 @@ form.Register{
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 430px;
 
     input{
         width: 100%;
@@ -33,12 +34,12 @@ form.Register{
         justify-content: space-between;
         align-items: center;
         
-
         span{
             font-size: 8px;
             color: red;
         }
     }
+    
     .line{
         width: 100%;
         height: 1px;
@@ -99,6 +100,7 @@ form.Register{
         span:nth-child(2){
             color: $green;
             font-size: 12px;
+            cursor: pointer;
         }
     }
 }
