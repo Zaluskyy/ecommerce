@@ -24,16 +24,12 @@
             font-size: 17px;
             
             &::placeholder{
-                color: black;
-                opacity: .2;
+                color: rgba(0, 0, 0, 0.2);
             }
         }
         input[type=email]{
-            margin-bottom: 20px;
+            margin-bottom: 29px;
             
-        }
-        input[type=password]{
-
         }
 
         div{
@@ -46,7 +42,7 @@
             align-items: center;
             .invalidData{
                 font-size: 8px;
-                color: red;
+                color: #ff3333;
             }
             a.forgotPassword{
                 font-size: 11px;

@@ -1,6 +1,8 @@
 import * as React from 'react';
 import style from './style/Register.module.scss';
 
+import { useFormik } from 'formik';
+
 
 interface RegisterProps{
     setLoginOrRegister: React.Dispatch<React.SetStateAction<'LOGIN' | 'REGISTER'>>;
@@ -9,31 +11,31 @@ interface RegisterProps{
 
 const Register: React.FC<RegisterProps> = ({ setLoginOrRegister, mobile }) => {
 
-    const handleSignUp = ()=>{
 
-    }
+    // const {} = useFormik({
+    //     initialValues: {
+    //         email
+    //     }
+    // })
+
 
     return(
-        <form onSubmit={handleSignUp} className={style.Register}>
-            <input placeholder='Email...' type="email"/>
-            <input placeholder='Repeat email...' type="email"/>
-            <div className={style.emailValidation}>
-                <span>Invalid email address</span>
-                <span>Emails do not match</span>
+        <form className={style.Register}>
+            <input placeholder='Name...' type="text"/>
+            <div className={style.errorContainer}>
+                <span className={style.error}>Please enter name</span>
             </div>
-            <div className={style.line}/>
+            <input placeholder='Email...' type="email"/>
+            <div className={style.errorContainer}>
+                <span className={style.error}>Please enter a valid email</span>
+            </div>
             <input placeholder='Password...' type="password"/>
-            <input className={style.lastInput} placeholder='Repeat password...' type="password"/>
-            <div className={style.passwordValidation}>
-                <div className={style.left}>
-                    <span>A lowercase letter</span>
-                    <span>A capital letter</span>
-                    <span>A number</span>
-                    <span>Minimum 8 characters</span>
-                </div>
-                <div className={style.right}>
-                    <span>Passwords match</span>
-                </div>
+            <div className={style.errorContainer}>
+                <span className={style.error}>Your password have to include at least 1 lower case letter, 1 uppercase letter, 1 numerical digit and one special character</span>
+            </div>
+            <input placeholder='Repeat password...' type="password"/>
+            <div className={style.errorContainer}>
+                <span className={style.error}>Passwords must match</span>
             </div>
 
             <button className={style.signUp}>Sign up</button>
