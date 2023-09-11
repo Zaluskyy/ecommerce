@@ -22,6 +22,7 @@
             padding: 20px;
             background-color: #d9d9d9;
             font-size: 17px;
+            border: 2px solid transparent;
             
             &::placeholder{
                 color: rgba(0, 0, 0, 0.2);
@@ -29,7 +30,10 @@
         }
         input[type=email]{
             margin-bottom: 29px;
-            
+        }
+
+        .errorInput{
+            border-color: #ee5656;
         }
 
         div{

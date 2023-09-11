@@ -15,10 +15,15 @@ form.Register{
         padding: 20px;
         background-color: #d9d9d9;
         font-size: 17px;
+        border: 2px solid transparent;
         
         &::placeholder{
             color: rgba(0, 0, 0, 0.2);
         }
+    }
+
+    .errorInput{
+        border-color: #ee5656;
     }
     
     .errorContainer{
@@ -30,7 +35,7 @@ form.Register{
         margin-bottom: 8px;
         
         .error{
-            color: #ff3333;
+            color: #ee5656;
         }
     }
 

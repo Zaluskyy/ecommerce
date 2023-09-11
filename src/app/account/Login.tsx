@@ -5,6 +5,10 @@ import Image from 'next/image';
 
 import googleicon from '../../../public/img/icon/google.svg';
 
+import { loginSchema } from './Schema';
+
+import { Field, Form, Formik } from 'formik'
+
 
 
 interface LoginProps{
@@ -15,26 +19,48 @@ interface LoginProps{
 const Login: React.FC<LoginProps> = ({ setLoginOrRegister, mobile }) => {
 
     const handleLogin = ()=>{
-
+        console.log("handleLogin")
     }
 
     return(
         <div className={style.Login}>
-            <form onSubmit={handleLogin}>
-                <input placeholder='Email...' type="email"/>
-                <input placeholder='Password...' type="password"/>
-                <div>
-                    <span className={style.invalidData}>Wrong email or password</span>
-                    <Link className={style.forgotPassword} href="/account/forgot-password">
-                    Forgot password?
-                    </Link>
 
-                </div>
+            <Formik
+            initialValues={{email: '', password: ''}}
+            validationSchema={loginSchema}
+            onSubmit={handleLogin}
+            >
+                {({ errors, touched }) => (
+                    <Form>
+                        <Field
+                        placeholder="Email..."
+                        type="email" 
+                        name="email"
+                        className={errors.email&&touched.email&&style.errorInput}
+                        />
 
+                        <Field
+                        placeholder="Password..."
+                        type="password" 
+                        name="password"
+                        className={errors.password&&touched.password&&style.errorInput}
+                        />
 
-                <button>Login</button>
-            </form>
+                        <div>
+                            <span className={style.invalidData}>
+                                {/* Wrong email or password */}
+                            </span>
+                            <Link className={style.forgotPassword} href="/account/forgot-password">
+                                Forgot password?
+                            </Link>
+                        </div>
 
+                        <button type="submit">Login</button>
+                    </Form>
+                )}
+
+            </Formik>
+            
             <div className={style.or}>
                 <div></div>
                 <span>or</span>

@@ -1,0 +1,31 @@
+import * as yup from 'yup'
+
+const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}$/;
+
+export const registerSchema = yup.object().shape({
+    name: yup
+    .string()
+    .required("Required"),
+    email: yup
+        .string()
+        .email("Please enter a valid email")
+        .required("Required"),
+    password: yup.string()
+        // .min(8)
+        .matches(passwordRules, {message: "Your password have to include at least 1 lower case letter, 1 uppercase letter, 1 numerical digit and one special character"})
+        .required("Required"),
+    confirmPassword: yup
+        .string()
+         .oneOf([yup.ref('password')], "Passwords must match")
+        .required("Required")
+})
+
+export const loginSchema = yup.object().shape({
+    email: yup
+        .string()
+        .email("Please enter a valid email")
+        .required("Required"),
+    password: yup
+        .string()
+        .required()
+})

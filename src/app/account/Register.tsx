@@ -1,7 +1,9 @@
 import * as React from 'react';
 import style from './style/Register.module.scss';
 
-import { useFormik } from 'formik';
+import { registerSchema } from './Schema';
+
+import { Field, Form, Formik } from 'formik'
 
 
 interface RegisterProps{
@@ -12,39 +14,67 @@ interface RegisterProps{
 const Register: React.FC<RegisterProps> = ({ setLoginOrRegister, mobile }) => {
 
 
-    // const {} = useFormik({
-    //     initialValues: {
-    //         email
-    //     }
-    // })
-
+    const handleSubmit = ()=>{
+        console.log("handleSubmit")
+    }
 
     return(
-        <form className={style.Register}>
-            <input placeholder='Name...' type="text"/>
-            <div className={style.errorContainer}>
-                <span className={style.error}>Please enter name</span>
-            </div>
-            <input placeholder='Email...' type="email"/>
-            <div className={style.errorContainer}>
-                <span className={style.error}>Please enter a valid email</span>
-            </div>
-            <input placeholder='Password...' type="password"/>
-            <div className={style.errorContainer}>
-                <span className={style.error}>Your password have to include at least 1 lower case letter, 1 uppercase letter, 1 numerical digit and one special character</span>
-            </div>
-            <input placeholder='Repeat password...' type="password"/>
-            <div className={style.errorContainer}>
-                <span className={style.error}>Passwords must match</span>
-            </div>
+        <Formik
+        initialValues={{ name: '', email: '', password: '', confirmPassword: '' }} 
+        validationSchema={registerSchema}
+        onSubmit={handleSubmit}
+        >
+            {({ errors, touched }) => (
+            <Form className={style.Register}>
+                <Field
+                placeholder="Name..."
+                type="text"
+                name="name"
+                className={errors.name&&touched.name&&style.errorInput}
+                />
+                <div className={style.errorContainer}>
+                    {errors.name&&touched.name&&<span className={style.error}>{errors.name}</span>}
+                </div>
 
-            <button className={style.signUp}>Sign up</button>
+                <Field
+                placeholder="Email..."
+                type="email"
+                name="email"
+                className={errors.email&&touched.email&&style.errorInput}
+                />
+                <div className={style.errorContainer}>
+                    {errors.email&&touched.email&&<span className={style.error}>{errors.email}</span>}
+                </div>
 
-            {mobile&&<div className={style.existAccount}>
-                <span>You already have an account?</span>
-                <span onClick={()=>{setLoginOrRegister('LOGIN')}}>Login</span>
-            </div>}
-        </form>
+                <Field
+                placeholder="Password..."
+                type="password"
+                name="password"
+                className={errors.password&&touched.password&&style.errorInput}
+                />
+                <div className={style.errorContainer}>
+                    {errors.password&&touched.password&&<span className={style.error}>{errors.password}</span>}
+                </div>
+
+                <Field
+                placeholder="Repeat password..."
+                name="confirmPassword"
+                type="password"
+                className={errors.confirmPassword&&touched.confirmPassword&&style.errorInput}
+                />
+                <div className={style.errorContainer}>
+                    {errors.confirmPassword&&touched.confirmPassword&&<span className={style.error}>{errors.confirmPassword}</span>}
+                </div>
+
+                <button type="submit" className={style.signUp}>Sign up</button>
+
+                {mobile&&<div className={style.existAccount}>
+                    <span>You already have an account?</span>
+                    <span onClick={()=>{setLoginOrRegister('LOGIN')}}>Login</span>
+                </div>}
+            </Form>
+            )}
+        </Formik>
     )
 }
 
