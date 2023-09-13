@@ -11,14 +11,11 @@ import delivery from '../../../public/img/icon/delivery.svg'
 import summary from '../../../public/img/icon/summary.svg'
 import done from '../../../public/img/icon/done.svg'
 
-
-
 export default function CartPage(){
-
 
     const titleIcons = [
         {title: 'Cart', icon: cart},
-        {title: 'Delivery', icon: delivery},
+        {title: 'Delivery & Payment', icon: delivery},
         {title: 'Summary', icon: summary},
         {title: 'Done', icon: done},
     ]
@@ -28,16 +25,28 @@ export default function CartPage(){
     return(
         <div className={style.CartPage}>
 
-            <ProgressBar currentProgress={currentProgress} />
+            <div className={style.top}>
+                <ProgressBar 
+                currentProgress={currentProgress} 
+                setCurrentProgress={setCurrentProgress} 
+                />
 
-            <div className={style.title}>
-                <div className={style.iconContainer}>
-                    <Image src={titleIcons[currentProgress-1].icon} alt="icon" />
+
+                <div className={style.title}>
+                    <div className={style.iconContainer}>
+                        <Image src={titleIcons[currentProgress-1].icon} alt="icon" />
+                    </div>
+                    <span>{titleIcons[currentProgress-1].title}</span>
                 </div>
-                <span>{titleIcons[currentProgress-1].title}</span>
+
             </div>
 
+
             <Cart/>
+
+            {currentProgress<4&&
+            <button onClick={()=>setCurrentProgress(prev=>prev+1)} className={style.nextStep}>{titleIcons[currentProgress].title}</button>
+            }
         
         </div>
     )

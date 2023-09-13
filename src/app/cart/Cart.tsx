@@ -49,8 +49,6 @@ const Cart: FC<CartProps> = () => {
     return ( 
         <div className={style.Cart}>
             {productsElements}
-
-            <button className={style.nextStep}>Delivery &amp; payment</button>
         </div>
      );
 }
