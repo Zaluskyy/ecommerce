@@ -21,31 +21,11 @@ const Cart: FC<CartProps> = () => {
             name: 'Apple airdots',
             price: 1488,
         },
-        {
-            img: iphone,
-            name: 'Iphone 14',
-            price: 2137,
-        },
-        {
-            img: airdots,
-            name: 'Apple airdots',
-            price: 1488,
-        },
-        {
-            img: iphone,
-            name: 'Iphone 14',
-            price: 2137,
-        },
-        {
-            img: airdots,
-            name: 'Apple airdots',
-            price: 1488,
-        },
     ]
 
     const productsElements = products.map(item=>{
         return(
-            <div className={style.productContainer}>
+            <div key={item.name} className={style.productContainer}>
                 <div className={style.top}>
                     <div className={style.imageContainer}>
                         <Image src={item.img} alt={item.name}/>

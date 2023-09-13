@@ -1,6 +1,7 @@
 import './globals.css'
 import { Headland_One } from 'next/font/google'
 import NavBar from './components/NavBar'
+import { EcommerceContextProvider } from './store/context'
 
 const headland = Headland_One({ subsets: ['latin'], weight: ['400'] })
 
@@ -16,10 +17,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={headland.className}>
-        <NavBar/>
-        {children}
+      <EcommerceContextProvider>
+        <body className={headland.className}>
+          <NavBar/>
+          {children}
         </body>
+      </EcommerceContextProvider>
     </html>
   )
 }

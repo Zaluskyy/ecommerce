@@ -1,6 +1,6 @@
 "use client"
 
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import style from './style/Account.module.scss';
 import Image from 'next/image';
 
@@ -8,27 +8,15 @@ import Login from './Login';
 import Register from './Register';
 
 import account from '../../../public/img/icon/account.svg'
+import EcommerceContext from '../store/context';
 
 export default function Account(){
 
+    const context = useContext(EcommerceContext)
+    const { mobile } = context
+
     const [loginOrRegister, setLoginOrRegister] = useState<"LOGIN"|"REGISTER">("LOGIN")
 
-    const [mobile, setMobile] = useState<boolean>(true)
-
-    const [resize, setResize] = useState<boolean>(false)
-
-    useEffect(()=>{
-        setMobile(window.innerWidth<768)
-    }, [resize])
-
-    const handleResize = ()=>{
-        setResize(prev=>!prev)
-    }
-
-    useEffect(()=>{
-        window.addEventListener('resize', handleResize)
-        return()=>window.removeEventListener('resize', handleResize)
-    })
     
     return(
         <div className={style.Account}>

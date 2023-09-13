@@ -1,11 +1,13 @@
 "use client"
 
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useContext, useEffect, useState } from 'react';
 import style from './styles/NavBar.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { appearNavbar, slideSearchInput } from '../UI/AnimationVariants';
+
+import EcommerceContext from '../store/context';
 
 import logo from '../../../public/img/icon/logo.svg'
 import hamburger from '../../../public/img/icon/hamburger.svg'
@@ -18,7 +20,9 @@ import terms from '../../../public/img/icon/terms.svg'
 
 export default function Home() {
 
-    const [mobile, setMobile] = useState<boolean>(false)
+    const context = useContext(EcommerceContext)
+    
+    const {mobile, setMobile} = context
     const [openedNav, setOpenedNav] = useState<boolean>(false)
     const [openedLoupe, setOpenedLoupe] = useState<boolean>(false)
 

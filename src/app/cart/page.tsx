@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import style from './style//Page.module.scss';
 import Image from 'next/image';
 
@@ -14,6 +14,7 @@ import done from '../../../public/img/icon/done.svg'
 
 
 export default function CartPage(){
+
 
     const titleIcons = [
         {title: 'Cart', icon: cart},
