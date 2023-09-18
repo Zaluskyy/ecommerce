@@ -1,0 +1,119 @@
+@import '../../variables.scss';
+
+$marginBottom: 30px;
+
+.DeliveryAndPayment{
+    width: 100%;
+    padding: 0 20px;
+    margin-bottom: 100px;
+
+    span.title{
+        font-size: 20px;
+    }
+
+    .tableContainer{
+        margin-bottom: 40px;
+        form{
+            margin-top: 10px;
+            position: relative;
+            height: calc(var(--height) * 49px);
+
+            .container{
+                z-index: 1;
+                position: absolute;
+                top: calc(var(--top) * 49px);
+                width: 100%;
+                height: 50px;
+                border: 1px solid #808080;
+                display: flex;
+                justify-content: flex-start;
+                border-radius: 5px;
+                
+                transition: .1s border;
+                .radioConatiner{
+                    width: 50px;
+                    height: 50px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    input[type=radio]{
+    
+                    }
+                }
+                .informationContainer{
+                    width: calc(100% - 50px);
+                    height: 50px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+    
+                    div:nth-child(1){
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        align-items: flex-start;
+                        font-size: 10px;
+                        height: 50px;
+                        padding: 6px 0;
+                        span:nth-child(1){}
+                        span:nth-child(2){
+                            color: #808080;
+                        }
+                    }
+
+                    div.center{
+                        justify-content: center;
+                    }
+    
+                    .iconContainer{
+                        width: 50px;
+                        height: 50px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        img{
+                        }
+                    }
+                }
+            }
+
+            .active{
+                border: 2px solid $green;
+                z-index: 2;
+            }
+        }
+    }
+
+    .recipientDataContainer{
+        margin-bottom: 40px;
+        
+        .container{
+            margin-top: 10px;
+            width: 100%;
+            height: 100px;
+            border-radius: 10px;
+            border: 1px solid black;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 15px 13px;
+            position: relative;
+
+            span{
+                font-size: 10px;
+                color: #808080;
+                &:nth-child(1){
+                    color: black;
+                }
+            }
+            
+            span.change{
+                position: absolute;
+                right: 13px;
+                top: 15px;
+                color: $green;
+            }
+        }
+    }
+}
