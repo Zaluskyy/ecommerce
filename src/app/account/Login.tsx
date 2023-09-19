@@ -5,11 +5,9 @@ import Image from 'next/image';
 
 import googleicon from '../../../public/img/icon/google.svg';
 
-import { loginSchema } from './Schema';
+import { loginSchema } from '../components/Schema';
 
 import { Field, Form, Formik } from 'formik'
-
-
 
 interface LoginProps{
     setLoginOrRegister: React.Dispatch<React.SetStateAction<'LOGIN' | 'REGISTER'>>;

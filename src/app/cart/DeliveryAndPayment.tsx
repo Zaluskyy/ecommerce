@@ -7,9 +7,11 @@ import courierIcon from '../../../public/img/icon/courier.svg'
 import personalCollectionIcon from '../../../public/img/icon/personalCollection.svg';
 import inpostIcon from '../../../public/img/icon/inpost.svg';
 
-interface DeliveryAndPaymentProps{}
+interface DeliveryAndPaymentProps{
+    setChangeRecipientsData: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-const DeliveryAndPayment: FC<DeliveryAndPaymentProps> = () => {
+const DeliveryAndPayment: FC<DeliveryAndPaymentProps> = ({setChangeRecipientsData}) => {
 
     interface IArr {
         name: string,
@@ -126,7 +128,7 @@ const DeliveryAndPayment: FC<DeliveryAndPaymentProps> = () => {
                     <span>+48 537 728 008</span>
                     <span>adohit88@gmail.com</span>
 
-                    <span className={style.change}>Change</span>
+                    <span className={style.change} onClick={()=>setChangeRecipientsData(true)}>Change</span>
                 </div>
             </div>
 

@@ -29,3 +29,27 @@ export const loginSchema = yup.object().shape({
         .string()
         .required()
 })
+
+export const adressSchema = yup.object().shape({
+    fullName: yup
+        .string()
+        .required("Require"),
+    street: yup
+        .string()
+        .required("Require"),
+    apartmentNumber: yup
+        .string()
+        .required("Require"),
+    zipCode: yup
+        .string()
+        .required("Require"),
+    city: yup
+        .string()
+        .required("Require"),
+    telephone: yup
+        .string()
+        .required("Require"),
+    email: yup
+        .string()
+        .required("Require"),
+})

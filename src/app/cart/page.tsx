@@ -1,5 +1,5 @@
 "use client"
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import style from './style//Page.module.scss';
 import Image from 'next/image';
 
@@ -14,9 +14,16 @@ import cart from '../../../public/img/icon/cart.svg'
 import delivery from '../../../public/img/icon/delivery.svg'
 import summary from '../../../public/img/icon/summary.svg'
 import done from '../../../public/img/icon/done.svg'
+import ChangeRecipientsData from './ChangeRecipientsData';
 
 
 export default function CartPage(){
+
+    const [changeRecipientsData, setChangeRecipientsData] = useState<boolean>(false)
+
+    useEffect(()=>{
+        changeRecipientsData?document.body.style.overflow = 'hidden': document.body.style.overflow = 'auto';
+    }, [changeRecipientsData])
 
     const titleIcons = [
         {title: 'Cart', icon: cart},
@@ -27,7 +34,7 @@ export default function CartPage(){
 
     const components = [
         <Cart/>,
-        <DeliveryAndPayment/>,
+        <DeliveryAndPayment setChangeRecipientsData={setChangeRecipientsData}/>,
         <Summary/>,
         <Done/>
     ]
@@ -59,6 +66,8 @@ export default function CartPage(){
             {currentProgress<4&&
             <button onClick={()=>setCurrentProgress(prev=>prev+1)} className={style.nextStep}>{titleIcons[currentProgress].title}</button>
             }
+
+            {changeRecipientsData&&<ChangeRecipientsData setChangeRecipientsData={setChangeRecipientsData} />}
         
         </div>
     )

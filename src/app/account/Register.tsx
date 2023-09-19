@@ -1,7 +1,7 @@
 import * as React from 'react';
 import style from './style/Register.module.scss';
 
-import { registerSchema } from './Schema';
+import { registerSchema } from '../components/Schema';
 
 import { Field, Form, Formik } from 'formik'
 
