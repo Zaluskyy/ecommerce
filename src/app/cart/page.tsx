@@ -16,6 +16,8 @@ import summary from '../../../public/img/icon/summary.svg'
 import done from '../../../public/img/icon/done.svg'
 import ChangeRecipientsData from './ChangeRecipientsData';
 
+import { AnimatePresence } from 'framer-motion';
+
 
 export default function CartPage(){
 
@@ -50,16 +52,13 @@ export default function CartPage(){
                 setCurrentProgress={setCurrentProgress} 
                 />
 
-
                 <div className={style.title}>
                     <div className={style.iconContainer}>
                         <Image src={titleIcons[currentProgress-1].icon} alt="icon" />
                     </div>
                     <span>{titleIcons[currentProgress-1].title}</span>
                 </div>
-
             </div>
-
 
             {components[currentProgress-1]}
 
@@ -67,7 +66,15 @@ export default function CartPage(){
             <button onClick={()=>setCurrentProgress(prev=>prev+1)} className={style.nextStep}>{titleIcons[currentProgress].title}</button>
             }
 
-            {changeRecipientsData&&<ChangeRecipientsData setChangeRecipientsData={setChangeRecipientsData} />}
+            <AnimatePresence
+            mode={'wait'}
+            initial={false}
+            onExitComplete={()=>null}
+            >
+                {changeRecipientsData&&
+                <ChangeRecipientsData setChangeRecipientsData={setChangeRecipientsData} />
+                }
+            </AnimatePresence>
         
         </div>
     )

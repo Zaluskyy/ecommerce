@@ -114,30 +114,35 @@ const DeliveryAndPayment: FC<DeliveryAndPaymentProps> = ({setChangeRecipientsDat
 
     return(
         <div className={style.DeliveryAndPayment}>
-            <div className={style.tableContainer}>
-                <span className={style.title}>Delivery</span>
-                <form style={styleDeliveryHeight}>
-                    {deliveries}
-                </form>
+            <div className={style.left}>
+                <div className={style.tableContainer}>
+                    <span className={style.title}>Delivery</span>
+                    <form style={styleDeliveryHeight}>
+                        {deliveries}
+                    </form>
+                </div>
+
+                <div className={style.recipientDataContainer}>
+                    <span className={style.title}>Recipient's data</span>
+                    <div className={style.container}>
+                        <span>Adolf Hitler</span>
+                        <span>+48 537 728 008</span>
+                        <span>adohit88@gmail.com</span>
+
+                        <span className={style.change} onClick={()=>setChangeRecipientsData(true)}>Change</span>
+                    </div>
+                </div>
+
             </div>
-
-            <div className={style.recipientDataContainer}>
-                <span className={style.title}>Recipient's data</span>
-                <div className={style.container}>
-                    <span>Adolf Hitler</span>
-                    <span>+48 537 728 008</span>
-                    <span>adohit88@gmail.com</span>
-
-                    <span className={style.change} onClick={()=>setChangeRecipientsData(true)}>Change</span>
+            <div className={style.right}>
+                <div className={style.tableContainer} style={stylePaymentHeight}>
+                    <span className={style.title}>Payment</span>
+                    <form>
+                    {payment}
+                    </form>
                 </div>
             </div>
 
-            <div className={style.tableContainer} style={stylePaymentHeight}>
-                <span>Payment</span>
-                <form>
-                {payment}
-                </form>
-            </div>
         </div>
     )
 }
