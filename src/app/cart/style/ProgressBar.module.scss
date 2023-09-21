@@ -47,6 +47,12 @@
             background-color: #204745;
         }
     }
+    .past{
+        div{
+            background-color: hsla(0, 0%, 0%, 0.8);
+            cursor: pointer;
+        }
+    }
 }
 
 @media (min-width: 768px){
