@@ -41,7 +41,7 @@ export default function CartPage(){
         <Done/>
     ]
 
-    const [currentProgress, setCurrentProgress] = useState<number>(2)
+    const [currentProgress, setCurrentProgress] = useState<number>(3)
 
     return(
         <div className={style.CartPage}>
