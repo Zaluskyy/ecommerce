@@ -100,24 +100,33 @@ const Summary: FC<SummaryProps> = () => {
 
     return(
         <div className={style.Summary}>
+            <div className={style.left}>
 
-            {deliveryAndPaymentArr}
+                {deliveryAndPaymentArr}
 
-            <div className={style.recipientDataContainer}>
-                <span className={style.title}>Recipient's data</span>
-                <div className={style.container}>
-                    <span>Adolf Hitler</span>
-                    <span>+48 537 728 008</span>
-                    <span>adohit88@gmail.com</span>
+                <div className={style.recipientDataContainer}>
+                    <span className={style.title}>Recipient's data</span>
+                    <div className={style.container}>
+                        <span>Adolf Hitler</span>
+                        <span>+48 537 728 008</span>
+                        <span>adohit88@gmail.com</span>
+                    </div>
                 </div>
+
             </div>
 
-            <div className={style.cartContainer}>
-                <span className={style.title}>Cart</span>
-                <div className={style.container} style={styleProducts} >
-                    {products}
+            <div className={style.right}>
+
+                <div className={style.cartContainer}>
+                    <span className={style.title}>Cart</span>
+                    <div className={style.container} style={styleProducts} >
+                        {products}
+                    </div>
                 </div>
+                
             </div>
+
+
             
         </div>
     )

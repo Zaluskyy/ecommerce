@@ -146,3 +146,26 @@
         }
     }
 }
+
+$maxWidth: 600px;
+
+@media (min-width: 768px){
+    .Summary{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        .left{
+            width: 40%;
+            max-width: $maxWidth;
+        }
+        .right{
+            width: 40%;
+            max-width: $maxWidth;
+        }
+
+
+
+    }
+}
