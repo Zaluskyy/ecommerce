@@ -63,7 +63,7 @@ export default function Home() {
     useEffect(()=>{
         setMobile(window.innerWidth<768)
         setOpenedNav(false)
-        setOpenedLoupe(false)
+        if(!mobile) setOpenedLoupe(false)
     }, [resize])
 
     const handleResize = ()=>{
