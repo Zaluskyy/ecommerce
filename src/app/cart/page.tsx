@@ -63,8 +63,20 @@ export default function CartPage(){
             {components[currentProgress-1]}
 
             {currentProgress<4&&
-            <button onClick={()=>setCurrentProgress(prev=>prev+1)} className={style.nextStep}>{titleIcons[currentProgress].title}</button>
-            }
+            <div className={style.buttonContainer}>
+
+                {currentProgress!==1&&
+                <button
+                className={currentProgress==3?`${style.prev} ${style.smallerText}`: style.prev}
+                onClick={()=>setCurrentProgress(prev=>prev-1)}
+                >{titleIcons[currentProgress-2].title}</button>}
+
+                <button
+                className={currentProgress==1?`${style.next} ${style.bigger}`: style.next}
+                onClick={()=>setCurrentProgress(prev=>prev+1)}
+                >{titleIcons[currentProgress].title}</button>
+                
+            </div>}
 
             <AnimatePresence
             mode={'wait'}

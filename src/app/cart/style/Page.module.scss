@@ -41,23 +41,42 @@
         }
     }
 
-    button.nextStep{
+    .buttonContainer{
+        width: 100%;
+        height: 75px;
         position: fixed;
-        width: 260px;
-        height: 45px;
+        bottom: 0;
         display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: $green;
-        border: none;
-        border-radius: 50px;
-        color: white;
-        font-size: 20px;
-        bottom: 30px;
-        padding: 10px 20px;
-        z-index: 10;
-    }
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: flex-start;
 
+        button{
+            z-index: 110;
+            background-color: red;
+            width: 150px;
+            height: 45px;
+            border-radius: 50px;
+            border: none;
+            font-size: 20px;
+        }
+        .prev{
+            background: white;
+            color: $green;
+            border: 2px solid $green;
+        }
+        .smallerText{
+            font-size: 18px;
+        }
+
+        .next{
+            background-color: $green;
+            color: white;
+        }
+        .bigger{
+            width: 260px;
+        }
+    }
 }
     
 
@@ -71,6 +90,13 @@
                     order: 1;
                     align-self: center;
                     margin-bottom: 0;
+                }
+            }
+            
+            .buttonContainer{
+                button{
+                    width: 250px;
+                    height: 50px;
                 }
             }
         }
