@@ -1,22 +1,75 @@
 import * as React from 'react';
 import style from './page.module.scss'
-import Image from 'next/image';
+import {StaticImageData} from 'next/image';
 
-import bannerImg from '../../public/img/banner.jpg';
 import iphoneImg from '../../public/img/iphone.png';
-import whiteCart from '../../public/img/icon/whiteCart.svg';
+import airdotsImg from '../../public/img/airdots.png';
+
+import Product from './components/Product';
+import Banner from './components/Banner';
 
 export default function Home() {
+
+
+  interface IproductsArr{
+    img: StaticImageData;
+    name: string;
+    price: number;
+  }
+
+  const productsArr: IproductsArr[] = [
+    {
+      img: iphoneImg,
+      name: 'Iphone 14',
+      price: 2137,
+    },
+    {
+      img: airdotsImg,
+      name: 'Apple Airdots',
+      price: 1488,
+    },
+    {
+      img: iphoneImg,
+      name: 'Iphone 14',
+      price: 2137,
+    },
+    {
+      img: airdotsImg,
+      name: 'Apple Airdots',
+      price: 1488,
+    },
+    {
+      img: iphoneImg,
+      name: 'Iphone 14',
+      price: 2137,
+    },
+    {
+      img: airdotsImg,
+      name: 'Apple Airdots',
+      price: 1488,
+    },
+    {
+      img: airdotsImg,
+      name: 'Apple Airdots',
+      price: 1488,
+    },
+  ]
+
+  const products = productsArr.map(item=>{
+    return (
+      <Product 
+        key={item.name}
+        img={item.img} 
+        name={item.name} 
+        price={item.price } 
+        />
+    )
+  })
+
   return (
     <main className={style.main}>
-      <div className={style.banner}>
-        <Image src={bannerImg} alt="banner"/>
-        <div className={style.changeImgContainer}>
-          <div className={style.changeImg} />
-          <div className={style.changeImg} />
-          <div className={style.changeImg} />
-        </div>
-      </div>
+
+      <Banner/>
 
       <div className={style.filters}>
         <select className={style.categories}>
@@ -35,23 +88,7 @@ export default function Home() {
       <span className={style.title}>Recomended:</span>
 
       <div className={style.products}>
-        <div className={style.productContainer}>
-          <div className={style.imgContainer}>
-            <Image src={iphoneImg} alt="image"/>
-          </div>
-          <div className={style.informationContainer}>
-            <div className={style.top}>
-              <span>Iphone 14</span>
-            </div>
-            <div className={style.bottom}>
-              <button>
-                <span>Add to cart</span>
-                <Image src={whiteCart} alt="cart icon"/>
-              </button>
-              <span>2137.00 zł</span>
-            </div>
-          </div>
-        </div>
+        {products}
       </div>
 
     </main>

@@ -1,0 +1,83 @@
+@import '../../variables.scss';
+
+.container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    .product{
+        width: 140px;
+        height: 200px;
+        border-radius: 15px;
+        overflow: hidden;
+        background-color: #E8E8E8;
+    
+        .imgContainer{
+            width: 140px;
+            height: 140px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #F5F6F6;
+            border-radius: 15px;
+            
+            img{
+                width: 90%;
+                height: 90%;
+                object-fit: cover;
+            }
+        }
+    
+        .informationContainer{
+            width: 100%;
+            height: calc(100% - 140px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            .top{
+                display: flex;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding: 5px;
+                width: 100%;
+                height: 50%;
+                span{
+                    font-size: 9px;
+                }
+            }
+            .bottom{
+                width: 100%;
+                height: 50%;
+                padding: 5px;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                button{
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-around;
+                    align-items: center;
+                    padding: 5px;
+                    border-radius: 50px;
+                    border: none;
+                    background-color: $green;
+                    color: white;
+                    span{
+                        font-size: 9px;
+                    }
+                    img{
+                        margin-left: 2px;
+                        width: 9px;
+                        height: 9px;
+                    }
+                }
+                span{
+                    font-size: 9px;
+                }
+            }
+        }
+    }
+}
