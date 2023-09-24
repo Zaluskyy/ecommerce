@@ -53,3 +53,10 @@ export const adressSchema = yup.object().shape({
         .string()
         .required("Require"),
 })
+
+export const forgotPassword = yup.object().shape({
+    email: yup
+        .string()
+        .email("Please enter a valid email")
+        .required("Required"),
+})

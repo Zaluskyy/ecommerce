@@ -38,6 +38,7 @@ const Summary: FC<SummaryProps> = () => {
         name: string,
         pieces: number,
         price: number,
+        id: number
     }
 
     const productsArr: IproductsArr[] = [
@@ -46,18 +47,20 @@ const Summary: FC<SummaryProps> = () => {
             name: 'Iphone 15',
             pieces: 1,
             price: 1488,
+            id: 1,
         },
         {
             image: airdots,
             name: 'Apple Airdots',
             pieces: 1,
             price: 2137,
+            id: 2,
         },
     ]
 
-    const deliveryAndPaymentArr = summaryArr.map(item=>{
+    const deliveryAndPaymentArr = summaryArr.map((item)=>{
         return(
-            <div className={style.tableContainer}>
+            <div key={item.name} className={style.tableContainer}>
                 <span className={style.title}>{item.name}</span>
                 <div className={style.container}>
                     <div className={style.iconContainer}>
@@ -75,24 +78,22 @@ const Summary: FC<SummaryProps> = () => {
         )
     })
 
-    const products = productsArr.map(item=>{
+    const products = productsArr.map((item)=>{
         return(
-            <>
-        <div className={style.product}>
-            <div className={style.imageContainer}>
-                <Image src={item.image} alt="product img"/>
-            </div>
-            <div className={style.informationContainer}>
-                <div className={style.top}>
-                    <span>{item.name}</span>
+                <div key={item.id} className={style.product}>
+                    <div className={style.imageContainer}>
+                        <Image src={item.image} alt="product img"/>
+                    </div>
+                    <div className={style.informationContainer}>
+                        <div className={style.top}>
+                            <span>{item.name}</span>
+                        </div>
+                        <div className={style.bottom}>
+                            <span className={style.pieces}>{item.pieces} psc</span>
+                            <span className={style.price}>{item.price} zł</span>
+                        </div>
+                    </div>
                 </div>
-                <div className={style.bottom}>
-                    <span className={style.pieces}>{item.pieces} psc</span>
-                    <span className={style.price}>{item.price} zł</span>
-                </div>
-            </div>
-        </div>
-        </>
         )
     })
 
@@ -125,9 +126,6 @@ const Summary: FC<SummaryProps> = () => {
                 </div>
                 
             </div>
-
-
-            
         </div>
     )
 }
