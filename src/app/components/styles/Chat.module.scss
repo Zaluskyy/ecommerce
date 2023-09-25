@@ -13,6 +13,7 @@
     align-items: center;
     z-index: 100;
     cursor: pointer;
+    transition: width .2s, height .2s;
 }
 .startConversation{
     cursor: auto;
@@ -79,7 +80,7 @@
         height: 65px;
         background-color: $green;
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-end;
         align-items: center;
         padding: 10px;
         img{
@@ -136,7 +137,7 @@
                 order: 1;
                 .text{
                     color: white;
-                    background-color: $green;
+                    background-color: #204745de;
                 }
             }
         }
@@ -171,6 +172,36 @@
             
             img{
                 filter: invert(100%); 
+            }
+        }
+    }
+}
+
+@media (min-width: 768px){
+    .startConversation{
+        width: 320px;
+        height: 450px;
+        right: 20px;
+        bottom: 20px;
+        border-radius: 12px;
+    }
+    .conversation{
+        width: 320px;
+        height: 450px;
+        right: 20px;
+        bottom: 20px;
+        border-radius: 12px;
+        .topBar{
+            height: 40px;
+        }
+        .content{
+            height: calc(100% - 105px);
+            .messageContainer{
+                .message{
+                    .text{
+                        max-width: 190px;
+                    }
+                }
             }
         }
     }

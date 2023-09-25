@@ -19,7 +19,16 @@ const Chat: FC<ChatProps> = () => {
 
     const [opened, setOpened] = useState<boolean>(false)
     const [conversation, setConversation] = useState<boolean>(false)
-    const [currentStyle, setCurrentStyle] = useState<string>(style.chat)
+    const [currentStyle, setCurrentStyle] = useState<string>('')
+
+    const handleKeyDown = (e: KeyboardEvent)=>{
+        if(e.key=='Escape') setOpened(false)
+    }
+
+    useEffect(()=>{
+        addEventListener('keydown', handleKeyDown)
+        return ()=> removeEventListener('keydown', handleKeyDown)
+    })
 
     useEffect(()=>{
         if(!opened) setCurrentStyle('')
@@ -50,9 +59,10 @@ const Chat: FC<ChatProps> = () => {
         {author: 'shop', text: 'O'},
     ]
 
-    const messages = messagesArr.map(item=>{
+    const messages = messagesArr.map((item, index)=>{
         return(
             <div 
+            key={index}
             className={item.author=='shop'?`${style.messageContainer}`: `${style.messageContainer} ${style.myMessage}`}
             >
                 <div className={style.imageContainer}>
@@ -99,11 +109,6 @@ const Chat: FC<ChatProps> = () => {
             {opened&&conversation&&
             <div className={style.conversation}>
                 <div className={style.topBar}>
-                    <Image 
-                    src={backIcon} 
-                    alt="back icon"
-                    onClick={()=>setConversation(false)}
-                    />
                     <Image 
                     src={minimalizeIcon} 
                     alt="minimalize icon"
