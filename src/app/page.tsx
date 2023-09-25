@@ -8,6 +8,8 @@ import airdotsImg from '../../public/img/airdots.png';
 import Product from './components/Product';
 import Banner from './components/Banner';
 
+import Chat from './components/Chat';
+
 export default function Home() {
 
 
@@ -90,6 +92,10 @@ export default function Home() {
       <div className={style.products}>
         {products}
       </div>
+
+
+      <Chat/>
+
 
     </main>
   )
