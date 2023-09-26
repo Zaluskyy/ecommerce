@@ -79,12 +79,12 @@ export default function Home() {
         {name: 'account', img: account},
         {name: 'cart', img: cart},
         {name: 'contact', img: contact},
-        {name: 'terms and conditions', img: terms},
+        {name: 'terms & conditions', img: terms},
     ]
 
     const menuLi = menu.map((item: any)=>{
         return(
-            <Link key={item.name} href={`/${item.name=="terms and conditions"?'terms&conditions':item.name}`} onClick={()=>setOpenedNav(false)} >
+            <Link key={item.name} href={`/${item.name=="terms & conditions"?'terms&conditions':item.name}`} onClick={()=>setOpenedNav(false)} >
                 <div className={style.iconContainer}>
                     <Image src={item.img} alt={item.name}/>
                 </div>
