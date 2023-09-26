@@ -13,10 +13,7 @@ import EcommerceContext from '../store/context';
 export default function Account(){
 
     const context = useContext(EcommerceContext)
-    const { mobile } = context
-
-    const [loginOrRegister, setLoginOrRegister] = useState<"LOGIN"|"REGISTER">("LOGIN")
-
+    const { mobile, loginOrRegister, setLoginOrRegister } = context
     
     return(
         <div className={style.Account}>

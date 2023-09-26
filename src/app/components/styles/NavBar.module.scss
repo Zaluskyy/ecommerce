@@ -1,3 +1,5 @@
+@import '../../variables.scss';
+
 $navBarMobileHeight: 65px;
 $navBarDesktopHeight: 100px;
 
@@ -118,8 +120,6 @@ $loupeMobileHeight: 35px;
         }
     }
 
-
-
     .loupeContainer{
         background-color: #204745;
         width: $loupeMobileWidth;
@@ -171,15 +171,15 @@ $loupeMobileHeight: 35px;
         }
     }
 
-
     ul{
         position: absolute;
         left: 0;
         top: 65px;
         width: 100vw;
-        height: 100vh;
+        height: calc(100vh - 65px);
+        height: calc(100dvh - 65px);
         background-color: white;
-        padding: 80px 20px;
+        padding: 40px 20px;
         text-align: left;
         list-style: none;
         
@@ -214,9 +214,41 @@ $loupeMobileHeight: 35px;
             }
         }
 
-    }
+        .loginContainer{
+            position: absolute;
+            width: 100%;
+            height: 120px;
+            bottom: 40px;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
 
+            a{
+                margin: 0;
+                div{
+                    width: 150px;
+                    height: 50px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: $green;
+                    font-size: 20px;
+                    border: 1px solid $green;
+                    border-radius: 5px;
+                }
+                .login{
+                        border-color: transparent;
+                        background-color: $green;
+                        color: white;
+
+                }
+            }
+        }
+    }
 }
+
 
 @media (min-width: 768px){
     .NavBar{
@@ -243,7 +275,6 @@ $loupeMobileHeight: 35px;
             button.iconContainer{
             }
         }
-
 
         ul{
             position: static;
@@ -286,6 +317,16 @@ $loupeMobileHeight: 35px;
             position: static;
             transform: none;
             width: $loupeMobileWidth;
+        }
+    }
+}
+
+@media (max-height: 550px){
+    .NavBar{
+        ul{
+            .loginContainer{
+                top: 325px;
+            }
         }
     }
 }

@@ -22,7 +22,7 @@ export default function Home() {
 
     const context = useContext(EcommerceContext)
     
-    const {mobile, setMobile} = context
+    const {mobile, setMobile, setLoginOrRegister} = context
     const [openedNav, setOpenedNav] = useState<boolean>(false)
     const [openedLoupe, setOpenedLoupe] = useState<boolean>(false)
 
@@ -104,6 +104,11 @@ export default function Home() {
         setOpenedLoupe(false)
     }
 
+    const handleOpenAccountLogin = (login: String)=>{
+        setLoginOrRegister(login)
+        setOpenedNav(false)
+    }
+
   return (
     <motion.nav 
     className={style.NavBar}
@@ -139,7 +144,7 @@ export default function Home() {
             </motion.div>}
         </AnimatePresence>
 
-        {/* just mobile */}
+        {/* mobile toggle loupe */}
         {mobile&&!openedNav&&
         <div className={style.loupe} 
         onClick={()=>setOpenedLoupe(prev=>!prev)}
@@ -183,6 +188,22 @@ export default function Home() {
             exit="exit"
             >
                 {menuLi}
+
+                <div className={style.loginContainer}>
+                    <Link 
+                    href={'/account'} 
+                    onClick={()=>handleOpenAccountLogin('LOGIN')} 
+                    >
+                        <div className={style.login}>Login</div>
+                    </Link>
+                    <Link 
+                    href={'/account'} 
+                    onClick={()=>handleOpenAccountLogin('REGISTER')} 
+                    >
+                        <div>Register</div>
+                    </Link>
+                </div>
+
             </motion.ul>}
 
         </AnimatePresence>

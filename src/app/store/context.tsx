@@ -6,12 +6,11 @@ const EcommerceContext = createContext<any>({} as any);
 export const EcommerceContextProvider = ({children}: {children: ReactNode}) =>{
 
     const [mobile, setMobile] = useState<boolean>(false)
-    const [kurwa, setKurwa] = useState<boolean>(false)
-
+    const [loginOrRegister, setLoginOrRegister] = useState<"LOGIN"|"REGISTER">("LOGIN")
     return(
         <EcommerceContext.Provider value={{
-            kurwa, setKurwa,
             mobile, setMobile,
+            loginOrRegister, setLoginOrRegister,
         }}>
             {children}
         </EcommerceContext.Provider>
