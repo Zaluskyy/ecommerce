@@ -1,0 +1,81 @@
+@import '../../variables.scss';
+
+.AccountSettings{
+    width: 100%;
+    padding: 0 20px;
+    margin-top: 40px;
+
+    .tableContainer{
+        width: 100%;
+        margin-bottom: 30px;
+
+        span{
+            font-size: 15px;
+        }
+
+        .container{
+            margin-top: 10px;
+            width: 100%;
+            border: 1px solid #808080;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 13px 10px;
+
+            span{
+                font-size: 10px;
+            }
+
+            div.data{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: flex-start;
+                height: 100%;
+                
+                .name{
+                    font-weight: bold;
+                }
+                .data2{
+                    margin-top: 5px;
+                }
+            }
+
+            span.edit{
+                color: $green;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .deleteAccount{
+        margin-top: 60px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 10px;
+        margin-bottom: 50px;
+
+        span{
+            font-size: 15px;
+            align-self: flex-start;
+        }
+        .text{
+            font-size: 10px;
+            margin: 0;
+            padding: 0;
+            margin: 10px;
+        }
+        button{
+            background-color: #d9d9d9;
+            border-radius: 50px;
+            border: none;
+            font-size: 15px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    }
+}

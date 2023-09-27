@@ -7,11 +7,13 @@ import Image from 'next/image';
 import Login from './Login';
 import Register from './Register';
 import Account from './Account';
-
+import Orders from './Orders';
+import AccountSettings from './AccountSettings';
 
 import accountIcon from '../../../public/img/icon/account.svg'
 import settingsIcon from '../../../public/img/icon/settings.svg'
 import ordersIcon from '../../../public/img/icon/orders.svg'
+import arrowIcon from '../../../public/img/icon/arrow.svg'
 
 import EcommerceContext from '../store/context';
 
@@ -83,8 +85,21 @@ export default function Page(){
 
 
             {/* isAuth */}
+            {isAuth&&mobile&&accountDashboard&&
+            <div className={style.back} onClick={()=>setAccountDashboard("")}>
+                <Image src={arrowIcon} alt="back icon" />
+                <span>Back</span>
+            </div>
+            }
+
             {isAuth&&mobile&&accountDashboard==''&&
             <Account setAccountDashboard={setAccountDashboard} />
+            }
+            {isAuth&&mobile&&accountDashboard=='ORDERS'&&
+            <Orders/>
+            }
+            {isAuth&&mobile&&accountDashboard=='SETTINGS'&&
+            <AccountSettings/>
             }
 
 
