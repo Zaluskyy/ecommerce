@@ -22,7 +22,7 @@ export default function Home() {
 
     const context = useContext(EcommerceContext)
     
-    const {mobile, setMobile, setLoginOrRegister} = context
+    const {mobile, setMobile, setLoginOrRegister, isAuth} = context
     const [openedNav, setOpenedNav] = useState<boolean>(false)
     const [openedLoupe, setOpenedLoupe] = useState<boolean>(false)
 
@@ -189,6 +189,7 @@ export default function Home() {
             >
                 {menuLi}
 
+                {mobile&&!isAuth&&
                 <div className={style.loginContainer}>
                     <Link 
                     href={'/account'} 
@@ -202,7 +203,7 @@ export default function Home() {
                     >
                         <div>Register</div>
                     </Link>
-                </div>
+                </div>}
 
             </motion.ul>}
 

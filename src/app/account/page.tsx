@@ -1,33 +1,54 @@
 "use client"
 
 import React, {useState, useEffect, useContext} from 'react';
-import style from './style/Account.module.scss';
+import style from './style/Page.module.scss';
 import Image from 'next/image';
 
 import Login from './Login';
 import Register from './Register';
+import Account from './Account';
 
-import account from '../../../public/img/icon/account.svg'
+
+import accountIcon from '../../../public/img/icon/account.svg'
+import settingsIcon from '../../../public/img/icon/settings.svg'
+import ordersIcon from '../../../public/img/icon/orders.svg'
+
 import EcommerceContext from '../store/context';
 
-export default function Account(){
+export default function Page(){
 
     const context = useContext(EcommerceContext)
-    const { mobile, loginOrRegister, setLoginOrRegister } = context
-    
+    const { mobile, loginOrRegister, setLoginOrRegister, isAuth } = context
+
+    const [accountDashboard, setAccountDashboard] = useState<"ORDERS"|"SETTINGS"|"">("")
+
+    const getTitle = ()=>{
+        if(!isAuth) {
+            if(loginOrRegister=="LOGIN") return [accountIcon, 'Login']
+            else return [accountIcon, 'Register']
+        } else{
+            if(accountDashboard=='') return [accountIcon, 'Account']
+            else if(accountDashboard=='ORDERS') return [ordersIcon, 'Orders']
+            else if(accountDashboard=='SETTINGS') return [settingsIcon, 'Account settings']
+        }
+        return [accountIcon, 'error']
+    }
+
     return(
-        <div className={style.Account}>
+        <div className={style.Page}>
 
             {mobile&&
             <div className={style.title}>
                 <div className={style.iconContainer}>
-                    <Image src={account} alt="icon" />
+                    <Image src={getTitle()[0]} alt="icon" />
                 </div>
-                {loginOrRegister=="LOGIN"?<span>Login</span>:<span>Register</span>}
+                <span>{getTitle()[1]}</span>
             </div>
             }
 
-            {mobile&&(loginOrRegister=="LOGIN"?
+
+            {/* !isAuth */}
+            {mobile&&!isAuth&&(loginOrRegister=="LOGIN"?
             <Login setLoginOrRegister={setLoginOrRegister} mobile={mobile} />
             :
             <Register setLoginOrRegister={setLoginOrRegister} mobile={mobile} />
@@ -38,7 +59,7 @@ export default function Account(){
                 <div className={style.left}>
                     <div className={style.title}>
                         <div className={style.iconContainer}>
-                            <Image src={account} alt="icon" />
+                            <Image src={accountIcon} alt="icon" />
                         </div>
                         <span>Login</span>
                     </div>
@@ -50,7 +71,7 @@ export default function Account(){
                 <div className={style.right}>
                     <div className={style.title}>
                         <div className={style.iconContainer}>
-                            <Image src={account} alt="icon" />
+                            <Image src={accountIcon} alt="icon" />
                         </div>
                         <span>Register</span>
                     </div>
@@ -59,6 +80,15 @@ export default function Account(){
                 </div>
             </div>
             }
+
+
+            {/* isAuth */}
+            {isAuth&&mobile&&accountDashboard==''&&
+            <Account setAccountDashboard={setAccountDashboard} />
+            }
+
+
+
         </div>
     )
 }

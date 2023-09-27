@@ -17,9 +17,13 @@ import done from '../../../public/img/icon/done.svg'
 import ChangeRecipientsData from './ChangeRecipientsData';
 
 import { AnimatePresence } from 'framer-motion';
+import EcommerceContext from '../store/context';
 
 
 export default function CartPage(){
+
+    const context = useContext(EcommerceContext)
+    const { isAuth } = context
 
     const [changeRecipientsData, setChangeRecipientsData] = useState<boolean>(false)
 
@@ -42,6 +46,15 @@ export default function CartPage(){
     ]
 
     const [currentProgress, setCurrentProgress] = useState<number>(1)
+
+    const handlePrevNextBtn = (next: boolean)=>{
+        const t = true
+        if (!isAuth) window.location.href = "/account";
+        else {
+            if(next) setCurrentProgress(prev=>prev+1)
+            else setCurrentProgress(prev=>prev-1)
+        }
+    }
 
     return(
         <div className={style.CartPage}>
@@ -68,12 +81,12 @@ export default function CartPage(){
                 {currentProgress!==1&&
                 <button
                 className={currentProgress==3?`${style.prev} ${style.smallerText}`: style.prev}
-                onClick={()=>setCurrentProgress(prev=>prev-1)}
+                onClick={()=>handlePrevNextBtn(false)}
                 >{titleIcons[currentProgress-2].title}</button>}
 
                 <button
                 className={currentProgress==1?`${style.next} ${style.bigger}`: style.next}
-                onClick={()=>setCurrentProgress(prev=>prev+1)}
+                onClick={()=>handlePrevNextBtn(true)}
                 >{titleIcons[currentProgress].title}</button>
                 
             </div>}
