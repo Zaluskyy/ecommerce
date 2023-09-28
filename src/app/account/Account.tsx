@@ -26,7 +26,7 @@ const Account: React.FC<AccountProps> = ({setAccountDashboard}) => {
 
     const dashboard = dashboardArr.map(item=>{
         return(
-            <div className={style.element} onClick={()=>setAccountDashboard(item.goTo as "ORDERS"|"SETTINGS")} >
+            <div key={item.name} className={style.element} onClick={()=>setAccountDashboard(item.goTo as "ORDERS"|"SETTINGS")} >
                 <div className={style.informationContainer}>
                     <div className={style.imageContainer}>
                         <Image src={item.icon} alt={`${item.name} icon`} />
