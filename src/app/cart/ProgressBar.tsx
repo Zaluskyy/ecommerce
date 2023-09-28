@@ -15,7 +15,11 @@ const ProgressBar: FC<ProgressBarProps> = ({currentProgress, setCurrentProgress}
     const container = [];
 
     const handleClick = (i: number)=>{
-        if(i<currentProgress){
+        if(currentProgress==4){
+            //remove cursor pointer
+            return
+        }
+        else if(i<currentProgress){
             setCurrentProgress(i)
         }
     }

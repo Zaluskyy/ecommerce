@@ -29,7 +29,11 @@ export default function Page(){
             if(loginOrRegister=="LOGIN") return [accountIcon, 'Login']
             else return [accountIcon, 'Register']
         } else{
-            if(accountDashboard=='') return [accountIcon, 'Account']
+            if(accountDashboard==''&&mobile) return [accountIcon, 'Account']
+            else if(accountDashboard==''&&!mobile) {
+                setAccountDashboard("SETTINGS")
+                return [settingsIcon, 'Account settings']
+            }
             else if(accountDashboard=='ORDERS') return [ordersIcon, 'Orders']
             else if(accountDashboard=='SETTINGS') return [settingsIcon, 'Account settings']
         }
@@ -56,7 +60,7 @@ export default function Page(){
             <Register setLoginOrRegister={setLoginOrRegister} mobile={mobile} />
             )}
 
-            {!mobile&&
+            {!mobile&&!isAuth&&
             <div className={style.accountForms}>
                 <div className={style.left}>
                     <div className={style.title}>
@@ -100,6 +104,22 @@ export default function Page(){
             }
             {isAuth&&mobile&&accountDashboard=='SETTINGS'&&
             <AccountSettings/>
+            }
+
+            {!mobile&&isAuth&&
+            <>
+            <Account setAccountDashboard={setAccountDashboard} />
+            <div className={style.line}/>
+            <div className={style.desktopRightContainer}>
+                <div className={style.title}>
+                    <div className={style.iconContainer}>
+                        <Image src={getTitle()[0]} alt="icon" />
+                    </div>
+                    <span>{getTitle()[1]}</span>
+                </div>
+                {accountDashboard=='ORDERS'?<Orders/>:<AccountSettings/>}
+            </div>
+            </>
             }
 
 

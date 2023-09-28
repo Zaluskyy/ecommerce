@@ -11,6 +11,7 @@
         justify-content: space-between;
         align-items: center;
         margin-bottom: 10px;
+        user-select: none;
 
         .informationContainer{
             display: flex;
@@ -34,5 +35,11 @@
 
             }
         }
+    }
+}
+
+@media (min-width: 768px){
+    .Account{
+        width: 310px;
     }
 }

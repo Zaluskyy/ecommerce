@@ -8,6 +8,7 @@
     width: 100vw;
 
     .title{
+        user-select: none;
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
@@ -67,6 +68,7 @@
     }
 
     .back{
+        user-select: none;
         margin-left: 20px;
         align-self: flex-start;
         background-color: #d9d9d9;
@@ -94,5 +96,33 @@
             align-items: center;
             align-self: auto;
         }
+    }
+}
+
+@media (min-width: 768px){
+    .Page{
+         flex-direction: row;
+         justify-content: space-between;
+         align-items: flex-start;
+
+         .line{
+            width: 1px;
+            height: calc(100vh - 105px);
+            background-color: rgba(0, 0, 0, 0.2);
+         }
+
+         .desktopRightContainer{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: calc(100% - 309px);
+            padding: 0 20px;
+
+            .title{
+                align-self: flex-start;
+                margin-bottom: 0;
+            }
+         }
     }
 }
