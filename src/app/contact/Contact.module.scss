@@ -5,6 +5,9 @@ $height: 50px;
     margin-top: 65px;
     padding: 20px;
     text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     .title{
         align-self: flex-start;
@@ -81,5 +84,46 @@ $height: 50px;
                 }
             }
         }
+    }
+}
+
+$desktopHeihgt: 60px;
+
+@media (min-width: 768px){
+    .Contact{
+        .tableContainer{
+            max-width: 650px;
+
+            span{
+                font-size: 22px;
+            }
+
+            .container{
+                height: $desktopHeihgt;
+
+                .iconContainer{
+                    height: $desktopHeihgt;
+                    width: $desktopHeihgt;
+                }
+                .right{
+                    width: calc(100% - $desktopHeihgt);
+                    height: $desktopHeihgt;
+                    span{
+                        font-size: 17px;
+                    }
+                    &:last-child{
+                        span{
+                            font-size: 15px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 1000px){
+    .Contact{
+        padding: 20px 60px;
     }
 }
