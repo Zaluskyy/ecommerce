@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 import Login from './Login';
 import Register from './Register';
-import Account from './Account';
+import Dashboard from './Dashboard';
 import Orders from './Orders';
 import AccountSettings from './AccountSettings';
 
@@ -17,12 +17,47 @@ import arrowIcon from '../../../public/img/icon/arrow.svg'
 
 import EcommerceContext from '../store/context';
 
+import { AnimatePresence } from 'framer-motion';
+
+import EditDataPopUp from '../components/EditDataPopUp'
+import { adressSchema, changePrimaryData } from '../components/Schema';
+
 export default function Page(){
 
     const context = useContext(EcommerceContext)
     const { mobile, loginOrRegister, setLoginOrRegister, isAuth } = context
 
     const [accountDashboard, setAccountDashboard] = useState<"ORDERS"|"SETTINGS"|"">("")
+
+    const [editData, setEditData] = useState<boolean>(true)
+
+    const edit = {
+        data: {
+            initVal: {
+                name: '',
+                surname: '',
+                telephone: '',
+            },
+            schema: changePrimaryData,
+            inputs: [
+                {
+                    placeholder: "Name",
+                    type: "text",
+                    name: "name",
+                },
+                {
+                    placeholder: "Surname",
+                    type: "text",
+                    name: "surname",
+                },
+                {
+                    placeholder: "Telephone",
+                    type: "text",
+                    name: "telephone",
+                },
+            ]
+        }
+    }
 
     const getTitle = ()=>{
         if(!isAuth) {
@@ -97,7 +132,7 @@ export default function Page(){
             }
 
             {isAuth&&mobile&&accountDashboard==''&&
-            <Account setAccountDashboard={setAccountDashboard} />
+            <Dashboard setAccountDashboard={setAccountDashboard} />
             }
             {isAuth&&mobile&&accountDashboard=='ORDERS'&&
             <Orders/>
@@ -108,7 +143,7 @@ export default function Page(){
 
             {!mobile&&isAuth&&
             <>
-            <Account setAccountDashboard={setAccountDashboard} />
+            <Dashboard setAccountDashboard={setAccountDashboard} />
             <div className={style.line}/>
             <div className={style.desktopRightContainer}>
                 <div className={style.title}>
@@ -122,7 +157,19 @@ export default function Page(){
             </>
             }
 
+            <AnimatePresence
+            mode='wait'>
 
+                {editData&&
+                    <EditDataPopUp 
+                    setEditData={setEditData} 
+                    initialValues={edit.data.initVal}
+                    validationSchema={edit.data.schema}
+                    inputs={edit.data.inputs}
+                    />
+                }
+
+            </AnimatePresence>
 
         </div>
     )

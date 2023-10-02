@@ -1,0 +1,130 @@
+@import '../../variables.scss';
+
+$topBarHeight: 65px;
+$bottomBarHeight: 65px;
+
+.EditDataPopUp{
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 101;
+    background-color: white;
+    border-radius: 12px;
+
+    .topBar{
+        width: 100%;
+        height: $topBarHeight;
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+        align-items: center;
+        background-color: #d0d0d0;
+
+        .exit{
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            position: relative;
+
+            div{
+                position: absolute;
+                width: 28.3px;
+                height: 2px;
+                background-color: black;
+            }
+            div:nth-child(1){
+                transform-origin: right;
+                right: 0;
+                transform: rotate(-45deg);
+            }
+            div:nth-child(2){
+                transform-origin: left;
+                transform: rotate(45deg);
+            }
+        }
+    }
+    form{
+        width: 100%;
+        height: calc(100% - $topBarHeight - $bottomBarHeight);
+        padding: 20px;
+        padding-bottom: 0;
+        overflow: scroll;
+        background-color: white;
+
+        input{
+            width: 100%;
+            height: 40px;
+            border-radius: 50px;
+            padding: 10px 20px;
+            background-color: #d9d9d9;
+            border: none;
+        }
+
+        .errorContainer{
+            width: 100%;
+            height: 20px;
+            padding-left: 10px;
+            padding-top: 2px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+
+            span.error{
+                font-size: 9px;
+                color: #ee5656;
+            }
+        }
+
+        button{
+            position: absolute;
+            bottom: $bottomBarHeight/2;
+            left: 50%;
+            transform: translate(-50%, 50%);
+            width: 50%;
+            height: 50px;
+            background-color: $green;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    .buttonContainer{
+        width: 100%;
+        height: $bottomBarHeight;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+}
+
+@media (min-width: 768px){
+    .EditDataPopUp{
+        width: 300px;
+        height: auto;
+        max-height: 90vh;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        overflow: hidden;
+
+        form{
+            max-height: calc(90vh - $topBarHeight - $bottomBarHeight);
+        }
+    }
+    .background{
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(1px);
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 100;
+    }
+}

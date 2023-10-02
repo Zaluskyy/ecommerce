@@ -1,5 +1,5 @@
 import React, { SetStateAction } from 'react'
-import style from './style/Account.module.scss';
+import style from './style/Dashboard.module.scss';
 import Image from 'next/image';
 
 import ordersIcon from '../../../public/img/icon/orders.svg'
@@ -7,11 +7,11 @@ import settingsIcon from '../../../public/img/icon/settings.svg'
 import arrowIcon from '../../../public/img/icon/arrow.svg'
 
 
-interface AccountProps{
+interface DashboardProps{
     setAccountDashboard: React.Dispatch<React.SetStateAction<"ORDERS"|"SETTINGS"|"">>;
 }
 
-const Account: React.FC<AccountProps> = ({setAccountDashboard}) => {
+const Dashboard: React.FC<DashboardProps> = ({setAccountDashboard}) => {
 
     interface IDashboardArr{
         icon: string,
@@ -41,10 +41,10 @@ const Account: React.FC<AccountProps> = ({setAccountDashboard}) => {
     })
 
     return(
-        <div className={style.Account}>
+        <div className={style.Dashboard}>
             {dashboard}
         </div>
     )
 }
 
-export default Account
+export default Dashboard

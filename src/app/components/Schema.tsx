@@ -16,7 +16,7 @@ export const registerSchema = yup.object().shape({
         .required("Required"),
     confirmPassword: yup
         .string()
-         .oneOf([yup.ref('password')], "Passwords must match")
+        .oneOf([yup.ref('password')], "Passwords must match")
         .required("Required")
 })
 
@@ -59,4 +59,49 @@ export const forgotPassword = yup.object().shape({
         .string()
         .email("Please enter a valid email")
         .required("Required"),
+})
+
+
+
+
+
+export const changePrimaryData = yup.object().shape({
+    name: yup
+        .string()
+        .required("Required"),
+    surname: yup
+        .string()
+        .required("Required"),
+    telephone: yup
+        .number()
+        .required("Require"),
+})
+
+export const changeEmail = yup.object().shape({
+    currentEmail: yup
+        .string()
+        .email("Please enter a valid email")
+        .required("Required"),
+    newEmail: yup
+        .string()
+        .email("Please enter a valid email")
+        .required("Required"),
+    confirmNewEmail: yup
+        .string()
+        .oneOf([yup.ref('newEmail')], "Emails must match")
+        .required("Required")
+})
+
+export const changePassword = yup.object().shape({
+    currentPassword: yup
+        .string()
+        .required("Required"),
+    newPassword: yup
+        .string()
+        .matches(passwordRules, {message: "Your password have to include at least 1 lower case letter, 1 uppercase letter, 1 numerical digit and one special character"})
+        .required("Required"),
+    confirmNewPassword: yup
+        .string()
+        .oneOf([yup.ref('newPassword')], "Passwords must match")
+        .required("Required")
 })
