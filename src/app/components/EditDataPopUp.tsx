@@ -16,11 +16,12 @@ interface InputItem {
 }
 
 interface EditDataPopUpProps{
-    setEditData: React.Dispatch<React.SetStateAction<boolean>>,
-    initialValues: Record<string, string>,
-    validationSchema: yup.ObjectSchema<any>;
-    inputs: InputItem[],
+    setEditData: React.Dispatch<React.SetStateAction<number>>;
+    initialValues: Record<string, string | undefined>;
+    validationSchema: yup.Schema<any>;
+    inputs: InputItem[];
 }
+
 
 const EditDataPopUp: FC<EditDataPopUpProps> = ({setEditData, initialValues, validationSchema, inputs}) => {
 
@@ -42,13 +43,19 @@ const EditDataPopUp: FC<EditDataPopUpProps> = ({setEditData, initialValues, vali
     }, [])
     
 
-    const handleSave = ()=>{
+    const handleSave = async () => {
         // add data to base
-        // setChangeRecipientsData(false)
+        await new Promise<void>(resolve => {
+            setTimeout(() => {
+                console.log("done");
+                resolve();
+            }, 1000);
+        });
+        setEditData(-1)
     }
 
     const handleExit = ()=>{
-        setEditData(false)
+        setEditData(-1)
     }
 
     return(

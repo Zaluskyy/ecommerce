@@ -1,6 +1,11 @@
-import * as React from 'react';
-
+import React, {useState} from 'react';
 import style from './style/AccountSettings.module.scss';
+
+import EditDataPopUp from '../components/EditDataPopUp'
+
+import { changePrimaryData, changeEmail, changePassword } from '../components/Schema';
+
+import { AnimatePresence } from 'framer-motion';
 
 
 interface AccountSettingsProps{}
@@ -19,6 +24,86 @@ const AccountSettings: React.FC<AccountSettingsProps> = () => {
         {title: "Password", data: "********"},
     ]
 
+    const [edit, setEdit] = useState<number>(-1)
+
+    const editDatas = [
+        {
+            initVal: {
+                name: '',
+                surname: '',
+                telephone: '',
+            },
+            schema: changePrimaryData,
+            inputs: [
+                {
+                    placeholder: "Name",
+                    type: "text",
+                    name: "name",
+                },
+                {
+                    placeholder: "Surname",
+                    type: "text",
+                    name: "surname",
+                },
+                {
+                    placeholder: "Telephone",
+                    type: "text",
+                    name: "telephone",
+                },
+            ]
+        },
+        {
+            initVal: {
+                currentEmail: '',
+                newEmail: '',
+                confirmNewEmail: '',
+            },
+            schema: changeEmail,
+            inputs: [
+                {
+                    placeholder: "Current email",
+                    type: "email",
+                    name: "currentEmail",
+                },
+                {
+                    placeholder: "New Email",
+                    type: "email",
+                    name: "newEmail",
+                },
+                {
+                    placeholder: "Confirm new email",
+                    type: "email",
+                    name: "confirmNewEmail",
+                },
+            ]
+        },
+        {
+            initVal: {
+                currentPassword: '',
+                newPassword: '',
+                confirmNewPassword: '',
+            },
+            schema: changePassword,
+            inputs: [
+                {
+                    placeholder: "Current password",
+                    type: "email",
+                    name: "currentPassword",
+                },
+                {
+                    placeholder: "New password",
+                    type: "email",
+                    name: "newPassword",
+                },
+                {
+                    placeholder: "Confirm new password",
+                    type: "email",
+                    name: "confirmNewPassword",
+                },
+            ]
+        },
+    ]
+
     const data = dataArr.map((item, index)=>{
         return(
             <div key={item.title} className={style.tableContainer}>
@@ -29,7 +114,7 @@ const AccountSettings: React.FC<AccountSettingsProps> = () => {
                         <span className={style.data2}>{item.data2}</span>
                     </div>}
                     {index!==0&&<span>{item.data}</span>}
-                    <span className={style.edit}>Edit</span>
+                    <span onClick={()=>setEdit(index)} className={style.edit}>Edit</span>
                 </div>
             </div>
         )
@@ -45,6 +130,20 @@ const AccountSettings: React.FC<AccountSettingsProps> = () => {
                 <span className={style.text}>If you click this button, you will delete your account in our store. Please make sure you really want to do this – we won't be able to restore your account</span>
                 <button>Delete account</button>
             </div>
+
+            <AnimatePresence
+            mode='wait'>
+
+                {edit!==-1&&
+                    <EditDataPopUp 
+                    setEditData={setEdit} 
+                    initialValues={editDatas[edit].initVal}
+                    validationSchema={editDatas[edit].schema}
+                    inputs={editDatas[edit].inputs}
+                    />
+                }
+
+            </AnimatePresence>
 
         </div>
     )

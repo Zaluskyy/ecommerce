@@ -17,10 +17,6 @@ import arrowIcon from '../../../public/img/icon/arrow.svg'
 
 import EcommerceContext from '../store/context';
 
-import { AnimatePresence } from 'framer-motion';
-
-import EditDataPopUp from '../components/EditDataPopUp'
-import { adressSchema, changePrimaryData } from '../components/Schema';
 
 export default function Page(){
 
@@ -29,35 +25,6 @@ export default function Page(){
 
     const [accountDashboard, setAccountDashboard] = useState<"ORDERS"|"SETTINGS"|"">("")
 
-    const [editData, setEditData] = useState<boolean>(true)
-
-    const edit = {
-        data: {
-            initVal: {
-                name: '',
-                surname: '',
-                telephone: '',
-            },
-            schema: changePrimaryData,
-            inputs: [
-                {
-                    placeholder: "Name",
-                    type: "text",
-                    name: "name",
-                },
-                {
-                    placeholder: "Surname",
-                    type: "text",
-                    name: "surname",
-                },
-                {
-                    placeholder: "Telephone",
-                    type: "text",
-                    name: "telephone",
-                },
-            ]
-        }
-    }
 
     const getTitle = ()=>{
         if(!isAuth) {
@@ -156,21 +123,7 @@ export default function Page(){
             </div>
             </>
             }
-
-            <AnimatePresence
-            mode='wait'>
-
-                {editData&&
-                    <EditDataPopUp 
-                    setEditData={setEditData} 
-                    initialValues={edit.data.initVal}
-                    validationSchema={edit.data.schema}
-                    inputs={edit.data.inputs}
-                    />
-                }
-
-            </AnimatePresence>
-
+            
         </div>
     )
 }
