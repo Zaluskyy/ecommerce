@@ -7,11 +7,76 @@ import courierIcon from '../../../public/img/icon/courier.svg'
 import personalCollectionIcon from '../../../public/img/icon/personalCollection.svg';
 import inpostIcon from '../../../public/img/icon/inpost.svg';
 
+import { AnimatePresence } from 'framer-motion'
+
+import EditDataPopUp from '../components/EditDataPopUp'
+
+import { adressSchema } from '../components/Schema'
+
 interface DeliveryAndPaymentProps{
     setChangeRecipientsData: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const DeliveryAndPayment: FC<DeliveryAndPaymentProps> = ({setChangeRecipientsData}) => {
+
+    const [editData, setEditData] = useState<number>(-1)
+
+    const changeData = {
+        title: "Your data",
+        initVal: {
+            name: '',
+            surname: '',
+            street: '',
+            apartmentNumber: '',
+            zipCode: '',
+            city: '',
+            telephone: '',
+            email: '',
+        },
+        schema: adressSchema,
+        inputs: [
+            {
+                placeholder: "Name",
+                type: "text",
+                name: "name",
+            },
+            {
+                placeholder: "Surname",
+                type: "text",
+                name: "surname",
+            },
+            {
+                placeholder: "Street",
+                type: "text",
+                name: "street",
+            },
+            {
+                placeholder: "Atartment number",
+                type: "text",
+                name: "apartmentNumber",
+            },
+            {
+                placeholder: "ZIP code",
+                type: "text",
+                name: "zipCode",
+            },
+            {
+                placeholder: "City",
+                type: "text",
+                name: "city",
+            },
+            {
+                placeholder: "Telephone",
+                type: "text",
+                name: "telephone",
+            },
+            {
+                placeholder: "Email",
+                type: "text",
+                name: "email",
+            },
+        ]
+    }
 
     interface IArr {
         name: string,
@@ -129,7 +194,7 @@ const DeliveryAndPayment: FC<DeliveryAndPaymentProps> = ({setChangeRecipientsDat
                         <span>+48 537 728 008</span>
                         <span>adohit88@gmail.com</span>
 
-                        <span className={style.change} onClick={()=>setChangeRecipientsData(true)}>Change</span>
+                        <span className={style.change} onClick={()=>setEditData(0)}>Change</span>
                     </div>
                 </div>
 
@@ -142,6 +207,25 @@ const DeliveryAndPayment: FC<DeliveryAndPaymentProps> = ({setChangeRecipientsDat
                     </form>
                 </div>
             </div>
+
+
+
+            <AnimatePresence
+            mode='wait'>
+
+                {editData!==-1&&
+                    <EditDataPopUp 
+                    setEditData={setEditData} 
+                    title={changeData.title}
+                    initialValues={changeData.initVal}
+                    validationSchema={changeData.schema}
+                    inputs={changeData.inputs}
+                    />
+                }
+
+            </AnimatePresence>
+
+
 
         </div>
     )

@@ -14,11 +14,7 @@ import cart from '../../../public/img/icon/cart.svg'
 import delivery from '../../../public/img/icon/delivery.svg'
 import summary from '../../../public/img/icon/summary.svg'
 import done from '../../../public/img/icon/done.svg'
-import ChangeRecipientsData from './ChangeRecipientsData';
-
-import { AnimatePresence } from 'framer-motion';
 import EcommerceContext from '../store/context';
-
 
 export default function CartPage(){
 
@@ -89,18 +85,7 @@ export default function CartPage(){
                 onClick={()=>handlePrevNextBtn(true)}
                 >{titleIcons[currentProgress].title}</button>
                 
-            </div>}
-
-            <AnimatePresence
-            mode={'wait'}
-            initial={false}
-            onExitComplete={()=>null}
-            >
-                {changeRecipientsData&&
-                <ChangeRecipientsData setChangeRecipientsData={setChangeRecipientsData} />
-                }
-            </AnimatePresence>
-        
+            </div>}        
         </div>
     )
 }

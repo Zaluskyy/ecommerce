@@ -31,7 +31,10 @@ export const loginSchema = yup.object().shape({
 })
 
 export const adressSchema = yup.object().shape({
-    fullName: yup
+    name: yup
+        .string()
+        .required("Require"),
+    surname: yup
         .string()
         .required("Require"),
     street: yup

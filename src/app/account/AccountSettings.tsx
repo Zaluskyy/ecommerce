@@ -28,6 +28,7 @@ const AccountSettings: React.FC<AccountSettingsProps> = () => {
 
     const editDatas = [
         {
+            title: "Your data",
             initVal: {
                 name: '',
                 surname: '',
@@ -53,6 +54,7 @@ const AccountSettings: React.FC<AccountSettingsProps> = () => {
             ]
         },
         {
+            title: "Change email",
             initVal: {
                 currentEmail: '',
                 newEmail: '',
@@ -78,6 +80,7 @@ const AccountSettings: React.FC<AccountSettingsProps> = () => {
             ]
         },
         {
+            title: "Change password",
             initVal: {
                 currentPassword: '',
                 newPassword: '',
@@ -137,6 +140,7 @@ const AccountSettings: React.FC<AccountSettingsProps> = () => {
                 {edit!==-1&&
                     <EditDataPopUp 
                     setEditData={setEdit} 
+                    title={editDatas[edit].title}
                     initialValues={editDatas[edit].initVal}
                     validationSchema={editDatas[edit].schema}
                     inputs={editDatas[edit].inputs}

@@ -17,13 +17,14 @@ interface InputItem {
 
 interface EditDataPopUpProps{
     setEditData: React.Dispatch<React.SetStateAction<number>>;
+    title: string;
     initialValues: Record<string, string | undefined>;
     validationSchema: yup.Schema<any>;
     inputs: InputItem[];
 }
 
 
-const EditDataPopUp: FC<EditDataPopUpProps> = ({setEditData, initialValues, validationSchema, inputs}) => {
+const EditDataPopUp: FC<EditDataPopUpProps> = ({setEditData, title, initialValues, validationSchema, inputs}) => {
 
     const context = useContext(EcommerceContext)
     const {mobile} = context
@@ -68,7 +69,7 @@ const EditDataPopUp: FC<EditDataPopUpProps> = ({setEditData, initialValues, vali
             className={style.EditDataPopUp}
             >
                 <div className={style.topBar}>
-                    <span>Edit delivery address</span>
+                    <span>{title}</span>
                     <motion.div 
                     className={style.exit} 
                     onClick={handleExit}
