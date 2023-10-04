@@ -56,7 +56,7 @@ export default function CartPage(){
         <div className={style.CartPage}>
 
             <div className={style.top}>
-                {cartProducts&&<ProgressBar 
+                {cartProducts.length>0&&<ProgressBar 
                 currentProgress={currentProgress} 
                 setCurrentProgress={setCurrentProgress} 
                 />}
@@ -71,7 +71,7 @@ export default function CartPage(){
 
             {components[currentProgress-1]}
 
-            {cartProducts&&currentProgress<4&&
+            {cartProducts.length>0&&currentProgress<4&&
             <div className={style.buttonContainer}>
 
                 {currentProgress!==1&&

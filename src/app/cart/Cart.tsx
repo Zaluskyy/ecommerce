@@ -2,8 +2,7 @@ import React, {FC, useContext, useEffect, useState} from 'react'
 import style from './style/Cart.module.scss';
 import Image, { StaticImageData } from 'next/image';
 
-import iphone from '../../../public/img/iphone.png'
-import airdots from '../../../public/img/airdots.png'
+import transhIcon from '../../../public/img/icon/trash.svg'
 import EcommerceContext from '../store/context';
 
 interface CartProps{}
@@ -21,7 +20,7 @@ const Cart: FC<CartProps> = () => {
     }
 
     const [productsElements, setProductsElements] = useState<React.ReactNode[] | null>(null);
-    
+
 
     const handleChangePiece = (addition: boolean, productName: string)=>{
         setCartProducts((prev: ICartProducts[]) => {
@@ -39,6 +38,13 @@ const Cart: FC<CartProps> = () => {
             });
         });
     }
+    
+    const handleRemoveProduct = (productName: string)=>{
+        setCartProducts((prev: ICartProducts[])=>{
+            const updatedCart = prev.filter((product) => product.name !== productName);
+            return updatedCart;
+        })
+    }
 
     const getProducts = ()=>{
         setProductsElements(cartProducts.map((item: ICartProducts)=>{
@@ -54,11 +60,23 @@ const Cart: FC<CartProps> = () => {
                         </div>
                     </div>
                     <div className={style.bottom}>
-                        <button onClick={()=>handleChangePiece(false, item.name)}>-</button>
-                        <div>
-                            <span>{item.piece}</span>
+
+                        <div/>
+
+                        <div className={style.quantityContainer}>
+
+                            <button onClick={()=>handleChangePiece(false, item.name)}>-</button>
+                            <div>
+                                <span>{item.piece}</span>
+                            </div>
+                            <button onClick={()=>handleChangePiece(true, item.name)}>+</button>
+
                         </div>
-                        <button onClick={()=>handleChangePiece(true, item.name)}>+</button>
+                        
+                        <div onClick={()=>handleRemoveProduct(item.name)} className={style.removeContainer}>
+                            <Image src={transhIcon} alt="trash icon"/>
+                        </div>
+
                     </div>
                 </div>
             )
@@ -73,8 +91,8 @@ const Cart: FC<CartProps> = () => {
 
     return ( 
         <div className={style.Cart}>
-            {cartProducts&&productsElements}
-            {!cartProducts&&<div className={style.emptyCart}>
+            {cartProducts.length>0&&productsElements}
+            {!(cartProducts.length>0)&&<div className={style.emptyCart}>
                 <span>Your cart is empty</span>
                 <a href='/'><div>Go to the homepage</div></a>
             </div>}

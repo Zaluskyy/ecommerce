@@ -36,7 +36,7 @@ export const EcommerceContextProvider = ({children}: {children: ReactNode}) =>{
     const [isAuth, setIsAuth] = useState<boolean>(true)
     const [loginOrRegister, setLoginOrRegister] = useState<"LOGIN"|"REGISTER">("LOGIN")
 
-    const [cartProducts, setCartProducts] = useState<ICartProducts[]|null>(products)
+    const [cartProducts, setCartProducts] = useState<ICartProducts[]>(products)
 
 
     return(
