@@ -1,16 +1,44 @@
-import React, {FC} from 'react';
+import React, { FC, useContext } from 'react';
 import style from './style/Summary.module.scss';
-import Image, {StaticImageData} from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 
 import personalCollectionIcon from '../../../public/img/icon/personalCollection.svg';
 
-
-import iphone from '../../../public/img/iphone.png'
-import airdots from '../../../public/img/airdots.png'
+import EcommerceContext from '../store/context';
 
 interface SummaryProps{}
 
 const Summary: FC<SummaryProps> = () => {
+
+    const context = useContext(EcommerceContext)
+    const { cartProducts } = context
+    
+    interface ICartProducts {
+        name: string,
+        price: number,
+        img: StaticImageData,
+        piece: number,
+    }   
+
+    const products = cartProducts.map((item: ICartProducts)=>{
+        return(
+                <div key={item.name} className={style.product}>
+                    <div className={style.imageContainer}>
+                        <Image src={item.img} alt="product img"/>
+                    </div>
+                    <div className={style.informationContainer}>
+                        <div className={style.top}>
+                            <span>{item.name}</span>
+                        </div>
+                        <div className={style.bottom}>
+                            <span className={style.pieces}>{item.piece} psc</span>
+                            <span className={style.price}>{item.price} zł</span>
+                        </div>
+                    </div>
+                </div>
+        )
+    })
+
 
     interface IsummaryArr {
         name: string,
@@ -33,31 +61,6 @@ const Summary: FC<SummaryProps> = () => {
         },
     ]
 
-    interface IproductsArr{
-        image: StaticImageData,
-        name: string,
-        pieces: number,
-        price: number,
-        id: number
-    }
-
-    const productsArr: IproductsArr[] = [
-        {
-            image: iphone,
-            name: 'Iphone 15',
-            pieces: 1,
-            price: 1488,
-            id: 1,
-        },
-        {
-            image: airdots,
-            name: 'Apple Airdots',
-            pieces: 1,
-            price: 2137,
-            id: 2,
-        },
-    ]
-
     const deliveryAndPaymentArr = summaryArr.map((item)=>{
         return(
             <div key={item.name} className={style.tableContainer}>
@@ -73,31 +76,11 @@ const Summary: FC<SummaryProps> = () => {
                             <span className={style.price}>{`${item.price} zł`}</span>}
                     </div>
                 </div>
-
             </div>
         )
     })
 
-    const products = productsArr.map((item)=>{
-        return(
-                <div key={item.id} className={style.product}>
-                    <div className={style.imageContainer}>
-                        <Image src={item.image} alt="product img"/>
-                    </div>
-                    <div className={style.informationContainer}>
-                        <div className={style.top}>
-                            <span>{item.name}</span>
-                        </div>
-                        <div className={style.bottom}>
-                            <span className={style.pieces}>{item.pieces} psc</span>
-                            <span className={style.price}>{item.price} zł</span>
-                        </div>
-                    </div>
-                </div>
-        )
-    })
-
-    const styleProducts = { "--produsts": productsArr.length } as React.CSSProperties;
+    const styleProducts = { "--products": cartProducts.length } as React.CSSProperties;
 
     return(
         <div className={style.Summary}>

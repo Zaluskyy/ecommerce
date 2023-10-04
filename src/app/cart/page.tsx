@@ -19,7 +19,7 @@ import EcommerceContext from '../store/context';
 export default function CartPage(){
 
     const context = useContext(EcommerceContext)
-    const { isAuth } = context
+    const { isAuth, cartProducts } = context
 
     const [changeRecipientsData, setChangeRecipientsData] = useState<boolean>(false)
 
@@ -56,10 +56,10 @@ export default function CartPage(){
         <div className={style.CartPage}>
 
             <div className={style.top}>
-                <ProgressBar 
+                {cartProducts&&<ProgressBar 
                 currentProgress={currentProgress} 
                 setCurrentProgress={setCurrentProgress} 
-                />
+                />}
 
                 <div className={style.title}>
                     <div className={style.iconContainer}>
@@ -71,7 +71,7 @@ export default function CartPage(){
 
             {components[currentProgress-1]}
 
-            {currentProgress<4&&
+            {cartProducts&&currentProgress<4&&
             <div className={style.buttonContainer}>
 
                 {currentProgress!==1&&
