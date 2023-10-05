@@ -22,7 +22,7 @@ export const EcommerceContextProvider = ({children}: {children: ReactNode}) =>{
             name: 'Iphone 14',
             price: 2137,
             img: iphoneImg,
-            piece: 7,
+            piece: 1,
         },
         {
             name: 'Apple airdots',

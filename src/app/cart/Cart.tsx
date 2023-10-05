@@ -56,7 +56,8 @@ const Cart: FC<CartProps> = () => {
                         </div>
                         <div className={style.right}>
                             <span className={style.name}>{item.name}</span>
-                            <span className={style.price}>{item.price} zł</span>
+                            <span className={style.price}>{item.price * item.piece
+                            } zł</span>
                         </div>
                     </div>
                     <div className={style.bottom}>

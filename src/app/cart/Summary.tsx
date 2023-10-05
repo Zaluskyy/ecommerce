@@ -43,7 +43,7 @@ const Summary: FC<SummaryProps> = () => {
     interface IsummaryArr {
         name: string,
         text: string,
-        price?: number,
+        price: number,
         icon: string,
     }
 
@@ -51,12 +51,13 @@ const Summary: FC<SummaryProps> = () => {
         {
             name: 'Delivery',
             text: 'Personal collection',
-            price: 0,
+            price: 13,
             icon: personalCollectionIcon,
         },
         {
             name: 'Payment',
             text: 'Pay Pal',
+            price: 0,
             icon: personalCollectionIcon,
         },
     ]
@@ -81,6 +82,11 @@ const Summary: FC<SummaryProps> = () => {
     })
 
     const styleProducts = { "--products": cartProducts.length } as React.CSSProperties;
+
+    let cartValue: number = 0;
+    cartProducts.forEach((item: ICartProducts) => {
+        cartValue += item.price * item.piece;
+    });
 
     return(
         <div className={style.Summary}>
@@ -108,6 +114,29 @@ const Summary: FC<SummaryProps> = () => {
                     </div>
                 </div>
                 
+                <div className={style.priceSummary}>
+                    <div className={style.cartValue}>
+                        <span>Cart value</span>
+                        <span>{cartValue} zł</span>
+                    </div>
+                    <div className={style.delivery}>
+                        <span>Delivery</span>
+                        <span>{summaryArr[0].price} zł</span>
+                    </div>
+                    <div className={style.payment}>
+                        <span>Payment</span>
+                        <span>{summaryArr[1].price} zł</span>
+                    </div>
+
+                    <div className={style.line}/>
+
+                    <div className={style.total}>
+                        <span>Total to pay</span>
+                        <span>{cartValue + summaryArr[0].price + summaryArr[1].price} zł</span>
+                    </div>
+
+                </div>
+
             </div>
         </div>
     )
