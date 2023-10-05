@@ -11,7 +11,7 @@ interface SummaryProps{}
 const Summary: FC<SummaryProps> = () => {
 
     const context = useContext(EcommerceContext)
-    const { cartProducts } = context
+    const { cartProducts, selectedDelivery, selectedPayment } = context
     
     interface ICartProducts {
         name: string,
@@ -50,15 +50,15 @@ const Summary: FC<SummaryProps> = () => {
     const summaryArr: IsummaryArr[] = [
         {
             name: 'Delivery',
-            text: 'Personal collection',
-            price: 13,
-            icon: personalCollectionIcon,
+            text: selectedDelivery?.name,
+            price: selectedDelivery?.price,
+            icon: selectedDelivery?.icon,
         },
         {
             name: 'Payment',
-            text: 'Pay Pal',
-            price: 0,
-            icon: personalCollectionIcon,
+            text: selectedPayment?.name,
+            price: selectedPayment?.price,
+            icon: selectedPayment?.icon,
         },
     ]
 
@@ -68,7 +68,7 @@ const Summary: FC<SummaryProps> = () => {
                 <span className={style.title}>{item.name}</span>
                 <div className={style.container}>
                     <div className={style.iconContainer}>
-                        <Image src={personalCollectionIcon} alt="icon"/>
+                        <Image src={item.icon} alt="icon"/>
                     </div>
 
                     <div className={style.informationContainer}>
@@ -125,14 +125,14 @@ const Summary: FC<SummaryProps> = () => {
                     </div>
                     <div className={style.payment}>
                         <span>Payment</span>
-                        <span>{summaryArr[1].price} zł</span>
+                        <span>{summaryArr[1].price?summaryArr[1].price:0} zł</span>
                     </div>
 
                     <div className={style.line}/>
 
                     <div className={style.total}>
                         <span>Total to pay</span>
-                        <span>{cartValue + summaryArr[0].price + summaryArr[1].price} zł</span>
+                        <span>{cartValue + (summaryArr[0].price?summaryArr[0].price:0) + (summaryArr[1].price?summaryArr[1].price:0)} zł</span>
                     </div>
 
                 </div>

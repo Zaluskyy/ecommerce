@@ -195,6 +195,7 @@ $maxWidth: 600px;
         flex-direction: row;
         justify-content: space-between;
         align-items: flex-start;
+        margin-bottom: 100px;
 
         .left{
             width: 40%;
@@ -207,7 +208,7 @@ $maxWidth: 600px;
             .priceSummary{
                 position: static;
                 width: 100%;
-                border-radius: 12px;
+                border-radius: 10px;
             }
         }
     }

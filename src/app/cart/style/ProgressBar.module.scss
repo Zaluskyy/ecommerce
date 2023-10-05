@@ -1,3 +1,5 @@
+@import '../../variables.scss';
+
 .ProgressBar{
     width: 100%;
     height: 62px;
@@ -45,7 +47,7 @@
 
     .current{
         div{
-            background-color: #204745;
+            background-color: $green;
         }
     }
     .past{

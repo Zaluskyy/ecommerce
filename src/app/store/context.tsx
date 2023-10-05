@@ -32,6 +32,22 @@ export const EcommerceContextProvider = ({children}: {children: ReactNode}) =>{
         },
     ]
 
+    interface IDelivery {
+        name: string,
+        price: number,
+        icon: string,
+    }
+    interface IPayment {
+        name: string,
+        price: number,
+        icon: string,
+    }
+
+    const [selectedDelivery, setSelectedDelivery] = useState<IDelivery|null>(null)
+    const [selectedPayment, setSelectedPayment] = useState<IPayment|null>(null)
+
+
+
     const [mobile, setMobile] = useState<boolean>(false)
     const [isAuth, setIsAuth] = useState<boolean>(true)
     const [loginOrRegister, setLoginOrRegister] = useState<"LOGIN"|"REGISTER">("LOGIN")
@@ -45,6 +61,8 @@ export const EcommerceContextProvider = ({children}: {children: ReactNode}) =>{
             loginOrRegister, setLoginOrRegister,
             isAuth, setIsAuth,
             cartProducts, setCartProducts,
+            selectedDelivery, setSelectedDelivery,
+            selectedPayment, setSelectedPayment,
         }}>
             {children}
         </EcommerceContext.Provider>

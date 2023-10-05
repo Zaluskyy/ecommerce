@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useContext, useState} from 'react';
 import style from './style/DeliveryAndPayment.module.scss';
 
 import Image from 'next/image';
@@ -7,17 +7,23 @@ import courierIcon from '../../../public/img/icon/courier.svg'
 import personalCollectionIcon from '../../../public/img/icon/personalCollection.svg';
 import inpostIcon from '../../../public/img/icon/inpost.svg';
 
+import blikIcon from '../../../public/img/icon/blik.svg';
+import paypalIcon from '../../../public/img/icon/paypal.svg';
+
 import { AnimatePresence } from 'framer-motion'
 
 import EditDataPopUp from '../components/EditDataPopUp'
 
 import { adressSchema } from '../components/Schema'
 
-interface DeliveryAndPaymentProps{
-    setChangeRecipientsData: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import EcommerceContext from '../store/context';
 
-const DeliveryAndPayment: FC<DeliveryAndPaymentProps> = ({setChangeRecipientsData}) => {
+interface DeliveryAndPaymentProps{}
+
+const DeliveryAndPayment: FC<DeliveryAndPaymentProps> = ({}) => {
+
+    const context = useContext(EcommerceContext)
+    const {selectedDelivery, setSelectedDelivery, selectedPayment, setSelectedPayment} = context
 
     const [editData, setEditData] = useState<number>(-1)
 
@@ -51,7 +57,7 @@ const DeliveryAndPayment: FC<DeliveryAndPaymentProps> = ({setChangeRecipientsDat
                 name: "street",
             },
             {
-                placeholder: "Atartment number",
+                placeholder: "Apartment number",
                 type: "text",
                 name: "apartmentNumber",
             },
@@ -91,23 +97,9 @@ const DeliveryAndPayment: FC<DeliveryAndPaymentProps> = ({setChangeRecipientsDat
     ] 
 
     const paymentArr: IArr[] = [
-        {name: 'Blik', icon: courierIcon},
-        {name: 'Paypal', price: 0, icon: personalCollectionIcon},
-    ] 
-
-    type deliveryOption = 'Courier' | 'Personal collection' | 'Inpost' | '';
-    type paymentOption = 'Blik' | 'PayPal' | '';
-    
-
-    const [selectedDeliveryOption, setSelectedDeliveryOption] = useState<deliveryOption>("")
-    const [selectedPaymentOption, setSelectedPaymentOption] = useState<paymentOption>("")
-
-    const handleDeliveryOptionChange = (e: deliveryOption)=>{
-        setSelectedDeliveryOption(e)
-    }
-    const handlePaymentOptionChange = (e: paymentOption)=>{
-        setSelectedPaymentOption(e)
-    }
+        {name: 'Blik', icon: blikIcon},
+        {name: 'Paypal', price: 0, icon: paypalIcon},
+    ]     
       
     const deliveries = deliveryArr.map((item, index)=>{
           
@@ -117,13 +109,14 @@ const DeliveryAndPayment: FC<DeliveryAndPaymentProps> = ({setChangeRecipientsDat
             <div 
             key={item.name} 
             style={styleTop} 
-            className={selectedDeliveryOption==item.name?`${style.active} ${style.container}`: `${style.container}`} 
-            onClick={()=>handleDeliveryOptionChange(item.name as deliveryOption)}>
+            className={selectedDelivery?.name==item.name?`${style.active} ${style.container}`: `${style.container}`} 
+            onClick={()=>setSelectedDelivery({name: item.name, price: item.price, icon: item.icon})}
+            >
                 <div className={style.radioConatiner}>
                     <input 
                     value={item.name} 
-                    checked={selectedDeliveryOption==item.name}
-                    onChange={()=>handleDeliveryOptionChange(item.name as deliveryOption)} 
+                    checked={selectedDelivery?.name==item.name}
+                    onChange={()=>setSelectedDelivery({name: item.name, price: item.price, icon: item.icon})}
                     type="radio" 
                     name="delivery"/>
                 </div>
@@ -141,7 +134,6 @@ const DeliveryAndPayment: FC<DeliveryAndPaymentProps> = ({setChangeRecipientsDat
         )
     })
 
-
     const payment = paymentArr.map((item, index)=>{
 
         const styleTop = { "--top": index } as React.CSSProperties;
@@ -150,14 +142,14 @@ const DeliveryAndPayment: FC<DeliveryAndPaymentProps> = ({setChangeRecipientsDat
             <div 
             key={item.name} 
             style={styleTop}  
-            className={selectedPaymentOption==item.name?`${style.active} ${style.container}`: `${style.container}`} 
-            onClick={()=>handlePaymentOptionChange(item.name as paymentOption)}
+            className={selectedPayment?.name==item.name?`${style.active} ${style.container}`: `${style.container}`} 
+            onClick={()=>setSelectedPayment({name: item.name, price: item.price, icon: item.icon})}
             >
                 <div className={style.radioConatiner}>
                     <input 
                     value={item.name} 
-                    checked={selectedPaymentOption==item.name}
-                    onChange={()=>handlePaymentOptionChange(item.name as paymentOption)} 
+                    checked={selectedPayment?.name==item.name}
+                    onChange={()=>setSelectedPayment({name: item.name, price: item.price, icon: item.icon})} 
                     type="radio" 
                     name="payment"/>
                 </div>
@@ -208,8 +200,6 @@ const DeliveryAndPayment: FC<DeliveryAndPaymentProps> = ({setChangeRecipientsDat
                 </div>
             </div>
 
-
-
             <AnimatePresence
             mode='wait'>
 
@@ -224,9 +214,6 @@ const DeliveryAndPayment: FC<DeliveryAndPaymentProps> = ({setChangeRecipientsDat
                 }
 
             </AnimatePresence>
-
-
-
         </div>
     )
 }

@@ -21,12 +21,6 @@ export default function CartPage(){
     const context = useContext(EcommerceContext)
     const { isAuth, cartProducts } = context
 
-    const [changeRecipientsData, setChangeRecipientsData] = useState<boolean>(false)
-
-    useEffect(()=>{
-        changeRecipientsData?document.body.style.overflow = 'hidden': document.body.style.overflow = 'auto';
-    }, [changeRecipientsData])
-
     const titleIcons = [
         {title: 'Cart', icon: cart},
         {title: 'Delivery & Payment', icon: delivery},
@@ -36,7 +30,7 @@ export default function CartPage(){
 
     const components = [
         <Cart/>,
-        <DeliveryAndPayment setChangeRecipientsData={setChangeRecipientsData}/>,
+        <DeliveryAndPayment/>,
         <Summary/>,
         <Done/>
     ]
