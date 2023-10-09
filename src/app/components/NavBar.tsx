@@ -76,10 +76,10 @@ export default function Home() {
     })
 
     const menu = [
-        {name: 'account', img: account},
-        {name: 'cart', img: cart},
         {name: 'contact', img: contact},
         {name: 'terms & conditions', img: terms},
+        {name: 'account', img: account},
+        {name: 'cart', img: cart},
     ]
 
     const menuLi = menu.map((item: any)=>{
@@ -187,7 +187,8 @@ export default function Home() {
             animate="visible"
             exit="exit"
             >
-                {menuLi}
+                {mobile&&menuLi.reverse()}
+                {!mobile&&menuLi}
 
                 {mobile&&!isAuth&&
                 <div className={style.loginContainer}>

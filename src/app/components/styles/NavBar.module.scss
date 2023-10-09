@@ -121,13 +121,12 @@ $loupeMobileHeight: 35px;
     }
 
     .loupeContainer{
-        background-color: $green;
+        background-color: #858585;
         width: $loupeMobileWidth;
         height: $loupeMobileHeight;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border: 1px solid black;
         overflow: hidden;
         border-radius: 50px;
         position: absolute;

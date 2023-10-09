@@ -1,9 +1,10 @@
 import './globals.css'
-import { Headland_One } from 'next/font/google'
+import { Headland_One, Poppins } from 'next/font/google'
 import NavBar from './components/NavBar'
 import { EcommerceContextProvider } from './store/context'
 
 const headland = Headland_One({ subsets: ['latin'], weight: ['400'] })
+const poppins = Poppins({ subsets: ['latin'], weight: ['400', '500', '600', '700', '900'] })
 
 export const metadata = {
   title: 'Create Next App',
@@ -18,7 +19,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <EcommerceContextProvider>
-        <body className={headland.className}>
+        {/* <body className={headland.className}> */}
+        <body className={poppins.className}>
           <NavBar/>
           {children}
         </body>
