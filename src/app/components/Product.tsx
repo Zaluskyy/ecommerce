@@ -13,27 +13,21 @@ interface ProductProps{
 
 const Product: FC<ProductProps> = ({img, name, price}) => {
 
-    return(
-      <div className={style.container}>
-        <div className={style.product}>
-          <div className={style.imgContainer}>
-            <Image src={img} alt="image"/>
-          </div>
-          <div className={style.informationContainer}>
-            <div className={style.top}>
-              <span>{name}</span>
-            </div>
-            <div className={style.bottom}>
-              <button>
-                <span>Add to cart</span>
-                <Image src={whiteCart} alt="cart icon"/>
-              </button>
-              <span>{price} zł</span>
-            </div>
-          </div>
+  return(    
+    <div className={`${style.Product} ${style.smaller}`}>
+      <div className={style.imgContainer}>
+        <Image src={img} alt="product image"/>
+      </div>
+      <span className={style.category}>Phone</span>
+      <span className={style.title}>{name}</span>
+      <div className={style.bottom}>
+        <span className={style.price}>{price} zł</span>
+        <div className={style.addToCartContainer}>
+          <Image src={whiteCart} alt="add to cart"/>
         </div>
       </div>
-    )
+    </div>
+  )
 }
 
 export default Product

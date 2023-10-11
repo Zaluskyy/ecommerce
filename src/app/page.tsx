@@ -9,6 +9,8 @@ import Product from './components/Product';
 import Banner from './components/Banner';
 
 import Chat from './components/Chat';
+import Categories from './components/Categories';
+import Products from './components/Products';
 
 export default function Home() {
 
@@ -71,32 +73,14 @@ export default function Home() {
   return (
     <main className={style.main}>
 
+      <Categories/>
       <Banner/>
 
-      <div className={style.filters}>
-        <select className={style.categories}>
-          <option>Categories</option>
-          <option>Phone</option>
-          <option>Headphones</option>
-        </select>
-
-        <select className={style.sort}>
-          <option>Sort by</option>
-          <option>Rosnąco</option>
-          <option>Malejąco</option>
-        </select>
-      </div>
-
-      <span className={style.title}>Recomended:</span>
-
-      <div className={style.products}>
-        {products}
-      </div>
-
-
+      <span className={style.title}>Recomended</span>
+      <Products/>
+      
       <Chat/>
-
-
+      
     </main>
   )
 }

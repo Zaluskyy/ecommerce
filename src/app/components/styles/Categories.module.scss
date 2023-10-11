@@ -1,0 +1,45 @@
+.Categories{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    overflow: scroll;
+    margin: 10px 0;
+
+    li{
+        list-style: none;
+        margin-right: 20px;
+        font-size: 16px;
+        cursor: pointer;
+
+        &:last-child{
+            margin-right: 0;
+        }
+    }
+}
+
+@media (min-width: 460px){
+    .Categories{
+        li{
+            margin-right: 50px;
+        }
+    }
+}
+
+@media (min-width: 620px){
+    .Categories{
+        overflow: visible;
+        justify-content: space-between;
+    }
+}
+@media (min-width: 768px){
+    .Categories{
+        padding: 0 60px;
+    }
+}
+@media (min-width: 1000px){
+    .Categories{
+        padding: 0 150px;
+    }
+}

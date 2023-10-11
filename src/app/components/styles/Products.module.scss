@@ -1,0 +1,28 @@
+.Products{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 100px;
+}
+
+@media (min-width: 450px){
+    .Products{
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+@media (min-width: 700px){
+    .Products{
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+@media (min-width: 950px){
+    .Products{
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
+}
+@media (min-width: 1150px){
+    .Products{
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    }
+}

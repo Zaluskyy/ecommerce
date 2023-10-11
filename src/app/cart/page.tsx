@@ -19,7 +19,7 @@ import EcommerceContext from '../store/context';
 export default function CartPage(){
 
     const context = useContext(EcommerceContext)
-    const { isAuth, cartProducts } = context
+    const { isAuth, cartProducts, selectedDelivery, selectedPayment } = context
 
     const titleIcons = [
         {title: 'Cart', icon: cart},
@@ -38,10 +38,17 @@ export default function CartPage(){
     const [currentProgress, setCurrentProgress] = useState<number>(1)
 
     const handlePrevNextBtn = (next: boolean)=>{
-        const t = true
         if (!isAuth) window.location.href = "/account";
         else {
-            if(next) setCurrentProgress(prev=>prev+1)
+            if(next) {
+                if(currentProgress==2) {
+                    if(selectedDelivery&&selectedPayment) {
+                        setCurrentProgress(prev=>prev+1)
+                        //tutaj dodaj powiadomienie
+                    }
+                }
+                else setCurrentProgress(prev=>prev+1)
+            }
             else setCurrentProgress(prev=>prev-1)
         }
     }
