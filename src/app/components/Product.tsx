@@ -1,17 +1,50 @@
-import React, {FC} from 'react'
+"use client"
+import React, {FC, useContext} from 'react'
 import style from './styles/Product.module.scss';
 
 import Image, {StaticImageData} from 'next/image';
 
 import whiteCart from '../../../public/img/icon/whiteCart.svg';
+import EcommerceContext from '../store/context';
 
 interface ProductProps{
+    id: number;
     img: StaticImageData;
     name: string;
     price: number;
 }
 
-const Product: FC<ProductProps> = ({img, name, price}) => {
+const Product: FC<ProductProps> = ({id, img, name, price}) => {
+
+  const context = useContext(EcommerceContext)
+  const { cartProducts, setCartProducts } = context
+
+  interface ICartProducts {
+    id: number,
+    name: string,
+    price: number,
+    img: StaticImageData,
+    piece: number,
+}
+
+const handleAddProductToCart = () => {
+  const updatedCartProducts = [...cartProducts];
+  const productIndex = updatedCartProducts.findIndex((item: ICartProducts) => item.name === name);
+
+  if (productIndex !== -1) {
+    updatedCartProducts[productIndex].piece += 1;
+  } else {
+    updatedCartProducts.push({
+      id,
+      name,
+      price,
+      img,
+      piece: 1,
+    });
+  }
+  setCartProducts(updatedCartProducts);
+};
+
 
   return(    
     <div className={`${style.Product} ${style.smaller}`}>
@@ -22,7 +55,7 @@ const Product: FC<ProductProps> = ({img, name, price}) => {
       <span className={style.title}>{name}</span>
       <div className={style.bottom}>
         <span className={style.price}>{price} zł</span>
-        <div className={style.addToCartContainer}>
+        <div onClick={handleAddProductToCart} className={style.addToCartContainer}>
           <Image src={whiteCart} alt="add to cart"/>
         </div>
       </div>

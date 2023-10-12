@@ -13,6 +13,7 @@ const Cart: FC<CartProps> = () => {
     const { cartProducts, setCartProducts } = context
 
     interface ICartProducts {
+        id: number,
         name: string,
         price: number,
         img: StaticImageData,
@@ -22,10 +23,10 @@ const Cart: FC<CartProps> = () => {
     const [productsElements, setProductsElements] = useState<React.ReactNode[] | null>(null);
 
 
-    const handleChangePiece = (addition: boolean, productName: string)=>{
+    const handleChangePiece = (addition: boolean, id: number)=>{
         setCartProducts((prev: ICartProducts[]) => {
             return prev.map(product => {
-              if (product.name === productName) {
+              if (product.id === id) {
 
                 let newPiece = addition ? product.piece + 1 : product.piece - 1;
                 newPiece = Math.max(newPiece, 1);
@@ -49,10 +50,13 @@ const Cart: FC<CartProps> = () => {
     const getProducts = ()=>{
         setProductsElements(cartProducts.map((item: ICartProducts)=>{
             return(
-                <div key={item.name} className={style.productContainer}>
+                <div key={item.id} className={style.productContainer}>
                     <div className={style.top}>
-                        <div className={style.imageContainer}>
-                            <Image src={item.img} alt={item.name}/>
+                        <div className={style.left}>
+                            <div className={style.imageContainer}>
+                                <Image src={item.img} alt={item.name}/>
+
+                            </div>
                         </div>
                         <div className={style.right}>
                             <span className={style.name}>{item.name}</span>
@@ -62,15 +66,13 @@ const Cart: FC<CartProps> = () => {
                     </div>
                     <div className={style.bottom}>
 
-                        <div/>
-
                         <div className={style.quantityContainer}>
 
-                            <button onClick={()=>handleChangePiece(false, item.name)}>-</button>
+                            <button onClick={()=>handleChangePiece(false, item.id)}>-</button>
                             <div>
                                 <span>{item.piece}</span>
                             </div>
-                            <button onClick={()=>handleChangePiece(true, item.name)}>+</button>
+                            <button onClick={()=>handleChangePiece(true, item.id)}>+</button>
 
                         </div>
                         

@@ -25,7 +25,7 @@ $productHeight: calc(#{$productWidth} * 1.533123028391167);
         align-items: center;
         
         img{
-            object-fit: cover;
+            object-fit: contain;
             width: 80%;
             height: 80%;
         }
@@ -63,9 +63,18 @@ $productHeight: calc(#{$productWidth} * 1.533123028391167);
             display: flex;
             justify-content: center;
             align-items: center;
+            transition: .2s;
             img{
+                transition: .2s;
                 width: 60%;
                 height: 60%;
+            }
+
+            &:hover{
+                background-color: white;
+                img {
+                    filter: invert(100%);
+                  } 
             }
         }
     }

@@ -9,9 +9,9 @@ import 'swiper/css/pagination'
 import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules';
 import arrowIcon from '../../../public/img/icon/arrow.svg';
 
-import banner from '../../../public/img/banner.jpg';
-import apple from '../../../public/img/apple.jpg';
-import japko14 from '../../../public/img/japko14.jpg';
+import banner1 from '../../../public/img/banner/1.jpg';
+import banner2 from '../../../public/img/banner/2.jpg';
+import banner3 from '../../../public/img/banner/3.jpg';
 
 import Image from 'next/image';
 
@@ -50,15 +50,15 @@ const Banner: FC<BannerProps> = () => {
             className={style.swiperContainer}
             >
                 <SwiperSlide className={style.slide}>
-                    <Image src={banner} alt="banner"/>
+                    <Image src={banner1} alt="banner"/>
                     {/* slide */}
                 </SwiperSlide>
                 <SwiperSlide className={style.slide}>
-                    <Image src={japko14} alt="banner"/>
+                    <Image src={banner2} alt="banner"/>
                     {/* slide */}
                 </SwiperSlide>
                 <SwiperSlide className={style.slide}>
-                    <Image src={apple} alt="banner"/>
+                    <Image src={banner3} alt="banner"/>
                     {/* slide */}
                 </SwiperSlide>
 

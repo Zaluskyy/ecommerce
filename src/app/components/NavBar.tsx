@@ -10,7 +10,6 @@ import { appearNavbar, slideSearchInput } from '../UI/AnimationVariants';
 import EcommerceContext from '../store/context';
 
 import logo from '../../../public/img/icon/logo.svg'
-import hamburger from '../../../public/img/icon/hamburger.svg'
 import loupe from '../../../public/img/icon/loupe.svg'
 
 import account from '../../../public/img/icon/account.svg'
@@ -21,8 +20,8 @@ import terms from '../../../public/img/icon/terms.svg'
 export default function Home() {
 
     const context = useContext(EcommerceContext)
-    
-    const {mobile, setMobile, setLoginOrRegister, isAuth} = context
+    const {mobile, setMobile, setLoginOrRegister, isAuth, cartProducts} = context
+
     const [openedNav, setOpenedNav] = useState<boolean>(false)
     const [openedLoupe, setOpenedLoupe] = useState<boolean>(false)
 
@@ -85,6 +84,7 @@ export default function Home() {
     const menuLi = menu.map((item: any)=>{
         return(
             <Link key={item.name} href={`/${item.name=="terms & conditions"?'terms&conditions':item.name}`} onClick={()=>setOpenedNav(false)} >
+                {!mobile&&item.name=='cart'&&cartProducts.length>0&&<div className={style.newProduct}>{cartProducts.length}</div>}
                 <div className={style.iconContainer}>
                     <Image src={item.img} alt={item.name}/>
                 </div>

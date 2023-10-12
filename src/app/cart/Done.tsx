@@ -1,13 +1,31 @@
-import React, {FC} from 'react';
+import React, {FC, useContext, useEffect} from 'react';
 import style from './style/Done.module.scss';
-import Image from 'next/image';
+import Image, {StaticImageData} from 'next/image';
 import Link from 'next/link';
 
 import emailIcon from '../../../public/img/icon/email.svg'
+import EcommerceContext from '../store/context';
 
 interface DoneProps{}
 
 const Done: FC<DoneProps> = () => {
+
+    const context = useContext(EcommerceContext)
+    const {setCartProducts} = context
+
+    interface ICartProducts {
+        id: number,
+        name: string,
+        price: number,
+        img: StaticImageData,
+        piece: number,
+    }
+
+    const products: ICartProducts[] = []
+
+    useEffect(()=>{
+        setCartProducts(products)
+    }, [])
 
     return(
         <div className={style.Done}>

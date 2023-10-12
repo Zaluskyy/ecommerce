@@ -76,8 +76,6 @@ $loupeMobileHeight: 35px;
         top: calc($navBarMobileHeight / 2);
         left: 50%;
         transform: translate(-50%, -50%);
-        .logo{
-        }
     }
         
     .loupe{
@@ -191,6 +189,22 @@ $loupeMobileHeight: 35px;
             justify-content: flex-start;
             align-items: center;
             margin-bottom: 40px;
+            position: relative;
+
+            .newProduct{
+                position: absolute;
+                left: 10px;
+                top: -4px;
+                width: 13px;
+                height: 13px;
+                border-radius: 50px;
+                background-color: red;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 8px;
+                color: white;
+            }
 
             .iconContainer{
                 width: 40px;
@@ -269,11 +283,6 @@ $loupeMobileHeight: 35px;
             position: static;
             transform: none;
             width: 150px;
-            
-            input{
-            }
-            button.iconContainer{
-            }
         }
 
         ul{
