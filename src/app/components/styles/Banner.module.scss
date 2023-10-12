@@ -50,14 +50,34 @@
         }
 
         .swiperButtonPrev{
-            left: 50px;
+            left: 10px;
             img{
                 rotate: 180deg;
             }
         }
 
         .swiperButtonNext{
-            right: 50px;
+            right: 10px;
+        }
+    }
+}
+
+@media (min-width: 768px){
+    .Banner{
+        .swiperContainer{
+
+            .swiperButtonPrev, .swiperButtonNext{
+                width: 50px;
+                height: 50px;
+            }
+
+            .swiperButtonPrev{
+                left: 50px;
+            }
+            .swiperButtonNext{
+                right: 50px;
+            }
+            
         }
     }
 }

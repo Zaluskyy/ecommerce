@@ -2,7 +2,9 @@
 import React, {FC, useRef} from 'react'
 import style from './styles/Banner.module.scss';
 
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper as SwiperElement, SwiperSlide } from 'swiper/react';
+import Swiper from 'swiper';
+
 import 'swiper/css';
 import 'swiper/css/pagination'
 
@@ -23,55 +25,67 @@ const Banner: FC<BannerProps> = () => {
     const nextBtnRef = useRef(null)
     const swiperPaginationRef = useRef(null)
 
+    const swiperRef = useRef<Swiper | null>(null);
+
+
+    const handlePrevSlide = ()=>{
+        swiperRef.current.slidePrev();
+    }
+
+    const handleNextSlide = ()=>{
+        swiperRef.current.slideNext();
+    }
+
+    const handleGoTo = (n: number)=>{
+        if(n==1) window.location.href = '/products/watch';
+        else if(n==2) window.location.href = '/products/mac';
+        else if(n==3) window.location.href = '/products/iphone';
+    }
+
     return(
         <div className={style.Banner}>
 
-            <Swiper
+            <SwiperElement
             effect={'coverflow'}
             grabCursor={ true }
-            centeredSlides={true}
             loop={true}
-            slidesPerView={'auto'}
+            slidesPerView={1}
             coverflowEffect={
                 {
                     rotate: 1,
                     stretch: 1,
-                    depth: 100,
-                    modifier: 2.5,
+                    depth: 20,
+                    modifier: 10,
                 }
             }
             pagination={{el: swiperPaginationRef.current, clickable: true}}
-            navigation={{
-                nextEl: nextBtnRef.current,
-                prevEl: prevBtnRef.current,
-                clickable: true,
-            }}
             modules={[EffectCoverflow, Pagination, Navigation]}
             className={style.swiperContainer}
+            onSwiper={(swiper: Swiper) => {
+                swiperRef.current = swiper;
+            }}
             >
-                <SwiperSlide className={style.slide}>
+
+                <SwiperSlide onClick={()=>handleGoTo(1)} className={style.slide}>
                     <Image src={banner1} alt="banner"/>
-                    {/* slide */}
-                </SwiperSlide>
-                <SwiperSlide className={style.slide}>
-                    <Image src={banner2} alt="banner"/>
-                    {/* slide */}
-                </SwiperSlide>
-                <SwiperSlide className={style.slide}>
-                    <Image src={banner3} alt="banner"/>
-                    {/* slide */}
                 </SwiperSlide>
 
-                <div ref={prevBtnRef} className={style.swiperButtonPrev}>
+                <SwiperSlide onClick={()=>handleGoTo(2)} className={style.slide}>
+                    <Image src={banner2} alt="banner"/>
+                </SwiperSlide>
+                <SwiperSlide onClick={()=>handleGoTo(3)} className={style.slide}>
+                    <Image src={banner3} alt="banner"/>
+                </SwiperSlide>
+
+                <div ref={prevBtnRef} className={style.swiperButtonPrev} onClick={handlePrevSlide}>
                     <Image src={arrowIcon} alt="arrow"/>
                 </div>
-                <div ref={nextBtnRef} className={style.swiperButtonNext}>
+                <div ref={nextBtnRef} className={style.swiperButtonNext} onClick={handleNextSlide}>
                     <Image src={arrowIcon} alt="arrow"/>
                 </div>
                 
                 <div ref={swiperPaginationRef} className={style.swiperPagination}/>
-            </Swiper>
-
+            </SwiperElement>
         </div>
     )
 }

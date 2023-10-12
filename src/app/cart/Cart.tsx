@@ -1,6 +1,7 @@
 import React, {FC, useContext, useEffect, useState} from 'react'
 import style from './style/Cart.module.scss';
 import Image, { StaticImageData } from 'next/image';
+import Link from 'next/link';
 
 import transhIcon from '../../../public/img/icon/trash.svg'
 import EcommerceContext from '../store/context';
@@ -97,7 +98,7 @@ const Cart: FC<CartProps> = () => {
             {cartProducts.length>0&&productsElements}
             {!(cartProducts.length>0)&&<div className={style.emptyCart}>
                 <span>Your cart is empty</span>
-                <a href='/'><div>Go to the homepage</div></a>
+                <Link href='/'><div>Go to the homepage</div></Link>
             </div>}
         </div>
      );
