@@ -32,7 +32,7 @@ export const EcommerceContextProvider = ({children}: {children: ReactNode}) =>{
 
 
 
-    const [mobile, setMobile] = useState<boolean>(false)
+    const [mobile, setMobile] = useState<boolean>(true)
     const [isAuth, setIsAuth] = useState<boolean>(true)
     const [loginOrRegister, setLoginOrRegister] = useState<"LOGIN"|"REGISTER">("LOGIN")
 

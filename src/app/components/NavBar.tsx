@@ -1,63 +1,59 @@
 "use client"
-
-import { FormEvent, useContext, useEffect, useState } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react'
 import style from './styles/NavBar.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
-import { appearNavbar, slideSearchInput } from '../UI/AnimationVariants';
-
-import EcommerceContext from '../store/context';
-
-import logo from '../../../public/img/icon/logo.svg'
-import loupe from '../../../public/img/icon/loupe.svg'
+import { motion } from 'framer-motion';
 
 import account from '../../../public/img/icon/account.svg'
 import cart from '../../../public/img/icon/cart.svg'
 import contact from '../../../public/img/icon/contact.svg'
 import terms from '../../../public/img/icon/terms.svg'
 
-export default function Home() {
+import logoIcon from '../../../public/img/icon/logo.svg'
+import loupe from '../../../public/img/icon/loupe.svg'
+
+import EcommerceContext from '../store/context';
+
+interface NavBarProps{}
+
+const NavBar: FC<NavBarProps> = () => {
 
     const context = useContext(EcommerceContext)
-    const {mobile, setMobile, setLoginOrRegister, isAuth, cartProducts} = context
+    const {mobile, setMobile, isAuth, setLoginOrRegister, cartProducts} = context
 
+    const [resize, setResize] = useState<boolean>(false)
     const [openedNav, setOpenedNav] = useState<boolean>(false)
     const [openedLoupe, setOpenedLoupe] = useState<boolean>(false)
 
-    const [resize, setResize] = useState<boolean>(false)
     const [scrollDirection, setScrollDirection] = useState<"down" | "up">("up");
 
+    useEffect(() => {
+        let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+        const handleScroll = () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+            if (scrollTop > lastScrollTop) {
+            setScrollDirection('down');
+            } else if (scrollTop < lastScrollTop) {
+            setScrollDirection('up');
+            }
+    
+            lastScrollTop = scrollTop;
+        };
+    
+        window.addEventListener('scroll', handleScroll);
+    
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
 
-
+    }, []);
+    
     useEffect(()=>{
         openedNav?document.body.style.overflow = 'hidden': document.body.style.overflow = 'auto';
     }, [openedNav])
-
-
-    useEffect(() => {
-    let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-    const handleScroll = () => {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-        if (scrollTop > lastScrollTop) {
-        setScrollDirection('down');
-        } else if (scrollTop < lastScrollTop) {
-        setScrollDirection('up');
-        }
-
-        lastScrollTop = scrollTop;
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-        window.removeEventListener('scroll', handleScroll);
-    };
-    }, []);
-
-
 
     useEffect(()=>{
         setMobile(window.innerWidth<768)
@@ -72,7 +68,12 @@ export default function Home() {
     useEffect(()=>{
         window.addEventListener('resize', handleResize)
         return()=>window.removeEventListener('resize', handleResize)
-    })
+    })    
+
+    const handleHamburgerClick = ()=>{
+        setOpenedNav(prev=>!prev)
+        setOpenedLoupe(false)
+    }
 
     const menu = [
         {name: 'contact', img: contact},
@@ -89,104 +90,55 @@ export default function Home() {
                     <Image src={item.img} alt={item.name}/>
                 </div>
                 <span>{item.name}</span>
-                
             </Link>
         )
     })
-
-    const handleHamburgerClick = ()=>{
-        setOpenedNav(prev=>!prev)
-        setOpenedLoupe(false)
-    }
-
-    const handleSearch = (e: FormEvent)=>{
-        e.preventDefault()
-        setOpenedLoupe(false)
-    }
 
     const handleOpenAccountLogin = (login: String)=>{
         setLoginOrRegister(login)
         setOpenedNav(false)
     }
 
-  return (
-    <motion.nav 
-    className={style.NavBar}
-    animate={scrollDirection=='down'?{top: -65}:{top: 0,}}
-    >
-        {mobile&&
-        <div 
-        className={`${style.hamburger} ${openedNav&&style.hamburgerX}`} 
-        onClick={handleHamburgerClick}
+    const handleSearch = ()=>{
+        setOpenedLoupe(false)
+    }
+
+    return(
+        <motion.div 
+        className={style.NavBar}
+        animate={scrollDirection=='down'?{top: -65}:{top: 0,}}
         >
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
 
-        </div>
-        }
-
-        {/* logoContainer */}
-        <AnimatePresence 
-        mode={'wait'}>
-        {(!openedLoupe||!mobile)&&
-            <motion.div
-            className={style.logoContainer}
-            variants={slideSearchInput}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
+            <div className={`${style.hamburger} ${openedNav&&style.hamburgerX}`} 
+            onClick={handleHamburgerClick}
             >
-                <Link href="/" className={style.logo} >
-                    <Image onClick={()=>setOpenedNav(false)} src={logo} alt='logo' width={24} height={24}/>
-                </Link>
-            </motion.div>}
-        </AnimatePresence>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
 
-        {/* mobile toggle loupe */}
-        {mobile&&!openedNav&&
-        <div className={style.loupe} 
-        onClick={()=>setOpenedLoupe(prev=>!prev)}
-        >
-            <div/>
-            <div/>
-            {openedLoupe&&<div/>}
-        </div>
-        }
+            </div>
 
-        {/* loupe */}
-        <AnimatePresence
-        mode={"wait"}
-        >
+            {!openedLoupe&&<Link onClick={()=>setOpenedNav(false)} href="/" className={style.logoContainer}>
+                <Image src={logoIcon} alt='logo' width={24} height={24}/>
+            </Link>}
+
+            {mobile&&<div onClick={()=>setOpenedLoupe(prev=>!prev)} className={style.toggleLoupe}>
+                <div/>
+                <div/>
+                {openedLoupe&&<div/>}
+            </div>}
+
             {(openedLoupe||!mobile)&&
-            <motion.form 
-            onSubmit={handleSearch} 
-            className={style.loupeContainer}
-            variants={slideSearchInput}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            >
+            <form onSubmit={handleSearch}  className={style.loupeContainer}>
                 <input placeholder='Search...' type="text"/>
                 <button className={style.iconContainer}>
                     <Image src={loupe} alt='loupe' width={24} height={24}/>
                 </button>
-            </motion.form>}
+            </form>
+            }
 
-        </AnimatePresence>
-
-        {/* ul */}
-        <AnimatePresence
-        mode={"wait"}
-        >
-            {(!mobile || openedNav)&&
-            <motion.ul
-            variants={appearNavbar}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            >
+            <ul className={`${openedNav&&style.activeNav}`}>
                 {mobile&&menuLi.reverse()}
                 {!mobile&&menuLi}
 
@@ -205,11 +157,10 @@ export default function Home() {
                         <div>Register</div>
                     </Link>
                 </div>}
+            </ul>
 
-            </motion.ul>}
-
-        </AnimatePresence>
-
-    </motion.nav>
-  )
+        </motion.div>
+    )
 }
+
+export default NavBar
