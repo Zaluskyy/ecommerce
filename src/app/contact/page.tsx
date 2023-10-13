@@ -44,7 +44,13 @@ export default function Contact(){
                 <span>{item.name}</span>
                 <a href={item.href} target="_blank" className={style.container}>
                     <div className={style.iconContainer}>
-                        <Image src={item.icon} alt="call icon"/>
+                        <Image 
+                        src={item.icon} 
+                        alt="call icon"
+                        width={24}
+                        height={24}
+                        priority={false}
+                        />
                     </div>
                     <div className={style.right}>
                         <span>{item.text}</span>
@@ -59,7 +65,13 @@ export default function Contact(){
         <div className={style.Contact}>
             <div className={style.title}>
                 <div className={style.iconContainer}>
-                    <Image src={contactIcon} alt="icon" />
+                    <Image 
+                    src={contactIcon} 
+                    alt="icon" 
+                    width={40}
+                    height={40}
+                    priority={true}
+                    />
                 </div>
                 <span>Contact</span>
             </div>

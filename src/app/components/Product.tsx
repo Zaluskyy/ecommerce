@@ -49,14 +49,26 @@ const handleAddProductToCart = () => {
   return(    
     <div className={`${style.Product} ${style.smaller}`}>
       <div className={style.imgContainer}>
-        <Image src={img} alt="product image"/>
+        <Image 
+        src={img} 
+        alt="product image"
+        width={undefined}
+        height={undefined}
+        priority={true}
+        />
       </div>
       <span className={style.category}>Phone</span>
       <span className={style.title}>{name}</span>
       <div className={style.bottom}>
         <span className={style.price}>{price} zł</span>
         <div onClick={handleAddProductToCart} className={style.addToCartContainer}>
-          <Image src={whiteCart} alt="add to cart"/>
+          <Image 
+          src={whiteCart} 
+          alt="add to cart"
+          width={undefined}
+          height={undefined}
+          priority={true}
+          />
         </div>
       </div>
     </div>

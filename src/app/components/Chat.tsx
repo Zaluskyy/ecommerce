@@ -62,11 +62,17 @@ const Chat: FC<ChatProps> = () => {
     const messages = messagesArr.map((item, index)=>{
         return(
             <div 
-            key={index}
+            key={index}//zmień key na time
             className={item.author=='shop'?`${style.messageContainer}`: `${style.messageContainer} ${style.myMessage}`}
             >
                 <div className={style.imageContainer}>
-                    <Image src={item.author=='shop'?logo:user} alt="logo"/>
+                    <Image 
+                    src={item.author=='shop'?logo:user} 
+                    alt="logo"
+                    width={24}
+                    height={24}
+                    priority={false}
+                    />
                 </div>
                 <div className={style.message}>
                     <div className={style.text}>
@@ -84,7 +90,13 @@ const Chat: FC<ChatProps> = () => {
         onClick={handleOpenBigChat} 
         >
             {!currentStyle&&
-            <Image src={chatIcon} alt="chat icon"/>
+            <Image 
+            src={chatIcon} 
+            alt="chat icon"
+            width={36}
+            height={36}
+            priority={true}
+            />
             }
 
             {opened&&!conversation&&
@@ -92,14 +104,26 @@ const Chat: FC<ChatProps> = () => {
                 <div 
                 onClick={()=>setOpened(false)} 
                 className={style.minimalize}>
-                    <Image src={minimalizeIcon} alt='minimalize icon'/>
+                    <Image 
+                    src={minimalizeIcon} 
+                    alt='minimalize icon'
+                    width={40}
+                    height={40}
+                    priority={false}
+                    />
                 </div>
 
                 <span className={style.title}>Start a conversation</span>
 
                 <div className={style.startContainer}>
                     <div onClick={()=>setConversation(true)} className={style.container}>
-                        <Image src={sendIcon} alt="send icon" />
+                        <Image 
+                        src={sendIcon} 
+                        alt="send icon"
+                        width={24}
+                        height={24}
+                        priority={false}
+                        />
                         <span>Send a message</span>
                     </div>
                 </div>
@@ -112,6 +136,9 @@ const Chat: FC<ChatProps> = () => {
                     <Image 
                     src={minimalizeIcon} 
                     alt="minimalize icon"
+                    width={40}
+                    height={40}
+                    priority={false}
                     onClick={()=>setOpened(false)}  
                     />
                 </div>

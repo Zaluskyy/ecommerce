@@ -48,7 +48,13 @@ export default function Page(){
             {mobile&&
             <div className={style.title}>
                 <div className={style.iconContainer}>
-                    <Image src={getTitle()[0]} alt="icon" />
+                    <Image 
+                    src={getTitle()[0]} 
+                    alt="icon"
+                    width={40}
+                    height={40}
+                    priority={true}
+                    />
                 </div>
                 <span>{getTitle()[1]}</span>
             </div>
@@ -67,7 +73,13 @@ export default function Page(){
                 <div className={style.left}>
                     <div className={style.title}>
                         <div className={style.iconContainer}>
-                            <Image src={accountIcon} alt="icon" />
+                            <Image 
+                            src={accountIcon} 
+                            alt="icon" 
+                            width={40}
+                            height={40}
+                            priority={true}
+                            />
                         </div>
                         <span>Login</span>
                     </div>
@@ -79,7 +91,13 @@ export default function Page(){
                 <div className={style.right}>
                     <div className={style.title}>
                         <div className={style.iconContainer}>
-                            <Image src={accountIcon} alt="icon" />
+                            <Image 
+                            src={accountIcon} 
+                            alt="icon" 
+                            width={40}
+                            height={40}
+                            priority={true}
+                            />
                         </div>
                         <span>Register</span>
                     </div>
@@ -93,7 +111,13 @@ export default function Page(){
             {/* isAuth */}
             {isAuth&&mobile&&accountDashboard&&
             <div className={style.back} onClick={()=>setAccountDashboard("")}>
-                <Image src={arrowIcon} alt="back icon" />
+                <Image 
+                src={arrowIcon} 
+                alt="back icon" 
+                width={24}
+                height={24}
+                priority={false}
+                />
                 <span>Back</span>
             </div>
             }
@@ -115,7 +139,13 @@ export default function Page(){
             <div className={style.desktopRightContainer}>
                 <div className={style.title}>
                     <div className={style.iconContainer}>
-                        <Image src={getTitle()[0]} alt="icon" />
+                        <Image 
+                        src={getTitle()[0]} 
+                        alt="icon" 
+                        width={40}
+                        height={40}
+                        priority={true}
+                        />
                     </div>
                     <span>{getTitle()[1]}</span>
                 </div>

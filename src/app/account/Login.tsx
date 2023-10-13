@@ -67,7 +67,13 @@ const Login: React.FC<LoginProps> = ({ setLoginOrRegister, mobile }) => {
 
             <button className={style.googleLogin}>
                 <div className={style.iconContainer}>
-                    <Image src={googleicon} alt="google icon"/>
+                    <Image 
+                    src={googleicon} 
+                    alt="google icon"
+                    width={24}
+                    height={24}
+                    priority={false}
+                    />
                 </div>
                 <span>Google</span>
             </button>

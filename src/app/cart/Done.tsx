@@ -33,7 +33,13 @@ const Done: FC<DoneProps> = () => {
             <span>Thank you</span>
             <span className={style.message} >We will send you an email with all the order details.</span>
             <div className={style.iconContainer}>
-                <Image src={emailIcon} alt="email icon"/>
+                <Image 
+                src={emailIcon} 
+                alt="email icon"
+                width={24}
+                height={24}
+                priority={false}
+                />
             </div>
             <div className={style.contact}>
                 <span>If you have any additional questions, </span>

@@ -126,7 +126,13 @@ const DeliveryAndPayment: FC<DeliveryAndPaymentProps> = ({}) => {
                         <span>{item.price} zł</span>
                     </div>
                     <div className={style.iconContainer}>
-                        <Image src={item.icon} alt="courier icon"/>
+                        <Image 
+                        src={item.icon} 
+                        alt="courier icon"
+                        width={undefined}
+                        height={undefined}
+                        priority={false}
+                        />
                     </div>
 
                 </div>
@@ -158,7 +164,13 @@ const DeliveryAndPayment: FC<DeliveryAndPaymentProps> = ({}) => {
                         <span>{item.name}</span>
                     </div>
                     <div className={style.iconContainer}>
-                        <Image src={item.icon} alt="courier icon"/>
+                        <Image 
+                        src={item.icon} 
+                        alt="payment icon"
+                        width={undefined}
+                        height={undefined}
+                        priority={false}
+                        />
                     </div>
 
                 </div>

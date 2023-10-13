@@ -12,7 +12,13 @@ export default function Terms(){
             
             <div className={style.title}>
                 <div className={style.iconContainer}>
-                    <Image src={termsAndConditionsIcon} alt="icon" />
+                    <Image 
+                    src={termsAndConditionsIcon} 
+                    alt="icon" 
+                    width={40}
+                    height={40}
+                    priority={true}
+                    />
                 </div>
                 <span>Terms &amp; conditions</span>
             </div>

@@ -24,7 +24,13 @@ const Summary: FC<SummaryProps> = () => {
         return(
                 <div key={item.name} className={style.product}>
                     <div className={style.imageContainer}>
-                        <Image src={item.img} alt="product img"/>
+                        <Image 
+                        src={item.img}
+                        alt="product img"
+                        width={undefined}
+                        height={undefined}
+                        priority={false}
+                        />
                     </div>
                     <div className={style.informationContainer}>
                         <div className={style.top}>
@@ -68,7 +74,13 @@ const Summary: FC<SummaryProps> = () => {
                 <span className={style.title}>{item.name}</span>
                 <div className={style.container}>
                     <div className={style.iconContainer}>
-                        <Image src={item.icon} alt="icon"/>
+                        <Image 
+                        src={item.icon} 
+                        alt="icon"
+                        width={undefined}
+                        height={undefined}
+                        priority={false}
+                        />
                     </div>
 
                     <div className={style.informationContainer}>

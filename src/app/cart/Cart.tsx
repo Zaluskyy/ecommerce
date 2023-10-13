@@ -55,7 +55,13 @@ const Cart: FC<CartProps> = () => {
                     <div className={style.top}>
                         <div className={style.left}>
                             <div className={style.imageContainer}>
-                                <Image src={item.img} alt={item.name}/>
+                                <Image 
+                                src={item.img} 
+                                alt={item.name}
+                                width={undefined}
+                                height={undefined}
+                                priority={true}
+                                />
 
                             </div>
                         </div>
@@ -78,7 +84,13 @@ const Cart: FC<CartProps> = () => {
                         </div>
                         
                         <div onClick={()=>handleRemoveProduct(item.name)} className={style.removeContainer}>
-                            <Image src={transhIcon} alt="trash icon"/>
+                            <Image 
+                            src={transhIcon} 
+                            alt="trash icon"
+                            width={20}
+                            height={20}
+                            priority={false}
+                            />
                         </div>
 
                     </div>

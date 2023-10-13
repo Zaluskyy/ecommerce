@@ -29,12 +29,24 @@ const Dashboard: React.FC<DashboardProps> = ({setAccountDashboard}) => {
             <div key={item.name} className={style.element} onClick={()=>setAccountDashboard(item.goTo as "ORDERS"|"SETTINGS")} >
                 <div className={style.informationContainer}>
                     <div className={style.imageContainer}>
-                        <Image src={item.icon} alt={`${item.name} icon`} />
+                        <Image 
+                        src={item.icon} 
+                        alt={`${item.name} icon`} 
+                        width={24}
+                        height={24}
+                        priority={false}
+                        />
                     </div>
                     <span>{item.name}</span>
                 </div>
                 <div className={style.arrowContainer}>
-                    <Image src={arrowIcon} alt="arrow icon" />
+                    <Image 
+                    src={arrowIcon} 
+                    alt="arrow icon" 
+                    width={24}
+                    height={24}
+                    priority={false}
+                    />
                 </div>
             </div>
         )

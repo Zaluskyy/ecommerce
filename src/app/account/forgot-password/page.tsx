@@ -25,7 +25,13 @@ export default function ForgotPassword(){
             
             <div className={style.title}>
                 <div className={style.iconContainer}>
-                    <Image src={account} alt="icon" />
+                    <Image 
+                    src={account} 
+                    alt="icon" 
+                    width={40}
+                    height={40}
+                    priority={true}
+                    />
                 </div>
                 <span>Forgot password</span>
             </div>

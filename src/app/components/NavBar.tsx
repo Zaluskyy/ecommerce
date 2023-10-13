@@ -87,7 +87,12 @@ const NavBar: FC<NavBarProps> = () => {
             <Link key={item.name} href={`/${item.name=="terms & conditions"?'terms&conditions':item.name}`} onClick={()=>setOpenedNav(false)} >
                 {!mobile&&item.name=='cart'&&cartProducts.length>0&&<div className={style.newProduct}>{cartProducts.length}</div>}
                 <div className={style.iconContainer}>
-                    <Image src={item.img} alt={item.name}/>
+                    <Image 
+                    src={item.img} 
+                    alt={item.name} 
+                    width={24} 
+                    height={24} 
+                    priority={false}/>
                 </div>
                 <span>{item.name}</span>
             </Link>
@@ -99,8 +104,9 @@ const NavBar: FC<NavBarProps> = () => {
         setOpenedNav(false)
     }
 
-    const handleSearch = ()=>{
-        setOpenedLoupe(false)
+    const handleSearch = (e: React.FormEvent<HTMLFormElement>)=>{
+        e.preventDefault();
+        if(openedLoupe) setOpenedLoupe(false)
     }
 
     return(
@@ -120,7 +126,13 @@ const NavBar: FC<NavBarProps> = () => {
             </div>
 
             {!openedLoupe&&<Link onClick={()=>setOpenedNav(false)} href="/" className={style.logoContainer}>
-                <Image src={logoIcon} alt='logo' width={24} height={24}/>
+                <Image 
+                src={logoIcon} 
+                alt='logo' 
+                width={24} 
+                height={24}
+                priority={true}
+                />
             </Link>}
 
             {mobile&&<div onClick={()=>setOpenedLoupe(prev=>!prev)} className={style.toggleLoupe}>
@@ -133,7 +145,13 @@ const NavBar: FC<NavBarProps> = () => {
             <form onSubmit={handleSearch}  className={style.loupeContainer}>
                 <input placeholder='Search...' type="text"/>
                 <button className={style.iconContainer}>
-                    <Image src={loupe} alt='loupe' width={24} height={24}/>
+                    <Image 
+                    src={loupe} 
+                    alt='loupe' 
+                    width={24} 
+                    height={24} 
+                    priority={false}
+                    />
                 </button>
             </form>
             }

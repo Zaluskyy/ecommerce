@@ -50,7 +50,13 @@ const Orders: React.FC<OrdersProps> = () => {
                 <div className={style.right}>
                     <span className={style.title}>{item.name}</span>
                     <div className={style.imgContainer}>
-                        <Image src={item.image} alt="image"/>
+                        <Image 
+                        src={item.image} 
+                        alt="image"
+                        width={40}
+                        height={40}
+                        priority={false}
+                        />
                     </div>
                 </div>
             </div>

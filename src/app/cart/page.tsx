@@ -64,7 +64,13 @@ export default function CartPage(){
 
                 <div className={style.title}>
                     <div className={style.iconContainer}>
-                        <Image src={titleIcons[currentProgress-1].icon} alt="icon" />
+                        <Image 
+                        src={titleIcons[currentProgress-1].icon} 
+                        alt="icon" 
+                        width={40}
+                        height={40}
+                        priority={true}
+                        />
                     </div>
                     <span>{titleIcons[currentProgress-1].title}</span>
                 </div>

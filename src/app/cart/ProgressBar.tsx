@@ -34,7 +34,14 @@ const ProgressBar: FC<ProgressBarProps> = ({currentProgress, setCurrentProgress}
             <div key={texts[i]} onClick={()=>handleClick(i+1)} 
             className={`${getClassName(i)} ${style.numberContainer}`}
             >
-                <div>{getClassName(i)==style.past?<Image src={verifiedIcon} alt="verified icon"/>:i+1}</div>
+                <div>{getClassName(i)==style.past?
+                <Image 
+                src={verifiedIcon} 
+                alt="verified icon"
+                width={24}
+                height={24}
+                priority={false}
+                />:i+1}</div>
                 <span>{texts[i]}</span>
             </div>
         )
