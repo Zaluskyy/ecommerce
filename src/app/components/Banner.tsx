@@ -37,8 +37,8 @@ const Banner: FC<BannerProps> = () => {
 
     const handleGoTo = (n: number)=>{
         if(n==0) window.location.href = '/products/watch';
-        else if(n==1) window.location.href = '/products/mac';
-        else if(n==2) window.location.href = '/products/iphone';
+        else if(n==1) window.location.href = '/products/computer';
+        else if(n==2) window.location.href = '/products/phone';
     }
 
     const bannersArr = [banner1, banner2, banner3]

@@ -11,6 +11,7 @@ export const EcommerceContextProvider = ({children}: {children: ReactNode}) =>{
         name: string,
         price: number,
         img: StaticImageData,
+        category: string,
         piece: number,
     }
 

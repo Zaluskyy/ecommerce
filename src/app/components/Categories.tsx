@@ -12,11 +12,11 @@ const Categories: FC<CategoriesProps> = () => {
     }
 
     const categoriesArr: ICategoriesArr[] = [
-        {text: "Mac", href:'/products/mac'},
-        {text: "Ipad", href:'/products/ipad'},
-        {text: "Iphone", href:'/products/iphone'},
+        {text: "Computer", href:'/products/computer'},
+        {text: "Tablet", href:'/products/tablet'},
+        {text: "Phone", href:'/products/phone'},
         {text: "Watch", href:'/products/watch'},
-        {text: "AirPods", href:'/products/airpods'},
+        {text: "Headphones", href:'/products/headphones'},
         {text: "Accessories", href:'/products/accessories'},
     ]
 

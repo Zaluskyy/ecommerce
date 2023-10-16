@@ -10,11 +10,12 @@ import EcommerceContext from '../store/context';
 interface ProductProps{
     id: number;
     img: StaticImageData;
+    category: string;
     name: string;
     price: number;
 }
 
-const Product: FC<ProductProps> = ({id, img, name, price}) => {
+const Product: FC<ProductProps> = ({id, img, category, name, price}) => {
 
   const context = useContext(EcommerceContext)
   const { cartProducts, setCartProducts } = context
@@ -57,7 +58,7 @@ const handleAddProductToCart = () => {
         priority={true}
         />
       </div>
-      <span className={style.category}>Phone</span>
+      <span className={style.category}>{category}</span>
       <span className={style.title}>{name}</span>
       <div className={style.bottom}>
         <span className={style.price}>{price} zł</span>

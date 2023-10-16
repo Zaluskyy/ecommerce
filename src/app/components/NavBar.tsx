@@ -68,7 +68,7 @@ const NavBar: FC<NavBarProps> = () => {
     useEffect(()=>{
         window.addEventListener('resize', handleResize)
         return()=>window.removeEventListener('resize', handleResize)
-    })    
+    }, [])    
 
     const handleHamburgerClick = ()=>{
         setOpenedNav(prev=>!prev)

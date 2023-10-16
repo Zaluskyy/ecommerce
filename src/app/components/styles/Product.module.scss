@@ -35,12 +35,15 @@ $productHeight: calc(#{$productWidth} * 1.533123028391167);
         font-size: calc($productWidth * 0.050473186119874);
         color: #7CC3E2;
         align-self: flex-start;
+        text-transform: capitalize;
     }
     .title{
         width: 100%;
+        height: calc($productWidth * 0.215384615384615);
         font-size: calc($productWidth * 0.069400630914826);
         color: white;
         text-align: left;
+        overflow: hidden;
     }
 
     div.bottom{
@@ -63,7 +66,7 @@ $productHeight: calc(#{$productWidth} * 1.533123028391167);
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: .2s;
+            transition: .2s background-color;
             img{
                 transition: .2s;
                 width: 60%;
@@ -95,6 +98,7 @@ $productHeight: calc(#{$productWidth} * 1.533123028391167);
             font-size: calc($productWidth * 0.050473186119874);
         }
         .title{
+            height: calc($productWidth * 0.215384615384615);
             font-size: calc($productWidth * 0.069400630914826);
         }
         div.bottom{
@@ -123,6 +127,7 @@ $productHeight: calc(#{$productWidth} * 1.533123028391167);
             font-size: calc($productWidth * 0.050473186119874);
         }
         .title{
+            height: calc($productWidth * 0.215384615384615);
             font-size: calc($productWidth * 0.069400630914826);
         }
         div.bottom{
@@ -151,6 +156,7 @@ $productHeight: calc(#{$productWidth} * 1.533123028391167);
             font-size: calc($productWidth * 0.050473186119874);
         }
         .title{
+            height: calc($productWidth * 0.215384615384615);
             font-size: calc($productWidth * 0.069400630914826);
         }
         div.bottom{
@@ -179,6 +185,7 @@ $productHeight: calc(#{$productWidth} * 1.533123028391167);
             font-size: calc($productWidth * 0.050473186119874);
         }
         .title{
+            height: calc($productWidth * 0.215384615384615);
             font-size: calc($productWidth * 0.069400630914826);
         }
         div.bottom{
@@ -207,6 +214,35 @@ $productHeight: calc(#{$productWidth} * 1.533123028391167);
             font-size: calc($productWidth * 0.050473186119874);
         }
         .title{
+            height: calc($productWidth * 0.215384615384615);
+            font-size: calc($productWidth * 0.069400630914826);
+        }
+        div.bottom{
+            .price{
+                font-size: calc($productWidth * 0.075709779179811);
+            }
+            .addToCartContainer{
+                width: calc($productWidth * 0.189274447949527);
+                height: calc($productWidth * 0.189274447949527);
+            }
+        }
+    }
+}
+@media (min-width: 1550px){
+    $productWidth: calc(258.333333333333333px - 28.333333333333333px);
+    $productHeight: calc(#{$productWidth} * 1.533123028391167);
+    .Product{
+        width: $productWidth;
+        height: $productHeight;
+
+        .imgContainer{
+            height: calc($productWidth * .75);
+        }
+        .category{
+            font-size: calc($productWidth * 0.050473186119874);
+        }
+        .title{
+            height: calc($productWidth * 0.215384615384615);
             font-size: calc($productWidth * 0.069400630914826);
         }
         div.bottom{
