@@ -90,8 +90,20 @@ const Products: FC<ProductsProps> = ({which}) => {
     }
 
     const getNumberProducts = ()=>{
+
+        let numberOfProductsToShow = 0;
+        if (typeof which === 'number') {
+            numberOfProductsToShow = which;
+        } else if (typeof which === 'string') {
+            const parsedNumber = parseInt(which);
+            if (!isNaN(parsedNumber)) {
+                numberOfProductsToShow = parsedNumber;
+            }
+        }
+
         let setElements: React.JSX.Element[] = [];
-        for (let i: number = 0; i<(which>productsArr.length?productsArr.length:which); i++){
+
+        for (let i: number = 0; i<(numberOfProductsToShow > productsArr.length ? productsArr.length : numberOfProductsToShow); i++){
             setElements.push(
                 <Product
                 key={productsArr[i].id}
