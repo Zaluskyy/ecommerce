@@ -107,7 +107,7 @@ const Summary: FC<SummaryProps> = () => {
                 {deliveryAndPaymentArr}
 
                 <div className={style.recipientDataContainer}>
-                    <span className={style.title}>Recipient's data</span>
+                    <span className={style.title}>Recipient&apos;s data</span>
                     <div className={style.container}>
                         <span>Adolf Hitler</span>
                         <span>+48 537 728 008</span>

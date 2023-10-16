@@ -38,9 +38,9 @@ export default function Contact(){
         },
     ]
 
-    const contact = contactArr.map((item, index)=>{
+    const contact = contactArr.map((item)=>{
         return(
-            <div className={style.tableContainer}>
+            <div key={item.name} className={style.tableContainer}>
                 <span>{item.name}</span>
                 <a href={item.href} target="_blank" className={style.container}>
                     <div className={style.iconContainer}>

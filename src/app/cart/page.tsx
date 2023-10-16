@@ -29,10 +29,10 @@ export default function CartPage(){
     ]
 
     const components = [
-        <Cart/>,
-        <DeliveryAndPayment/>,
-        <Summary/>,
-        <Done/>
+        <Cart key="cart" />,
+        <DeliveryAndPayment key="delivery" />,
+        <Summary key="summary" />,
+        <Done key="done" />
     ]
 
     const [currentProgress, setCurrentProgress] = useState<number>(1)

@@ -67,7 +67,7 @@ const Orders: React.FC<OrdersProps> = () => {
         <div className={style.Orders}>
             {ordersArr.length==0&&
             <div className={style.nothing}>
-                <span>You haven't placed any order yet</span>
+                <span>You haven&apos;t placed any order yet</span>
             </div>
             }
             {true&&

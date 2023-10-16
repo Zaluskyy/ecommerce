@@ -130,7 +130,7 @@ const AccountSettings: React.FC<AccountSettingsProps> = () => {
 
             <div className={style.deleteAccount}>
                 <span className={style.title}>Deleting account</span>
-                <span className={style.text}>If you click this button, you will delete your account in our store. Please make sure you really want to do this – we won't be able to restore your account</span>
+                <span className={style.text}>If you click this button, you will delete your account in our store. Please make sure you really want to do this – we won&apos;t be able to restore your account</span>
                 <button>Delete account</button>
             </div>
 
