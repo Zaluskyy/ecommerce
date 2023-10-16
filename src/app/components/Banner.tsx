@@ -28,11 +28,11 @@ const Banner: FC<BannerProps> = () => {
 
 
     const handlePrevSlide = ()=>{
-        swiperRef.current.slidePrev();
+        swiperRef.current?.slidePrev();
     }
 
     const handleNextSlide = ()=>{
-        swiperRef.current.slideNext();
+        swiperRef.current?.slideNext();
     }
 
     const handleGoTo = (n: number)=>{
