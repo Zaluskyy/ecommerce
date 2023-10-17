@@ -1,5 +1,6 @@
 "use client"
 import React, {FC, useContext} from 'react'
+import { useCookies } from 'react-cookie';
 import style from './styles/Product.module.scss';
 
 import Image, {StaticImageData} from 'next/image';
@@ -16,6 +17,8 @@ interface ProductProps{
 }
 
 const Product: FC<ProductProps> = ({id, img, category, name, price}) => {
+
+  const [cookies, setCookie] = useCookies(['cartProducts']);
 
   const context = useContext(EcommerceContext)
   const { cartProducts, setCartProducts } = context
@@ -44,6 +47,7 @@ const handleAddProductToCart = () => {
     });
   }
   setCartProducts(updatedCartProducts);
+  setCookie('cartProducts', updatedCartProducts);
 };
 
 

@@ -1,6 +1,7 @@
 "use client"
-import React, { createContext, ReactNode, useState } from 'react';
+import React, { createContext, ReactNode, useState, useEffect } from 'react';
 import { StaticImageData } from 'next/image';
+import { useCookies } from 'react-cookie';
 
 const EcommerceContext = createContext<any>({} as any);
 
@@ -38,7 +39,12 @@ export const EcommerceContextProvider = ({children}: {children: ReactNode}) =>{
     const [loginOrRegister, setLoginOrRegister] = useState<"LOGIN"|"REGISTER">("LOGIN")
 
     const [cartProducts, setCartProducts] = useState<ICartProducts[]>(products)
+    const [cookies, setCookies] = useCookies(['cartProducts']);
 
+    useEffect(() => {
+        const cartFromCookies = cookies.cartProducts || [];
+        setCartProducts(cartFromCookies);
+      }, []);
 
     return(
         <EcommerceContext.Provider value={{

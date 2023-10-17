@@ -1,4 +1,5 @@
 import React, {FC, useContext, useEffect, useState} from 'react'
+import { useCookies } from 'react-cookie';
 import style from './style/Cart.module.scss';
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
@@ -9,6 +10,8 @@ import EcommerceContext from '../store/context';
 interface CartProps{}
 
 const Cart: FC<CartProps> = () => {
+
+    const [cookies, setCookie] = useCookies(['cartProducts']);
 
     const context = useContext(EcommerceContext)
     const { cartProducts, setCartProducts } = context
@@ -104,6 +107,10 @@ const Cart: FC<CartProps> = () => {
             getProducts()
         }
     }, [cartProducts])
+
+    useEffect(() => {
+        setCookie('cartProducts', cartProducts);
+      }, [cartProducts]);
 
     return ( 
         <div className={style.Cart}>
