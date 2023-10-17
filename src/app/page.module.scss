@@ -1,7 +1,7 @@
 @import './variables.scss';
 
 .main{
-    width: 100vw;
+    width: 100%;
     margin-top: 65px;
     display: flex;
     flex-direction: column;
@@ -13,6 +13,7 @@
     }
 
     a{
+        outline: none;
         button{
             padding: 10px 20px;
             border: 1px solid $green;

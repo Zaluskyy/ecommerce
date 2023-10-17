@@ -1,6 +1,7 @@
 "use client"
 import React, {FC, useRef} from 'react'
 import style from './styles/Banner.module.scss';
+import { useRouter } from 'next/navigation'
 
 import { Swiper as SwiperElement, SwiperSlide } from 'swiper/react';
 import Swiper from 'swiper';
@@ -21,6 +22,8 @@ interface BannerProps{}
 
 const Banner: FC<BannerProps> = () => {
 
+    const router = useRouter();
+
     const prevBtnRef = useRef(null)
     const nextBtnRef = useRef(null)
 
@@ -36,9 +39,9 @@ const Banner: FC<BannerProps> = () => {
     }
 
     const handleGoTo = (n: number)=>{
-        if(n==0) window.location.href = '/products/watch';
-        else if(n==1) window.location.href = '/products/computer';
-        else if(n==2) window.location.href = '/products/phone';
+        if(n==0) router.push('/products/watch');
+        else if(n==1) router.push('/products/computer');
+        else if(n==2) router.push('/products/phone');
     }
 
     const bannersArr = [banner1, banner2, banner3]

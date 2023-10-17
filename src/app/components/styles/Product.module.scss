@@ -67,6 +67,7 @@ $productHeight: calc(#{$productWidth} * 1.533123028391167);
             justify-content: center;
             align-items: center;
             transition: .2s background-color;
+            cursor: pointer;
             img{
                 transition: .2s;
                 width: 60%;

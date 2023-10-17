@@ -11,7 +11,7 @@ interface DoneProps{}
 const Done: FC<DoneProps> = () => {
 
     const context = useContext(EcommerceContext)
-    const {setCartProducts} = context
+    const {setCartProducts, setSelectedDelivery, setSelectedPayment} = context
 
     interface ICartProducts {
         id: number,
@@ -25,6 +25,8 @@ const Done: FC<DoneProps> = () => {
 
     useEffect(()=>{
         setCartProducts(products)
+        setSelectedDelivery(null)
+        setSelectedPayment(null)
     }, [])
 
     return(

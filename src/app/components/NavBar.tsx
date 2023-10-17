@@ -34,7 +34,8 @@ const NavBar: FC<NavBarProps> = () => {
         const handleScroll = () => {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     
-            if (scrollTop > lastScrollTop) {
+            if(scrollTop == 0) setScrollDirection('up')
+            else if (scrollTop > lastScrollTop) {
             setScrollDirection('down');
             } else if (scrollTop < lastScrollTop) {
             setScrollDirection('up');
