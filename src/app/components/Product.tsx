@@ -2,11 +2,13 @@
 import React, {FC, useContext} from 'react'
 import { useCookies } from 'react-cookie';
 import style from './styles/Product.module.scss';
-
+import Link from 'next/link';
 import Image, {StaticImageData} from 'next/image';
 
 import whiteCart from '../../../public/img/icon/whiteCart.svg';
 import EcommerceContext from '../store/context';
+
+import toast from 'react-hot-toast';
 
 interface ProductProps{
     id: number;
@@ -32,6 +34,10 @@ const Product: FC<ProductProps> = ({id, img, category, name, price}) => {
 }
 
 const handleAddProductToCart = () => {
+    toast.success(()=>(
+      <span className={style.messageSpan}>Product added to the <Link href='/cart'>cart</Link></span>
+    ))
+
   const updatedCartProducts = [...cartProducts];
   const productIndex = updatedCartProducts.findIndex((item: ICartProducts) => item.name === name);
 

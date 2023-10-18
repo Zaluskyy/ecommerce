@@ -1,6 +1,5 @@
 @import '../../variables.scss';
 
-
 $productWidth: calc(50vw - 25px);
 $productHeight: calc(#{$productWidth} * 1.533123028391167);
 
@@ -255,5 +254,11 @@ $productHeight: calc(#{$productWidth} * 1.533123028391167);
                 height: calc($productWidth * 0.189274447949527);
             }
         }
+    }
+}
+
+.messageSpan{
+    a{
+        color: $green;
     }
 }

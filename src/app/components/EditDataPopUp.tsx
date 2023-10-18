@@ -23,7 +23,6 @@ interface EditDataPopUpProps{
     inputs: InputItem[];
 }
 
-
 const EditDataPopUp: FC<EditDataPopUpProps> = ({setEditData, title, initialValues, validationSchema, inputs}) => {
 
     const context = useContext(EcommerceContext)

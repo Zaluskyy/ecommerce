@@ -7,6 +7,8 @@ import Link from 'next/link';
 import transhIcon from '../../../public/img/icon/trash.svg'
 import EcommerceContext from '../store/context';
 
+import toast from 'react-hot-toast';
+
 interface CartProps{}
 
 const Cart: FC<CartProps> = () => {
@@ -45,6 +47,7 @@ const Cart: FC<CartProps> = () => {
     }
     
     const handleRemoveProduct = (productName: string)=>{
+        toast.success("Product removed from the cart")
         setCartProducts((prev: ICartProducts[])=>{
             const updatedCart = prev.filter((product) => product.name !== productName);
             return updatedCart;

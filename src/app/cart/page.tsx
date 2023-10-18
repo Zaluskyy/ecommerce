@@ -16,6 +16,8 @@ import summary from '../../../public/img/icon/summary.svg'
 import done from '../../../public/img/icon/done.svg'
 import EcommerceContext from '../store/context';
 
+import toast from 'react-hot-toast';
+
 export default function CartPage(){
 
     const context = useContext(EcommerceContext)
@@ -44,7 +46,9 @@ export default function CartPage(){
                 if(currentProgress==2) {
                     if(selectedDelivery&&selectedPayment) {
                         setCurrentProgress(prev=>prev+1)
-                        //tutaj dodaj powiadomienie
+                    }
+                    else{
+                        toast.error("Select delivery and payment")
                     }
                 }
                 else setCurrentProgress(prev=>prev+1)
