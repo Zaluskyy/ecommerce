@@ -16,6 +16,8 @@ import summary from '../../../public/img/icon/summary.svg'
 import done from '../../../public/img/icon/done.svg'
 import EcommerceContext from '../store/context';
 
+import ButtonAnimation from '../UI/ButtonAnimation';
+
 import toast from 'react-hot-toast';
 
 export default function CartPage(){
@@ -86,15 +88,15 @@ export default function CartPage(){
             <div className={style.buttonContainer}>
 
                 {currentProgress!==1&&
-                <button
+                <ButtonAnimation
                 className={currentProgress==3?`${style.prev} ${style.smallerText}`: style.prev}
                 onClick={()=>handlePrevNextBtn(false)}
-                >{titleIcons[currentProgress-2].title}</button>}
+                >{titleIcons[currentProgress-2].title}</ButtonAnimation>}
 
-                <button
+                <ButtonAnimation
                 className={currentProgress==1?`${style.next} ${style.bigger}`: style.next}
                 onClick={()=>handlePrevNextBtn(true)}
-                >{titleIcons[currentProgress].title}</button>
+                >{titleIcons[currentProgress].title}</ButtonAnimation>
                 
             </div>}        
         </div>

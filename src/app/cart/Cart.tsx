@@ -9,6 +9,8 @@ import EcommerceContext from '../store/context';
 
 import toast from 'react-hot-toast';
 
+import ButtonAnimation from '../UI/ButtonAnimation';
+
 interface CartProps{}
 
 const Cart: FC<CartProps> = () => {
@@ -81,15 +83,15 @@ const Cart: FC<CartProps> = () => {
 
                         <div className={style.quantityContainer}>
 
-                            <button onClick={()=>handleChangePiece(false, item.id)}>-</button>
+                            <ButtonAnimation onClick={()=>handleChangePiece(false, item.id)}>-</ButtonAnimation>
                             <div>
                                 <span>{item.piece}</span>
                             </div>
-                            <button onClick={()=>handleChangePiece(true, item.id)}>+</button>
+                            <ButtonAnimation onClick={()=>handleChangePiece(true, item.id)}>+</ButtonAnimation>
 
                         </div>
                         
-                        <div onClick={()=>handleRemoveProduct(item.name)} className={style.removeContainer}>
+                        <ButtonAnimation onClick={()=>handleRemoveProduct(item.name)} className={style.removeContainer}>
                             <Image 
                             src={transhIcon} 
                             alt="trash icon"
@@ -97,7 +99,7 @@ const Cart: FC<CartProps> = () => {
                             height={20}
                             priority={false}
                             />
-                        </div>
+                        </ButtonAnimation>
 
                     </div>
                 </div>
@@ -120,7 +122,7 @@ const Cart: FC<CartProps> = () => {
             {cartProducts.length>0&&productsElements}
             {!(cartProducts.length>0)&&<div className={style.emptyCart}>
                 <span>Your cart is empty</span>
-                <Link href='/'><div>Go to the homepage</div></Link>
+                <Link href='/'><ButtonAnimation>Go to the homepage</ButtonAnimation></Link>
             </div>}
         </div>
      );

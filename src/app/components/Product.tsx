@@ -4,6 +4,7 @@ import { useCookies } from 'react-cookie';
 import style from './styles/Product.module.scss';
 import Link from 'next/link';
 import Image, {StaticImageData} from 'next/image';
+import ButtonAnimation from '../UI/ButtonAnimation';
 
 import whiteCart from '../../../public/img/icon/whiteCart.svg';
 import EcommerceContext from '../store/context';
@@ -72,7 +73,7 @@ const handleAddProductToCart = () => {
       <span className={style.title}>{name}</span>
       <div className={style.bottom}>
         <span className={style.price}>{price} zł</span>
-        <div onClick={handleAddProductToCart} className={style.addToCartContainer}>
+        <ButtonAnimation onClick={handleAddProductToCart} className={style.addToCartContainer}>
           <Image 
           src={whiteCart} 
           alt="add to cart"
@@ -80,7 +81,7 @@ const handleAddProductToCart = () => {
           height={undefined}
           priority={true}
           />
-        </div>
+          </ButtonAnimation>
       </div>
     </div>
   )

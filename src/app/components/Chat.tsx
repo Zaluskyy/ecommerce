@@ -2,6 +2,7 @@
 
 import React, {FC, FormEvent, useEffect, useState} from 'react'
 import style from './styles/Chat.module.scss';
+import Image from 'next/image';
 
 import chatIcon from '../../../public/img/icon/chat.svg';
 import sendIcon from '../../../public/img/icon/send.svg';
@@ -10,8 +11,7 @@ import backIcon from '../../../public/img/icon/back.svg';
 import logo from '../../../public/img/icon/logo.svg';
 import user from '../../../public/img/icon/user.svg';
 
-
-import Image from 'next/image';
+import ButtonAnimation from '../UI/ButtonAnimation';
 
 interface ChatProps{}
 
@@ -116,7 +116,7 @@ const Chat: FC<ChatProps> = () => {
                 <span className={style.title}>Start a conversation</span>
 
                 <div className={style.startContainer}>
-                    <div onClick={()=>setConversation(true)} className={style.container}>
+                    <ButtonAnimation onClick={()=>setConversation(true)} className={style.container}>
                         <Image 
                         src={sendIcon} 
                         alt="send icon"
@@ -125,7 +125,7 @@ const Chat: FC<ChatProps> = () => {
                         priority={false}
                         />
                         <span>Send a message</span>
-                    </div>
+                    </ButtonAnimation>
                 </div>
             </>
             }
@@ -149,9 +149,9 @@ const Chat: FC<ChatProps> = () => {
 
                 <form onClick={handleSendMessage} className={style.writeMessage}>
                         <input type="text" placeholder='Send message...' />
-                        <button className={style.sendContainer}>
+                        <ButtonAnimation className={style.sendContainer}>
                             <Image src={sendIcon} alt="send icon"/>
-                        </button>
+                        </ButtonAnimation>
                 </form>
             </div>
             }

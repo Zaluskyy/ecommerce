@@ -1,4 +1,5 @@
 import React, {FC, useContext, useEffect} from 'react';
+import { useCookies } from 'react-cookie';
 import style from './style/Done.module.scss';
 import Image, {StaticImageData} from 'next/image';
 import Link from 'next/link';
@@ -9,6 +10,8 @@ import EcommerceContext from '../store/context';
 interface DoneProps{}
 
 const Done: FC<DoneProps> = () => {
+
+    const [cookies, setCookie] = useCookies(['cartProducts']);
 
     const context = useContext(EcommerceContext)
     const {setCartProducts, setSelectedDelivery, setSelectedPayment} = context
@@ -25,6 +28,7 @@ const Done: FC<DoneProps> = () => {
 
     useEffect(()=>{
         setCartProducts(products)
+        setCookie('cartProducts', products);
         setSelectedDelivery(null)
         setSelectedPayment(null)
     }, [])

@@ -64,6 +64,13 @@
             background: white;
             color: $green;
             border: 2px solid $green;
+            transition: background-color .2s color .2s;
+            cursor: pointer;
+
+            &:hover{
+                background-color: $green500;
+                color: white;
+            }
         }
         .smallerText{
             font-size: 18px;
@@ -72,6 +79,14 @@
         .next{
             background-color: $green;
             color: white;
+            transition: background-color .2s;
+            border: 2px solid transparent;
+            cursor: pointer;
+
+            &:hover{
+                border-color: $green;
+                background-color: $green500;
+            }
         }
         .bigger{
             width: 260px;

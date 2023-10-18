@@ -72,10 +72,14 @@ const EditDataPopUp: FC<EditDataPopUpProps> = ({setEditData, title, initialValue
                     <motion.div 
                     className={style.exit} 
                     onClick={handleExit}
-                    
-                    initial="hidden"
-                    animate="visible"
-                    exit="exit"
+                    whileHover={{
+                        scale: 1.5,
+                        rotate: 10,
+                    }}
+                    whileTap={{
+                        scale: .9,
+                        rotate: 0,
+                    }}
                     >
                         <div/>
                         <div/>

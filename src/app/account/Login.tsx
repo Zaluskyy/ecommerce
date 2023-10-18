@@ -9,6 +9,8 @@ import { loginSchema } from '../components/Schema';
 
 import { Field, Form, Formik } from 'formik'
 
+import ButtonAnimation from '../UI/ButtonAnimation';
+
 interface LoginProps{
     setLoginOrRegister: React.Dispatch<React.SetStateAction<'LOGIN' | 'REGISTER'>>;
     mobile: boolean;
@@ -53,7 +55,7 @@ const Login: React.FC<LoginProps> = ({ setLoginOrRegister, mobile }) => {
                             </Link>
                         </div>
 
-                        <button type="submit">Login</button>
+                        <ButtonAnimation type="submit">Login</ButtonAnimation>
                     </Form>
                 )}
 
@@ -65,7 +67,7 @@ const Login: React.FC<LoginProps> = ({ setLoginOrRegister, mobile }) => {
                 <div></div>
             </div>
 
-            <button className={style.googleLogin}>
+            <ButtonAnimation className={style.googleLogin}>
                 <div className={style.iconContainer}>
                     <Image 
                     src={googleicon} 
@@ -76,10 +78,10 @@ const Login: React.FC<LoginProps> = ({ setLoginOrRegister, mobile }) => {
                     />
                 </div>
                 <span>Google</span>
-            </button>
+            </ButtonAnimation>
 
             {mobile&&<div className={style.noAccount}>
-                <span>Don’t you have an account?</span>
+                <span>Don&apos;t you have an account?</span>
                 <span onClick={()=>setLoginOrRegister('REGISTER')}>Sign Up</span>
             </div>}
 

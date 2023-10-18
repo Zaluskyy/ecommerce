@@ -9,6 +9,8 @@ import Chat from './components/Chat';
 import Categories from './components/Categories';
 import Products from './components/Products';
 
+import ButtonAnimation from './UI/ButtonAnimation';
+
 export default function Home() {
 
   const [resize, setResize] = useState<boolean>(false)
@@ -41,7 +43,7 @@ export default function Home() {
       <Products which={howMuch}/>
 
       <Link href='/products'>
-        <button>See all products</button>
+        <ButtonAnimation>See all products</ButtonAnimation>
       </Link>
       
       <Chat/>

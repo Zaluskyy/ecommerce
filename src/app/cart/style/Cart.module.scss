@@ -103,7 +103,7 @@
                     justify-content: center;
                     align-items: center;
                     border-radius: 3px;
-                    margin: 0 2px;
+                    margin: 0 5px;
                     span{
                         color: white;
                         font-size: 10px;
@@ -119,6 +119,8 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                background-color: transparent;
+                border: none;
                 cursor: pointer;
 
                 img{
@@ -142,13 +144,14 @@
         }
         a{
             text-decoration: none;
-            div{
+            button{
+                border: none;
                 padding: 15px 30px;
                 background-color: $green;
                 color: white;
                 border-radius: 50px;
                 cursor: pointer;
-                font-size: 16px;
+                font-size: 20px;
             }
         }
     }
@@ -192,7 +195,7 @@
                     div{
                         height: 30px;
                         width: 30px;
-                        margin: 0 5px;
+                        margin: 0 7px;
                         border-radius: 5px;
                         span{
                             font-size: 17px;

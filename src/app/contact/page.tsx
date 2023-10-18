@@ -1,3 +1,4 @@
+"use client"
 import style from './Contact.module.scss';
 import Image from 'next/image';
 
@@ -7,6 +8,7 @@ import callIcon from '../../../public/img/icon/call.svg';
 import mailIcon from '../../../public/img/icon/mail.svg';
 import locationIcon from '../../../public/img/icon/location.svg';
 
+import { motion } from 'framer-motion';
 
 export default function Contact(){
 
@@ -25,7 +27,7 @@ export default function Contact(){
         href: "tel: +48 213 701 488", 
         text: "+48 213 701 488",
         },{
-        name: "Mail", 
+        name: "Email", 
         icon: mailIcon, 
         href: "mailto: papwat2137@gmail.com", 
         text: "papwat2137@gmail.com",
@@ -42,7 +44,17 @@ export default function Contact(){
         return(
             <div key={item.name} className={style.tableContainer}>
                 <span>{item.name}</span>
-                <a href={item.href} target="_blank" className={style.container}>
+                <motion.a 
+                href={item.href} 
+                target="_blank" 
+                className={style.container}
+                whileHover={{
+                    scale: 1.1,
+                }}
+                whileTap={{
+                    scale: .9,
+                }}
+                >
                     <div className={style.iconContainer}>
                         <Image 
                         src={item.icon} 
@@ -56,7 +68,7 @@ export default function Contact(){
                         <span>{item.text}</span>
                         {item.text2&&<span>{item.text2}</span>}
                     </div>
-                </a>
+                </motion.a>
             </div>
         )
     })

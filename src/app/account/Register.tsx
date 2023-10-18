@@ -5,6 +5,8 @@ import { registerSchema } from '../components/Schema';
 
 import { Field, Form, Formik } from 'formik'
 
+import ButtonAnimation from '../UI/ButtonAnimation';
+
 
 interface RegisterProps{
     setLoginOrRegister: React.Dispatch<React.SetStateAction<'LOGIN' | 'REGISTER'>>;
@@ -66,7 +68,7 @@ const Register: React.FC<RegisterProps> = ({ setLoginOrRegister, mobile }) => {
                     {errors.confirmPassword&&touched.confirmPassword&&<span className={style.error}>{errors.confirmPassword}</span>}
                 </div>
 
-                <button type="submit" className={style.signUp}>Sign up</button>
+                <ButtonAnimation type="submit" className={style.signUp}>Sign up</ButtonAnimation>
 
                 {mobile&&<div className={style.existAccount}>
                     <span>You already have an account?</span>

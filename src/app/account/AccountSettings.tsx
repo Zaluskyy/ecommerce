@@ -7,6 +7,8 @@ import { changePrimaryData, changeEmail, changePassword } from '../components/Sc
 
 import { AnimatePresence } from 'framer-motion';
 
+import ButtonAnimation from '../UI/ButtonAnimation';
+
 
 interface AccountSettingsProps{}
 
@@ -131,7 +133,7 @@ const AccountSettings: React.FC<AccountSettingsProps> = () => {
             <div className={style.deleteAccount}>
                 <span className={style.title}>Deleting account</span>
                 <span className={style.text}>If you click this button, you will delete your account in our store. Please make sure you really want to do this – we won&apos;t be able to restore your account</span>
-                <button>Delete account</button>
+                <ButtonAnimation>Delete account</ButtonAnimation>
             </div>
 
             <AnimatePresence

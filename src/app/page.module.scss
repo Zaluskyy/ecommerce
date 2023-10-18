@@ -16,7 +16,7 @@
         outline: none;
         button{
             padding: 10px 20px;
-            border: 1px solid $green;
+            border: 2px solid $green;
             border-radius: 12px;
             margin-top: 40px;
             color: $green;
@@ -24,7 +24,7 @@
             transition: background-color .2s, color .2s;
 
             &:hover{
-                background-color: $green;
+                background-color: $green500;
                 color: white;
             }
         }

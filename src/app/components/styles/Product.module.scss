@@ -58,6 +58,7 @@ $productHeight: calc(#{$productWidth} * 1.533123028391167);
         }
 
         .addToCartContainer{
+            background-color: $green;
             width: calc($productWidth * 0.189274447949527);
             height: calc($productWidth * 0.189274447949527);
             border-radius: 50px;
@@ -74,10 +75,7 @@ $productHeight: calc(#{$productWidth} * 1.533123028391167);
             }
 
             &:hover{
-                background-color: white;
-                img {
-                    filter: invert(100%);
-                  } 
+                background-color: $green500;
             }
         }
     }
