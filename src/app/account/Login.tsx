@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import style from './style/Login.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -11,6 +11,14 @@ import { Field, Form, Formik } from 'formik'
 
 import ButtonAnimation from '../UI/ButtonAnimation';
 
+import toast from 'react-hot-toast';
+
+import { useCookies } from 'react-cookie';
+
+import { auth, googleProvider } from '../firebase';
+import { signInWithPopup } from 'firebase/auth';
+import EcommerceContext from '../store/context';
+
 interface LoginProps{
     setLoginOrRegister: React.Dispatch<React.SetStateAction<'LOGIN' | 'REGISTER'>>;
     mobile: boolean;
@@ -18,8 +26,24 @@ interface LoginProps{
 
 const Login: React.FC<LoginProps> = ({ setLoginOrRegister, mobile }) => {
 
+    const context = useContext(EcommerceContext)
+    const { setIsAuth } = context
+
+    const [cookies, setCookie] = useCookies(['auth-token']);
+
     const handleLogin = ()=>{
         console.log("handleLogin")
+    }
+
+    const signInWithGoogle = async()=>{
+        try{
+            const result = await signInWithPopup(auth, googleProvider)
+            setCookie('auth-token', result.user.refreshToken)
+            setIsAuth(true)
+            toast.success("You are logged")
+        } catch(err){
+            toast.error("Login failed")
+        }
     }
 
     return(
@@ -67,7 +91,7 @@ const Login: React.FC<LoginProps> = ({ setLoginOrRegister, mobile }) => {
                 <div></div>
             </div>
 
-            <ButtonAnimation className={style.googleLogin}>
+            <ButtonAnimation onClick={signInWithGoogle} className={style.googleLogin}>
                 <div className={style.iconContainer}>
                     <Image 
                     src={googleicon} 

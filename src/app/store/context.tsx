@@ -33,18 +33,20 @@ export const EcommerceContextProvider = ({children}: {children: ReactNode}) =>{
     const [selectedPayment, setSelectedPayment] = useState<IPayment|null>(null)
 
 
-
+    const [cookies, setCookies] = useCookies(['cartProducts', 'auth-token']);
+    
     const [mobile, setMobile] = useState<boolean>(true)
-    const [isAuth, setIsAuth] = useState<boolean>(true)
+    const [isAuth, setIsAuth] = useState<boolean>(false)
     const [loginOrRegister, setLoginOrRegister] = useState<"LOGIN"|"REGISTER">("LOGIN")
 
     const [cartProducts, setCartProducts] = useState<ICartProducts[]>(products)
-    const [cookies, setCookies] = useCookies(['cartProducts']);
 
     useEffect(() => {
         const cartFromCookies = cookies.cartProducts || [];
         setCartProducts(cartFromCookies);
-      }, []);
+
+        setIsAuth(cookies['auth-token']?true:false)
+    }, []);
 
     return(
         <EcommerceContext.Provider value={{
