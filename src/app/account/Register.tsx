@@ -7,6 +7,11 @@ import { Field, Form, Formik } from 'formik'
 
 import ButtonAnimation from '../UI/ButtonAnimation';
 
+import toast from 'react-hot-toast';
+
+import { auth } from '../firebase';
+import { createUserWithEmailAndPassword, updateProfile, sendEmailVerification } from 'firebase/auth'
+
 
 interface RegisterProps{
     setLoginOrRegister: React.Dispatch<React.SetStateAction<'LOGIN' | 'REGISTER'>>;
@@ -16,15 +21,32 @@ interface RegisterProps{
 const Register: React.FC<RegisterProps> = ({ setLoginOrRegister, mobile }) => {
 
 
-    const handleSubmit = ()=>{
-        console.log("handleSubmit")
+    interface IFormValues {
+        name: string;
+        email: string;
+        password: string;
+        confirmPassword: string;
+      }
+
+    const handleSignUp = async(values: IFormValues)=>{
+        const {name, email, password} = values
+        try{
+            const result = await createUserWithEmailAndPassword(auth, email, password)
+            const user = result.user;
+            await updateProfile(user, {displayName: name})
+            await sendEmailVerification(user);
+            toast.success("Succesfully sign up, verify your email")
+
+        }catch{
+            toast.error("Something went wrong")
+        }
     }
 
     return(
         <Formik
         initialValues={{ name: '', email: '', password: '', confirmPassword: '' }} 
         validationSchema={registerSchema}
-        onSubmit={handleSubmit}
+        onSubmit={handleSignUp}
         >
             {({ errors, touched }) => (
             <Form className={style.Register}>

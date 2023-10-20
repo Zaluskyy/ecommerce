@@ -11,13 +11,14 @@ import { Field, Form, Formik } from 'formik'
 
 import ButtonAnimation from '../UI/ButtonAnimation';
 
-import toast from 'react-hot-toast';
+import EcommerceContext from '../store/context';
 
 import { useCookies } from 'react-cookie';
 
+import toast from 'react-hot-toast';
+
 import { auth, googleProvider } from '../firebase';
-import { signInWithPopup } from 'firebase/auth';
-import EcommerceContext from '../store/context';
+import { signInWithPopup, signInWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 
 interface LoginProps{
     setLoginOrRegister: React.Dispatch<React.SetStateAction<'LOGIN' | 'REGISTER'>>;
@@ -29,10 +30,37 @@ const Login: React.FC<LoginProps> = ({ setLoginOrRegister, mobile }) => {
     const context = useContext(EcommerceContext)
     const { setIsAuth } = context
 
-    const [cookies, setCookie] = useCookies(['auth-token']);
+    const [, setCookie] = useCookies(['auth-token']);
 
-    const handleLogin = ()=>{
-        console.log("handleLogin")
+    interface IFormValues{
+        email: string,
+        password: string
+    }
+
+    const handleLogin = async(values: IFormValues)=>{
+        const { email, password } = values
+        try{
+            const result = await signInWithEmailAndPassword(auth, email, password)
+            const user = result.user
+
+            if(user.emailVerified){
+                toast.success("You are logged")
+                setCookie('auth-token', user.refreshToken)
+                setIsAuth(true)
+            }else{
+                toast.error("Verify email")
+                try{
+                    await sendEmailVerification(user);
+                    toast("sent email verification")
+                }catch{
+                    toast.error("Failed to send email")
+                }
+            }
+
+        }catch{
+            toast.error("Wrong email or password")
+        }
+
     }
 
     const signInWithGoogle = async()=>{

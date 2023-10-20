@@ -9,14 +9,31 @@ import account from '../../../../public/img/icon/account.svg'
 import {Formik, Form, Field} from 'formik';
 import { forgotPassword } from '../../components/Schema';
 
+import toast from 'react-hot-toast';
+
+import { sendPasswordResetEmail } from 'firebase/auth';
+import { auth } from '../../firebase'
+
 
 export default function ForgotPassword(){
 
     const [sent, setSent] = useState<boolean>(false)
 
-    const handleResetPassword = ()=>{
-        console.log("reset password")
-        setSent(true)
+    interface IFormValues {
+        email: string
+    }
+
+    const handleResetPassword = async(value: IFormValues)=>{
+        const { email } = value
+        
+        try{
+            await sendPasswordResetEmail(auth, email)
+            toast.success("Sent email")
+            setSent(true)
+        }catch{
+            toast.error("Something went wrong")
+        }
+        
     }   
 
     return(
