@@ -1,27 +1,54 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import style from './style/AccountSettings.module.scss';
 
 import EditDataPopUp from '../components/EditDataPopUp'
 
-import { changePrimaryData, changeEmail, changePassword } from '../components/Schema';
+import { changePrimaryData, changePassword, deleteAccount } from '../components/Schema';
 
 import { AnimatePresence } from 'framer-motion';
 
 import ButtonAnimation from '../UI/ButtonAnimation';
+
+import { auth, db } from '../firebase';
+import {doc, getDoc} from 'firebase/firestore';
 
 
 interface AccountSettingsProps{}
 
 const AccountSettings: React.FC<AccountSettingsProps> = () => {
 
+    const [renderFromEdit, setRenderFromEdit] = useState<boolean>(false)
+
+    const [displayName, setDisplayName] = useState<string | null>(null);
+    const [displayTelephone, setDisplayTelephone] = useState<number | null>(null)
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged(async(user) => {
+          if (user) {
+            setDisplayName(user.displayName);
+            const userDocRef = doc(db, 'account', user.uid);
+                const userDocSnapshot = await getDoc(userDocRef);
+                if (userDocSnapshot.exists()) {
+                const userData = userDocSnapshot.data();
+                setDisplayTelephone(userData.telephone)
+                }
+          }
+        });
+    
+        return () => {
+          unsubscribe();
+        };
+      }, [renderFromEdit]);
+
+
     interface IDataArr {
         title: string,
-        data: string,
+        data: string | null, 
         data2?: string,
     }
 
     const dataArr: IDataArr[] = [
-        {title: "Your data", data: "Adolf Hitler", data2: "Tel. 213 701 488"},
+        {title: "Your data", data: displayName, data2: `${displayTelephone ? `Tel. ${displayTelephone}`:''}`},
         {title: "Email", data: "adohit88@gmail.com"},
         {title: "Password", data: "********"},
     ]
@@ -56,32 +83,6 @@ const AccountSettings: React.FC<AccountSettingsProps> = () => {
             ]
         },
         {
-            title: "Change email",
-            initVal: {
-                currentEmail: '',
-                newEmail: '',
-                confirmNewEmail: '',
-            },
-            schema: changeEmail,
-            inputs: [
-                {
-                    placeholder: "Current email",
-                    type: "email",
-                    name: "currentEmail",
-                },
-                {
-                    placeholder: "New Email",
-                    type: "email",
-                    name: "newEmail",
-                },
-                {
-                    placeholder: "Confirm new email",
-                    type: "email",
-                    name: "confirmNewEmail",
-                },
-            ]
-        },
-        {
             title: "Change password",
             initVal: {
                 currentPassword: '',
@@ -92,18 +93,32 @@ const AccountSettings: React.FC<AccountSettingsProps> = () => {
             inputs: [
                 {
                     placeholder: "Current password",
-                    type: "email",
+                    type: "string",
                     name: "currentPassword",
                 },
                 {
                     placeholder: "New password",
-                    type: "email",
+                    type: "string",
                     name: "newPassword",
                 },
                 {
                     placeholder: "Confirm new password",
-                    type: "email",
+                    type: "string",
                     name: "confirmNewPassword",
+                },
+            ]
+        },
+        {
+            title: "Delete Account",
+            initVal: {
+                currentPassword: '',
+            },
+            schema: deleteAccount,
+            inputs: [
+                {
+                    placeholder: "Current password",
+                    type: "string",
+                    name: "currentPassword",
                 },
             ]
         },
@@ -116,10 +131,10 @@ const AccountSettings: React.FC<AccountSettingsProps> = () => {
                 <div className={style.container}>
                     {index==0&&<div className={style.data}>
                         <span className={style.name}>{item.data}</span>
-                        <span className={style.data2}>{item.data2}</span>
+                        {displayTelephone&&<span className={style.data2}>{item.data2}</span>}
                     </div>}
                     {index!==0&&<span>{item.data}</span>}
-                    <span onClick={()=>setEdit(index)} className={style.edit}>Edit</span>
+                    {index!==1&&<span onClick={()=>setEdit(index==2?1:index)} className={style.edit}>Edit</span>}
                 </div>
             </div>
         )
@@ -133,7 +148,7 @@ const AccountSettings: React.FC<AccountSettingsProps> = () => {
             <div className={style.deleteAccount}>
                 <span className={style.title}>Deleting account</span>
                 <span className={style.text}>If you click this button, you will delete your account in our store. Please make sure you really want to do this – we won&apos;t be able to restore your account</span>
-                <ButtonAnimation>Delete account</ButtonAnimation>
+                <ButtonAnimation onClick={()=>setEdit(2)}>Delete account</ButtonAnimation>
             </div>
 
             <AnimatePresence
@@ -146,11 +161,10 @@ const AccountSettings: React.FC<AccountSettingsProps> = () => {
                     initialValues={editDatas[edit].initVal}
                     validationSchema={editDatas[edit].schema}
                     inputs={editDatas[edit].inputs}
+                    setUpdatedFromEdit={setRenderFromEdit}
                     />
                 }
-
             </AnimatePresence>
-
         </div>
     )
 }

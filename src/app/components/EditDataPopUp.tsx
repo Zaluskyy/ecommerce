@@ -9,6 +9,14 @@ import { motion } from 'framer-motion'
 import { popUpDesktopAnimation, popUpMobileAnimation } from '../UI/AnimationVariants'
 import EcommerceContext from '../store/context';
 
+import { auth, db } from '../firebase';
+import { updateProfile, EmailAuthProvider, reauthenticateWithCredential, updatePassword, deleteUser } from 'firebase/auth';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
+
+import toast from 'react-hot-toast'
+
+import { useCookies } from 'react-cookie';
+
 interface InputItem {
     placeholder: string;
     type: string;
@@ -21,12 +29,15 @@ interface EditDataPopUpProps{
     initialValues: Record<string, string | undefined>;
     validationSchema: yup.Schema<any>;
     inputs: InputItem[];
+    setUpdatedFromEdit: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const EditDataPopUp: FC<EditDataPopUpProps> = ({setEditData, title, initialValues, validationSchema, inputs}) => {
+const EditDataPopUp: FC<EditDataPopUpProps> = ({setEditData, title, initialValues, validationSchema, inputs, setUpdatedFromEdit}) => {
+
+    const [,, removeCookie] = useCookies(['auth-token']);
 
     const context = useContext(EcommerceContext)
-    const {mobile} = context
+    const {mobile, setIsAuth} = context
 
     useEffect(()=>{
         window.scrollTo({
@@ -41,19 +52,57 @@ const EditDataPopUp: FC<EditDataPopUpProps> = ({setEditData, title, initialValue
             document.body.style.overflow = 'auto';
         }
     }, [])
-    
 
-    const handleSave = async () => {
-        // add data to base
-        await new Promise<void>(resolve => {
-            setTimeout(() => {
-                console.log("done");
-                resolve();
-            }, 1000);
-        });
+
+    const handleSave = async (values: any) => {
+        const user = auth.currentUser
+        if(title == "Your data"){
+            const { name, surname, telephone } = values
+            if(user){
+                const userDocRef = doc(db, 'account', user.uid);
+                const userDocSnapshot = await getDoc(userDocRef);
+                if (userDocSnapshot.exists()) {
+                    await updateProfile(user, {displayName: `${name} ${surname}`})
+                    await setDoc(userDocRef, { telephone }, { merge: true });
+                    toast.success("Updated your data")
+                } else {
+                    await setDoc(userDocRef, { telephone });
+                    toast.success("Added your data")
+                }
+            }else{
+                toast.error("Something went wrong")
+            }
+        }else if(title == "Change password"){
+            const { currentPassword, newPassword } = values
+            if(user){
+                try {
+                    const credential = EmailAuthProvider.credential(user.email as string, currentPassword);
+                    await reauthenticateWithCredential(user, credential);
+                    await updatePassword(user, newPassword);
+                    toast.success('Password have changed');
+                  } catch (error) {
+                    toast.error('Password has not been changed');
+                  }
+            }
+        }else if(title == "Delete Account"){
+            const { currentPassword } = values
+            if (user) {
+                try {
+                    const credential = EmailAuthProvider.credential(user.email as string, currentPassword);
+                    await reauthenticateWithCredential(user, credential);
+                    await deleteUser(user);
+                    removeCookie("auth-token")
+                    setIsAuth(false)
+                    toast.success('Addount has been deleted.');
+                } catch (error) {
+                    toast.error("Wrong password")
+                }
+            }
+        }
+        setUpdatedFromEdit(prev=>!prev)
         setEditData(-1)
     }
-
+    
     const handleExit = ()=>{
         setEditData(-1)
     }

@@ -108,3 +108,9 @@ export const changePassword = yup.object().shape({
         .oneOf([yup.ref('newPassword')], "Passwords must match")
         .required("Required")
 })
+
+export const deleteAccount = yup.object().shape({
+    currentPassword: yup
+        .string()
+        .required("Required")
+})
