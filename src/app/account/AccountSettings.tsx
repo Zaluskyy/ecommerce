@@ -2,6 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import style from './style/AccountSettings.module.scss';
 
 import EditDataPopUp from '../components/EditDataPopUp'
+import ConfirmPopUp from '../components/ConfirmPopUp';
 
 import { changePrimaryData, changePassword, deleteAccount } from '../components/Schema';
 
@@ -36,6 +37,11 @@ const AccountSettings: React.FC<AccountSettingsProps> = () => {
     const [displayEmail, setDisplayEmail] = useState<string | null>(null);
     const [displayTelephone, setDisplayTelephone] = useState<number | null>(null)
 
+    const [edit, setEdit] = useState<number>(-1)
+    const [confirm, setConfirm] = useState<boolean>(false)
+
+    const [confirmDelete, setConfirmDelete] = useState<boolean | null>(null)
+
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(async(user) => {
           if (user) {
@@ -55,6 +61,29 @@ const AccountSettings: React.FC<AccountSettingsProps> = () => {
         };
     }, [renderFromEdit]);
 
+    useEffect(()=>{
+        const deleteGoogleAccount = async()=>{
+            const user = auth.currentUser
+            if(confirmDelete&&user){
+                const userDocRef = doc(db, 'account', user.uid);
+                const userDocSnapshot = await getDoc(userDocRef);
+                try{
+                    if(userDocSnapshot) await deleteDoc(userDocRef)
+
+                    await unlink(user, 'google.com')
+                    await deleteUser(user)
+                    removeCookie("auth-token")
+                    setIsAuth(false)
+                    toast.success('Addount has been deleted.');
+                }catch{
+                    toast.error("Somehing went wrong")
+                }
+            }
+        }
+        
+        deleteGoogleAccount();
+    }, [confirmDelete])
+
 
     interface IDataArr {
         title: string,
@@ -67,8 +96,6 @@ const AccountSettings: React.FC<AccountSettingsProps> = () => {
         {title: "Email", data: `${displayEmail?displayEmail:''}`},
         {title: "Password", data: "********"},
     ]
-
-    const [edit, setEdit] = useState<number>(-1)
 
     const editDatas = [
         {
@@ -154,22 +181,7 @@ const AccountSettings: React.FC<AccountSettingsProps> = () => {
         if(user){
             const providerData = user.providerData;
             const isGoogleAuth = providerData.some((info)=>info.providerId == 'google.com')
-            if(isGoogleAuth){
-                // add confirm
-                const userDocRef = doc(db, 'account', user.uid);
-                const userDocSnapshot = await getDoc(userDocRef);
-                try{
-                    if(userDocSnapshot) await deleteDoc(userDocRef)
-
-                    await unlink(user, 'google.com')
-                    await deleteUser(user)
-                    removeCookie("auth-token")
-                    setIsAuth(false)
-                    toast.success('Addount has been deleted.');
-                }catch{
-                    toast.error("Somehing went wrong")
-                }
-            }
+            if(isGoogleAuth) setConfirm(true)
             else setEdit(2)
         }
     }
@@ -199,6 +211,21 @@ const AccountSettings: React.FC<AccountSettingsProps> = () => {
                     />
                 }
             </AnimatePresence>
+
+            <AnimatePresence
+            mode='wait'>
+
+                {confirm&&
+                    <ConfirmPopUp 
+                    title="Account deletion"
+                    description='Are you sure you would like to delete this account from the database? This action cannot be undone.'
+                    setConfirmPopUp={setConfirm}
+                    setResponse={setConfirmDelete}
+                    />
+                }
+            </AnimatePresence>
+
+
         </div>
     )
 }
