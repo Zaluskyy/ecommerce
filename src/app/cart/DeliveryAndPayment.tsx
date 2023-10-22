@@ -1,4 +1,4 @@
-import React, {FC, useContext, useState} from 'react';
+import React, {FC, useContext, useState, useEffect} from 'react';
 import style from './style/DeliveryAndPayment.module.scss';
 
 import Image from 'next/image';
@@ -18,6 +18,10 @@ import { adressSchema } from '../components/Schema'
 
 import EcommerceContext from '../store/context';
 
+import { auth, db } from '../firebase';
+import { doc, getDoc } from 'firebase/firestore'
+
+
 interface DeliveryAndPaymentProps{}
 
 const DeliveryAndPayment: FC<DeliveryAndPaymentProps> = ({}) => {
@@ -26,30 +30,56 @@ const DeliveryAndPayment: FC<DeliveryAndPaymentProps> = ({}) => {
     const {selectedDelivery, setSelectedDelivery, selectedPayment, setSelectedPayment} = context
 
     const [editData, setEditData] = useState<number>(-1)
+    const [renderFromEdit, setRenderFromEdit] = useState<boolean>(false)
+
+    const [displayName, setDisplayName] = useState<string | null>(null)
+    const [displayEmail, setDisplayEmail] = useState<string | null>(null)
+
+    const [displayTelephone, setDisplayTelephone] = useState<number | null>(null)
+    const [displayStreet, setDisplayStreet] = useState<string | null>(null)
+    const [displayApartmentNumber, setDisplayApartmentNumber] = useState<string | null>(null)
+    const [displayZipCode, setDisplayZipCode] = useState<string | null>(null)
+    const [displayCity, setDisplayCity] = useState<string | null>(null)
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged(async(user) => {
+          if (user) {
+            setDisplayName(user.displayName);
+            setDisplayEmail(user.email)
+            const userDocRef = doc(db, 'account', user.uid);
+                const userDocSnapshot = await getDoc(userDocRef);
+                if (userDocSnapshot.exists()) {
+                const userData = userDocSnapshot.data();
+                setDisplayTelephone(userData.telephone)
+                setDisplayStreet(userData.street)
+                setDisplayApartmentNumber(userData.apartmentNumber)
+                setDisplayZipCode(userData.zipCode)
+                setDisplayCity(userData.city)
+                }
+          }
+        });
+    
+        return () => {
+          unsubscribe();
+        };
+    }, [renderFromEdit]);
 
     const changeData = {
-        title: "Your data",
+        title: "Your delivery data",
         initVal: {
-            name: '',
-            surname: '',
-            street: '',
-            apartmentNumber: '',
-            zipCode: '',
-            city: '',
-            telephone: '',
-            email: '',
+            fullName: `${displayName?displayName:''}`,
+            street: `${displayStreet?displayStreet:''}`,
+            apartmentNumber: `${displayApartmentNumber?displayApartmentNumber:''}`,
+            zipCode: `${displayZipCode?displayZipCode:''}`,
+            city: `${displayCity?displayCity:''}`,
+            telephone: `${displayTelephone?displayTelephone:''}`,
         },
         schema: adressSchema,
         inputs: [
             {
-                placeholder: "Name",
+                placeholder: "Full name",
                 type: "text",
-                name: "name",
-            },
-            {
-                placeholder: "Surname",
-                type: "text",
-                name: "surname",
+                name: "fullName",
             },
             {
                 placeholder: "Street",
@@ -75,11 +105,6 @@ const DeliveryAndPayment: FC<DeliveryAndPaymentProps> = ({}) => {
                 placeholder: "Telephone",
                 type: "text",
                 name: "telephone",
-            },
-            {
-                placeholder: "Email",
-                type: "text",
-                name: "email",
             },
         ]
     }
@@ -194,9 +219,12 @@ const DeliveryAndPayment: FC<DeliveryAndPaymentProps> = ({}) => {
                 <div className={style.recipientDataContainer}>
                     <span className={style.title}>Recipient&apos;s data</span>
                     <div className={style.container}>
-                        <span>Adolf Hitler</span>
-                        <span>+48 537 728 008</span>
-                        <span>adohit88@gmail.com</span>
+
+                        {displayName&&<span>{displayName}</span>}
+                        {displayTelephone&&<span>+48 {displayTelephone}</span>}
+                        {displayEmail&&<span>{displayEmail}</span>}
+                        {displayStreet&&displayApartmentNumber&&<span>{`${displayStreet} ${displayApartmentNumber}`}</span>}
+                        {displayZipCode&&displayCity&&<span>{`${displayZipCode} ${displayCity}`}</span>}
 
                         <span className={style.change} onClick={()=>setEditData(0)}>Change</span>
                     </div>
@@ -222,6 +250,7 @@ const DeliveryAndPayment: FC<DeliveryAndPaymentProps> = ({}) => {
                     initialValues={changeData.initVal}
                     validationSchema={changeData.schema}
                     inputs={changeData.inputs}
+                    setUpdatedFromEdit={setRenderFromEdit}
                     />
                 }
 

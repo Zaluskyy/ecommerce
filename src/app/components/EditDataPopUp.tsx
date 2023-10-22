@@ -57,16 +57,32 @@ const EditDataPopUp: FC<EditDataPopUpProps> = ({setEditData, title, initialValue
     const handleSave = async (values: any) => {
         const user = auth.currentUser
         if(title == "Your data"){
-            const { name, surname, telephone } = values
+            const { fullName, telephone } = values
             if(user){
                 const userDocRef = doc(db, 'account', user.uid);
                 const userDocSnapshot = await getDoc(userDocRef);
                 if (userDocSnapshot.exists()) {
-                    await updateProfile(user, {displayName: `${name} ${surname}`})
+                    await updateProfile(user, {displayName: fullName})
                     await setDoc(userDocRef, { telephone }, { merge: true });
                     toast.success("Updated your data")
                 } else {
                     await setDoc(userDocRef, { telephone });
+                    toast.success("Added your data")
+                }
+            }else{
+                toast.error("Something went wrong")
+            }
+        }else if(title == "Your delivery data"){
+            const { fullName, street, apartmentNumber, zipCode, city, telephone } = values
+            if(user){
+                const userDocRef = doc(db, 'account', user.uid);
+                const userDocSnapshot = await getDoc(userDocRef);
+                if (userDocSnapshot.exists()) {
+                    await updateProfile(user, {displayName: fullName})
+                    await setDoc(userDocRef, { street, apartmentNumber, zipCode, city, telephone }, { merge: true });
+                    toast.success("Updated your data")
+                } else {
+                    await setDoc(userDocRef, { street, apartmentNumber, zipCode, city, telephone });
                     toast.success("Added your data")
                 }
             }else{

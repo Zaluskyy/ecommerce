@@ -33,12 +33,14 @@ const AccountSettings: React.FC<AccountSettingsProps> = () => {
     const [renderFromEdit, setRenderFromEdit] = useState<boolean>(false)
 
     const [displayName, setDisplayName] = useState<string | null>(null);
+    const [displayEmail, setDisplayEmail] = useState<string | null>(null);
     const [displayTelephone, setDisplayTelephone] = useState<number | null>(null)
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(async(user) => {
           if (user) {
             setDisplayName(user.displayName);
+            setDisplayEmail(user.email)
             const userDocRef = doc(db, 'account', user.uid);
                 const userDocSnapshot = await getDoc(userDocRef);
                 if (userDocSnapshot.exists()) {
@@ -51,7 +53,7 @@ const AccountSettings: React.FC<AccountSettingsProps> = () => {
         return () => {
           unsubscribe();
         };
-      }, [renderFromEdit]);
+    }, [renderFromEdit]);
 
 
     interface IDataArr {
@@ -62,7 +64,7 @@ const AccountSettings: React.FC<AccountSettingsProps> = () => {
 
     const dataArr: IDataArr[] = [
         {title: "Your data", data: displayName, data2: `${displayTelephone ? `Tel. ${displayTelephone}`:''}`},
-        {title: "Email", data: "adohit88@gmail.com"},
+        {title: "Email", data: `${displayEmail?displayEmail:''}`},
         {title: "Password", data: "********"},
     ]
 
@@ -72,21 +74,15 @@ const AccountSettings: React.FC<AccountSettingsProps> = () => {
         {
             title: "Your data",
             initVal: {
-                name: '',
-                surname: '',
-                telephone: '',
+                fullName: `${displayName?displayName:''}`,
+                telephone: `${displayTelephone?displayTelephone:''}`,
             },
             schema: changePrimaryData,
             inputs: [
                 {
-                    placeholder: "Name",
+                    placeholder: "Full name",
                     type: "text",
-                    name: "name",
-                },
-                {
-                    placeholder: "Surname",
-                    type: "text",
-                    name: "surname",
+                    name: "fullName",
                 },
                 {
                     placeholder: "Telephone",

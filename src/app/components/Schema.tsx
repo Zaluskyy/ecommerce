@@ -31,12 +31,9 @@ export const loginSchema = yup.object().shape({
 })
 
 export const adressSchema = yup.object().shape({
-    name: yup
+    fullName: yup
         .string()
-        .required("Require"),
-    surname: yup
-        .string()
-        .required("Require"),
+        .required("Required"),
     street: yup
         .string()
         .required("Require"),
@@ -50,9 +47,6 @@ export const adressSchema = yup.object().shape({
         .string()
         .required("Require"),
     telephone: yup
-        .string()
-        .required("Require"),
-    email: yup
         .string()
         .required("Require"),
 })
@@ -69,32 +63,13 @@ export const forgotPassword = yup.object().shape({
 
 
 export const changePrimaryData = yup.object().shape({
-    name: yup
-        .string()
-        .required("Required"),
-    surname: yup
+    fullName: yup
         .string()
         .required("Required"),
     telephone: yup
         .number()
         .required("Require"),
 })
-
-export const changeEmail = yup.object().shape({
-    currentEmail: yup
-        .string()
-        .email("Please enter a valid email")
-        .required("Required"),
-    newEmail: yup
-        .string()
-        .email("Please enter a valid email")
-        .required("Required"),
-    confirmNewEmail: yup
-        .string()
-        .oneOf([yup.ref('newEmail')], "Emails must match")
-        .required("Required")
-})
-
 export const changePassword = yup.object().shape({
     currentPassword: yup
         .string()
@@ -108,7 +83,6 @@ export const changePassword = yup.object().shape({
         .oneOf([yup.ref('newPassword')], "Passwords must match")
         .required("Required")
 })
-
 export const deleteAccount = yup.object().shape({
     currentPassword: yup
         .string()
