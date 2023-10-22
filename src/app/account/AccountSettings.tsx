@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import style from './style/AccountSettings.module.scss';
 
 import EditDataPopUp from '../components/EditDataPopUp'
@@ -10,12 +10,25 @@ import { AnimatePresence } from 'framer-motion';
 import ButtonAnimation from '../UI/ButtonAnimation';
 
 import { auth, db } from '../firebase';
-import {doc, getDoc} from 'firebase/firestore';
+import {doc, getDoc, deleteDoc} from 'firebase/firestore';
+import { unlink, deleteUser } from 'firebase/auth'
+
+import EcommerceContext from '../store/context';
+
+import toast from 'react-hot-toast'
+
+import { useCookies } from 'react-cookie';
 
 
 interface AccountSettingsProps{}
 
 const AccountSettings: React.FC<AccountSettingsProps> = () => {
+
+    const [,, removeCookie] = useCookies(['auth-token']);
+
+    const context = useContext(EcommerceContext)
+    const { setIsAuth } = context
+
 
     const [renderFromEdit, setRenderFromEdit] = useState<boolean>(false)
 
@@ -140,6 +153,31 @@ const AccountSettings: React.FC<AccountSettingsProps> = () => {
         )
     })
 
+    const handleDeleteAccount = async()=>{
+        const user = auth.currentUser
+        if(user){
+            const providerData = user.providerData;
+            const isGoogleAuth = providerData.some((info)=>info.providerId == 'google.com')
+            if(isGoogleAuth){
+                // add confirm
+                const userDocRef = doc(db, 'account', user.uid);
+                const userDocSnapshot = await getDoc(userDocRef);
+                try{
+                    if(userDocSnapshot) await deleteDoc(userDocRef)
+
+                    await unlink(user, 'google.com')
+                    await deleteUser(user)
+                    removeCookie("auth-token")
+                    setIsAuth(false)
+                    toast.success('Addount has been deleted.');
+                }catch{
+                    toast.error("Somehing went wrong")
+                }
+            }
+            else setEdit(2)
+        }
+    }
+
     return(
         <div className={style.AccountSettings}>
 
@@ -148,7 +186,7 @@ const AccountSettings: React.FC<AccountSettingsProps> = () => {
             <div className={style.deleteAccount}>
                 <span className={style.title}>Deleting account</span>
                 <span className={style.text}>If you click this button, you will delete your account in our store. Please make sure you really want to do this – we won&apos;t be able to restore your account</span>
-                <ButtonAnimation onClick={()=>setEdit(2)}>Delete account</ButtonAnimation>
+                <ButtonAnimation onClick={handleDeleteAccount}>Delete account</ButtonAnimation>
             </div>
 
             <AnimatePresence

@@ -11,7 +11,7 @@ import EcommerceContext from '../store/context';
 
 import { auth, db } from '../firebase';
 import { updateProfile, EmailAuthProvider, reauthenticateWithCredential, updatePassword, deleteUser } from 'firebase/auth';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc, deleteDoc } from 'firebase/firestore';
 
 import toast from 'react-hot-toast'
 
@@ -87,7 +87,11 @@ const EditDataPopUp: FC<EditDataPopUpProps> = ({setEditData, title, initialValue
         }else if(title == "Delete Account"){
             const { currentPassword } = values
             if (user) {
+                const userDocRef = doc(db, 'account', user.uid);
+                const userDocSnapshot = await getDoc(userDocRef);
                 try {
+                    if(userDocSnapshot) await deleteDoc(userDocRef)
+
                     const credential = EmailAuthProvider.credential(user.email as string, currentPassword);
                     await reauthenticateWithCredential(user, credential);
                     await deleteUser(user);
