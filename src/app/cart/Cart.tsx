@@ -24,7 +24,7 @@ const Cart: FC<CartProps> = () => {
         id: number,
         name: string,
         price: number,
-        img: StaticImageData,
+        img: string,
         piece: number,
     }
 
@@ -66,8 +66,8 @@ const Cart: FC<CartProps> = () => {
                                 <Image 
                                 src={item.img} 
                                 alt={item.name}
-                                width={undefined}
-                                height={undefined}
+                                width={68}
+                                height={56}
                                 priority={true}
                                 />
 

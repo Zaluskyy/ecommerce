@@ -1,10 +1,11 @@
-import React, { FC, useContext } from 'react';
+import React, { FC, useContext, useState, useEffect } from 'react';
 import style from './style/Summary.module.scss';
 import Image, { StaticImageData } from 'next/image';
 
-import personalCollectionIcon from '../../../public/img/icon/personalCollection.svg';
-
 import EcommerceContext from '../store/context';
+
+import { auth, db } from '../firebase';
+import { doc, getDoc } from 'firebase/firestore';
 
 interface SummaryProps{}
 
@@ -12,6 +13,31 @@ const Summary: FC<SummaryProps> = () => {
 
     const context = useContext(EcommerceContext)
     const { cartProducts, selectedDelivery, selectedPayment } = context
+
+    const [displayName, setDisplayName] = useState<string | null>(null)
+    const [displayTelephone, setDisplayTelephone] = useState<number | null>(null)
+    const [displayEmail, setDisplayEmail] = useState<string | null>(null)
+
+
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged(async(user) => {
+          if (user) {
+            setDisplayName(user.displayName);
+            setDisplayEmail(user.email)
+            const userDocRef = doc(db, 'account', user.uid);
+                const userDocSnapshot = await getDoc(userDocRef);
+                if (userDocSnapshot.exists()) {
+                const userData = userDocSnapshot.data();
+                setDisplayTelephone(userData.telephone)
+                }
+          }
+        });
+    
+        return () => {
+          unsubscribe();
+        };
+    }, []);
     
     interface ICartProducts {
         name: string,
@@ -27,8 +53,8 @@ const Summary: FC<SummaryProps> = () => {
                         <Image 
                         src={item.img}
                         alt="product img"
-                        width={undefined}
-                        height={undefined}
+                        width={100}
+                        height={100}
                         priority={false}
                         />
                     </div>
@@ -109,9 +135,9 @@ const Summary: FC<SummaryProps> = () => {
                 <div className={style.recipientDataContainer}>
                     <span className={style.title}>Recipient&apos;s data</span>
                     <div className={style.container}>
-                        <span>Adolf Hitler</span>
-                        <span>+48 537 728 008</span>
-                        <span>adohit88@gmail.com</span>
+                        <span>{displayName}</span>
+                        <span>{`+48 ${displayTelephone}`}</span>
+                        <span>{displayEmail}</span>
                     </div>
                 </div>
 

@@ -1,5 +1,5 @@
 "use client"
-import React, {FC, useContext} from 'react'
+import React, {FC, useContext, useEffect, useState} from 'react'
 import { useCookies } from 'react-cookie';
 import style from './styles/Product.module.scss';
 import Link from 'next/link';
@@ -11,9 +11,14 @@ import EcommerceContext from '../store/context';
 
 import toast from 'react-hot-toast';
 
+import photoImg from '../../../public/img/photo.svg';
+
+import { storage } from '../firebase';
+import { ref, getDownloadURL } from 'firebase/storage';
+
 interface ProductProps{
     id: number;
-    img: StaticImageData;
+    img: string;
     category: string;
     name: string;
     price: number;
@@ -21,7 +26,19 @@ interface ProductProps{
 
 const Product: FC<ProductProps> = ({id, img, category, name, price}) => {
 
-  const [cookies, setCookie] = useCookies(['cartProducts']);
+  const [, setCookie] = useCookies(['cartProducts']);
+
+  const [imgUrl, setImgUrl] = useState<string>(photoImg)
+
+  useEffect(()=>{
+    const getImgUrl = async()=>{
+      const imageRef = ref(storage, img);
+      const imageUrl = await getDownloadURL(imageRef);
+      setImgUrl(imageUrl)
+    }
+
+    getImgUrl()
+  }, [])
 
   const context = useContext(EcommerceContext)
   const { cartProducts, setCartProducts } = context
@@ -30,42 +47,41 @@ const Product: FC<ProductProps> = ({id, img, category, name, price}) => {
     id: number,
     name: string,
     price: number,
-    img: StaticImageData,
+    img: string,
     piece: number,
-}
-
-const handleAddProductToCart = () => {
-    toast.success(()=>(
-      <span className={style.messageSpan}>Product added to the <Link href='/cart'>cart</Link></span>
-    ))
-
-  const updatedCartProducts = [...cartProducts];
-  const productIndex = updatedCartProducts.findIndex((item: ICartProducts) => item.name === name);
-
-  if (productIndex !== -1) {
-    updatedCartProducts[productIndex].piece += 1;
-  } else {
-    updatedCartProducts.push({
-      id,
-      name,
-      price,
-      img,
-      piece: 1,
-    });
   }
-  setCartProducts(updatedCartProducts);
-  setCookie('cartProducts', updatedCartProducts);
-};
 
+  const handleAddProductToCart = () => {
+      toast.success(()=>(
+        <span className={style.messageSpan}>Product added to the <Link href='/cart'>cart</Link></span>
+      ))
+
+    const updatedCartProducts = [...cartProducts];
+    const productIndex = updatedCartProducts.findIndex((item: ICartProducts) => item.name === name);
+
+    if (productIndex !== -1) {
+      updatedCartProducts[productIndex].piece += 1;
+    } else {
+      updatedCartProducts.push({
+        id,
+        name,
+        price,
+        img: imgUrl,
+        piece: 1,
+      });
+    }
+    setCartProducts(updatedCartProducts);
+    setCookie('cartProducts', updatedCartProducts);
+  };
 
   return(    
     <div className={`${style.Product} ${style.smaller}`}>
       <div className={style.imgContainer}>
         <Image 
-        src={img} 
+        src={imgUrl} 
         alt="product image"
-        width={undefined}
-        height={undefined}
+        width={50}
+        height={50}
         priority={true}
         />
       </div>

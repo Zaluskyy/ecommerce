@@ -3,15 +3,8 @@ import React, { FC, useEffect, useState } from 'react';
 import Product from './Product';
 import style from './styles/Products.module.scss';
 
-import { StaticImageData } from 'next/image';
-
-import iphone14Img from '../../../public/img/iphone.png';
-import iphone15ProImg from '../../../public/img/iphone15pro.png';
-import airdotsImg from '../../../public/img/airdots.png';
-import ipadImg from '../../../public/img/ipad.png';
-import macbookImg from '../../../public/img/macbook.png';
-import watchImg from '../../../public/img/watch9.png';
-
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../firebase';
 
 interface ProductsProps{
     which: string | number,
@@ -21,56 +14,49 @@ const Products: FC<ProductsProps> = ({which}) => {
 
     interface IProductsArr{
         id: number
-        img: StaticImageData;
+        img: string;
         category: string
         name: string;
         price: number;
     }
 
-    const productsArr: IProductsArr[] = [
-        {
-            id: 0,
-            img: iphone14Img,
-            category: 'phone',
-            name: 'Apple Iphone 14 256GB Space black',
-            price: 44444,
-        },
-        {
-            id: 1,
-            img: iphone15ProImg,
-            category: 'phone',
-            name: 'Apple Iphone 15 Pro 128GB Space black',
-            price: 7000,
-        },
-        {
-            id: 2,
-            img: airdotsImg,
-            category: 'headphones',
-            name: 'Apple AirPods with Charging Case',
-            price: 2137,
-        },
-        {
-            id: 3,
-            img: ipadImg,
-            category: 'tablet',
-            name: 'APPLE iPad 10,9" Wi-Fi 64GB Niebieski',
-            price: 3684,
-        },
-        {
-            id: 4,
-            img: macbookImg,
-            category: 'computer',
-            name: 'APPLE iMac 21,5" Full HD, i5, 8GB',
-            price: 3684,
-        },
-        {
-            id: 5,
-            img: watchImg,
-            category: 'watch',
-            name: 'Apple Watch Series 9',
-            price: 1494,
-        },
-    ]
+    const initialProductsArr: IProductsArr[] = []
+
+    const [productsArr, setProductsArr] = useState<IProductsArr[]>(initialProductsArr)
+
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                const collectionRef = collection(db, 'product');
+                const querySnapshot = await getDocs(collectionRef);
+                const productsData: IProductsArr[] = [];
+
+                querySnapshot.forEach(async (doc) => {
+                    if (doc.exists()) {
+                        const productData = doc.data() as IProductsArr;
+                        productsData.push(productData);
+                    } else {
+                        console.error('The document does not exist.');
+                    }
+                });
+
+                setProductsArr(productsData)
+            } catch (error) {
+                console.error('Download data failed: ', error);
+                setLoading(false);
+            }
+        };
+        
+        getData()
+    }, []);
+    
+    useEffect(() => {
+    if (productsArr.length > 0) {
+        setLoading(false)
+    }
+    }, [productsArr]);
 
     const [products, setProducts] = useState<React.JSX.Element[]>()
 
@@ -137,12 +123,11 @@ const Products: FC<ProductsProps> = ({which}) => {
         if(which=='EVERY') getEveryProducts()
         else if(typeof which == "number") getNumberProducts()
         else getCategoryProducts()
-    }, [which])
-            
+    }, [which, loading, productsArr])            
 
     return(
         <div className={style.Products}>
-            {products}
+            {loading?"Loading...":products}
         </div>
     )
 }
