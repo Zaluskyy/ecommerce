@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import style from './style/Orders.module.scss';
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 
-import iphoneImg from  '../../../public/img/iphone.png';
-import airdotsImg from  '../../../public/img/airdots.png';
-
+import { auth, db } from '../firebase';
+import { collection, orderBy, query, where, onSnapshot } from 'firebase/firestore';
 
 interface OrdersProps{}
 
@@ -13,45 +12,64 @@ const Orders: React.FC<OrdersProps> = () => {
     interface IOrdersArr {
         completed: boolean,
         date: Date,
-        number: number,
-        price: number
+        id: number,
+        img: string,
         name: string,
-        image: StaticImageData,
+        piece: number,
+        price: number
     }
 
-    const ordersArr: IOrdersArr[] = [
-        {
-            completed: true,
-            date: new Date(),
-            number: 69420,
-            price: 2137,
-            name: "Iphone 14",
-            image: iphoneImg,
-        },
-        {
-            completed: true,
-            date: new Date(),
-            number: 69421,
-            price: 1488,
-            name: "Apple Airdots",
-            image: airdotsImg,
-        },
-    ]
+    const [ordersArr, setOrdersArr] = useState<IOrdersArr[]>([])
+
+    useEffect(() => {
+        const getData = async () => {
+          const user = auth.currentUser;
+          const orderCollectionRef = collection(db, 'order');
+      
+          if (user) {
+            const queryOrder = query(
+                orderCollectionRef,
+                where('user', '==', user.uid),
+                orderBy('date', 'desc')
+            );
+              
+            const newOrdersArr: IOrdersArr[] = [];
+            const unsubscribe = onSnapshot(queryOrder, (snapshot) => {
+              snapshot.docs.forEach((doc) => {
+                const orderData = doc.data();
+                newOrdersArr.push({
+                  completed: orderData.completed,
+                  date: orderData.date.toDate(),
+                  id: orderData.id,
+                  img: orderData.img,
+                  name: orderData.name,
+                  piece: orderData.piece,
+                  price: orderData.price,
+                });
+              });
+
+              setOrdersArr(newOrdersArr);
+            });
+          }
+        };
+      
+        getData();
+    }, []);
 
     const orders = ordersArr.map(item=>{
         return(
-            <div key={item.number} className={style.orderContainer}>
+            <div key={item.id} className={style.orderContainer}>
                 <div className={style.left}>
                     <span className={style.completed}>{item.completed?"Completed":"Not completed"}</span>
                     <span>{`${item.date.getDate()<10?`0${item.date.getDate()}`: item.date.getDate()}.${item.date.getMonth()<10?`0${item.date.getMonth()}`: item.date.getMonth()}.${item.date.getFullYear()}`}</span>
-                    <span>Nr. {item.number}</span>
+                    <span>Nr. {item.id}</span>
                     <span className={style.price}>{item.price} zł</span>
                 </div>
                 <div className={style.right}>
                     <span className={style.title}>{item.name}</span>
                     <div className={style.imgContainer}>
                         <Image 
-                        src={item.image} 
+                        src={item.img} 
                         alt="image"
                         width={40}
                         height={40}

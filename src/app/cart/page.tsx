@@ -20,6 +20,9 @@ import ButtonAnimation from '../UI/ButtonAnimation';
 
 import toast from 'react-hot-toast';
 
+import { auth, db } from '../firebase';
+import { collection, addDoc, doc, setDoc, getDoc } from 'firebase/firestore';
+
 export default function CartPage(){
 
     const context = useContext(EcommerceContext)
@@ -41,6 +44,54 @@ export default function CartPage(){
 
     const [currentProgress, setCurrentProgress] = useState<number>(1)
 
+    interface ICartProducts {
+        name: string,
+        price: number,
+        img: string,
+        piece: number,
+    }   
+
+    const handleAddToOrder = async () => {
+        
+        const user = auth.currentUser
+
+        const orderCollectionRef = collection(db, 'order')
+
+        const counterRef = doc(orderCollectionRef, 'counter')
+        const counterSnapshot = await getDoc(counterRef)
+
+        if(user){
+
+            if(counterSnapshot.exists()){
+                const currentId = counterSnapshot.data().number
+                const date = new Date()
+        
+                try{
+                    await cartProducts.forEach(async(item: ICartProducts)=>{
+                        
+                        await addDoc(orderCollectionRef, {
+                            completed: false,
+                            date,
+                            price: item.price,
+                            piece: item.piece,
+                            name: item.name,
+                            img: item.img,
+                            id: currentId+1,
+                            user: user.uid,
+                        })
+    
+                    })
+                    await setDoc(counterRef, {
+                        number: currentId+1
+                    })
+                    setCurrentProgress(prev=>prev+1)
+                }catch{
+                    toast.error('Something went wrong')
+                }
+            }else toast.error('Something went wrong')
+        }else toast.error('Something went wrong')
+    }
+
     const handlePrevNextBtn = (next: boolean)=>{
         if (!isAuth) window.location.href = "/account";
         else {
@@ -52,6 +103,8 @@ export default function CartPage(){
                     else{
                         toast.error("Select delivery and payment")
                     }
+                }else if(currentProgress==3){
+                    handleAddToOrder()
                 }
                 else setCurrentProgress(prev=>prev+1)
             }
