@@ -1,5 +1,5 @@
 "use client"
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, SetStateAction, useEffect, useState } from 'react';
 import Product from './Product';
 import style from './styles/Products.module.scss';
 
@@ -8,9 +8,11 @@ import { db } from '../firebase';
 
 interface ProductsProps{
     which: string | number,
+    search?: boolean,
+    setSearch?: React.Dispatch<SetStateAction<string>>,
 }
 
-const Products: FC<ProductsProps> = ({which}) => {
+const Products: FC<ProductsProps> = ({which, search, setSearch}) => {
 
     interface IProductsArr{
         id: number
@@ -60,6 +62,34 @@ const Products: FC<ProductsProps> = ({which}) => {
 
     const [products, setProducts] = useState<React.JSX.Element[]>()
 
+    const getSearchProducts = () => {
+    
+        const searchQuery = which.toString().toLowerCase();
+
+        const filteredProducts = productsArr.filter((product: IProductsArr) => {
+            const productName = product.name.toLowerCase();
+            const category = product.category.toLowerCase();
+            const price = product.price.toString().toLowerCase();
+    
+            return productName.includes(searchQuery) || category.includes(searchQuery) || price.includes(searchQuery);
+        });
+
+        const setElements = filteredProducts.map((item: IProductsArr) => {
+            return (
+                <Product
+                    key={item.id}
+                    id={item.id}
+                    img={item.img}
+                    category={item.category}
+                    name={item.name}
+                    price={item.price}
+                    setSearch={setSearch}
+                />
+            );
+        });
+    
+        setProducts(setElements);
+    }
     
     const getEveryProducts = ()=>{
         const setElements = productsArr.map((item: IProductsArr)=>{
@@ -120,7 +150,8 @@ const Products: FC<ProductsProps> = ({which}) => {
     }
 
     useEffect(()=>{
-        if(which=='EVERY') getEveryProducts()
+        if(search&&which) getSearchProducts()
+        else if(which=='EVERY') getEveryProducts()
         else if(typeof which == "number") getNumberProducts()
         else getCategoryProducts()
     }, [which, loading, productsArr])            

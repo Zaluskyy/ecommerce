@@ -122,53 +122,22 @@ $loupeMobileHeight: 35px;
         }
     }
 
-    .loupeContainer{
+    input{
         background-color: #858585;
         width: $loupeMobileWidth;
         height: $loupeMobileHeight;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        overflow: hidden;
+        padding: 0 10px;
         border-radius: 50px;
+        color: white;
+        border: none;
         position: absolute;
         left: 50%;
         top: calc($navHeight / 2);
         transform: translate(-50%, -50%);
 
-        input{
-            width: calc(100% - 40px);
-            height: 100%;
-            border: none;
-            padding-left: 10px;
-            background-color: transparent;
+        &::placeholder{
             color: white;
-            border-top-left-radius: 50px;
-            border-bottom-left-radius: 50px;
-
-            &::placeholder{
-                color: white;
-                opacity: .5;
-            }
-        }
-
-        button.iconContainer{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 40px;
-            height: 100%;
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            border-top-right-radius: 50px;
-            border-bottom-right-radius: 50px;
-
-            img{
-                width: calc($loupeMobileHeight - 15px);
-                height: calc($loupeMobileHeight - 15px);
-                filter: brightness(0) invert(1);
-            }
+            opacity: .5;
         }
     }
 
@@ -279,7 +248,7 @@ $loupeMobileHeight: 35px;
             display: none;
         }
 
-        .loupeContainer{
+        input{
             position: static;
             transform: none;
             width: 150px;
@@ -317,7 +286,7 @@ $loupeMobileHeight: 35px;
 
 @media (min-width: 850px){
     .NavBar{
-        .loupeContainer{
+        input{
             width: 200px;
         }
     }

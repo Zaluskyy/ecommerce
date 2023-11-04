@@ -1,9 +1,9 @@
 "use client"
-import React, {FC, useContext, useEffect, useState} from 'react'
+import React, {FC, SetStateAction, useContext, useEffect, useState} from 'react'
 import { useCookies } from 'react-cookie';
 import style from './styles/Product.module.scss';
 import Link from 'next/link';
-import Image, {StaticImageData} from 'next/image';
+import Image from 'next/image';
 import ButtonAnimation from '../UI/ButtonAnimation';
 
 import whiteCart from '../../../public/img/icon/whiteCart.svg';
@@ -22,9 +22,10 @@ interface ProductProps{
     category: string;
     name: string;
     price: number;
+    setSearch?: React.Dispatch<SetStateAction<string>>;
 }
 
-const Product: FC<ProductProps> = ({id, img, category, name, price}) => {
+const Product: FC<ProductProps> = ({id, img, category, name, price, setSearch}) => {
 
   const [, setCookie] = useCookies(['cartProducts']);
 
@@ -53,7 +54,7 @@ const Product: FC<ProductProps> = ({id, img, category, name, price}) => {
 
   const handleAddProductToCart = () => {
       toast.success(()=>(
-        <span className={style.messageSpan}>Product added to the <Link href='/cart'>cart</Link></span>
+        <span className={style.messageSpan}>Product added to the <Link onClick={()=>setSearch&&setSearch("")} href='/cart'>cart</Link></span>
       ))
 
     const updatedCartProducts = [...cartProducts];

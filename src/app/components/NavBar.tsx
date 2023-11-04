@@ -11,9 +11,9 @@ import contact from '../../../public/img/icon/contact.svg'
 import terms from '../../../public/img/icon/terms.svg'
 
 import logoIcon from '../../../public/img/icon/logo.svg'
-import loupe from '../../../public/img/icon/loupe.svg'
 
 import EcommerceContext from '../store/context';
+import SearchProducts from './SearchProducts';
 
 interface NavBarProps{}
 
@@ -28,20 +28,27 @@ const NavBar: FC<NavBarProps> = () => {
 
     const [scrollDirection, setScrollDirection] = useState<"down" | "up">("up");
 
+    const [search, setSearch] = useState<string>("");
+
     useEffect(() => {
         let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
     
         const handleScroll = () => {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    
-            if(scrollTop == 0) setScrollDirection('up')
-            else if (scrollTop > lastScrollTop) {
-            setScrollDirection('down');
-            } else if (scrollTop < lastScrollTop) {
-            setScrollDirection('up');
+
+            if(search.length>0){
+                setScrollDirection('up')
+            }else{
+                if(scrollTop == 0) setScrollDirection('up')
+                else if (scrollTop > lastScrollTop) {
+                setScrollDirection('down');
+                } else if (scrollTop < lastScrollTop) {
+                setScrollDirection('up');
+                }
+        
+                lastScrollTop = scrollTop;
             }
     
-            lastScrollTop = scrollTop;
         };
     
         window.addEventListener('scroll', handleScroll);
@@ -83,9 +90,14 @@ const NavBar: FC<NavBarProps> = () => {
         {name: 'cart', img: cart},
     ]
 
+    const handleCloseSearchAndNav = ()=>{
+        setSearch('')
+        if(openedNav) setOpenedNav(false)
+    }
+
     const menuLi = menu.map((item: any)=>{
         return(
-            <Link key={item.name} href={`/${item.name=="terms & conditions"?'terms&conditions':item.name}`} onClick={()=>setOpenedNav(false)} >
+            <Link key={item.name} href={`/${item.name=="terms & conditions"?'terms&conditions':item.name}`} onClick={handleCloseSearchAndNav} >
                 {!mobile&&item.name=='cart'&&cartProducts.length>0&&<div className={style.newProduct}>{cartProducts.length}</div>}
                 <div className={style.iconContainer}>
                     <Image 
@@ -102,19 +114,19 @@ const NavBar: FC<NavBarProps> = () => {
 
     const handleOpenAccountLogin = (login: String)=>{
         setLoginOrRegister(login)
-        setOpenedNav(false)
+        handleCloseSearchAndNav()
     }
 
-    const handleSearch = (e: React.FormEvent<HTMLFormElement>)=>{
-        e.preventDefault();
-        if(openedLoupe) setOpenedLoupe(false)
-    }
+    useEffect(()=>{
+        if(openedLoupe==false) setSearch('')
+    }, [openedLoupe])
 
     return(
         <motion.div 
         className={style.NavBar}
         animate={scrollDirection=='down'?{top: -65}:{top: 0,}}
         >
+            {(search.length>0)&&<SearchProducts search={search} setSearch={setSearch}/>}
 
             <div className={`${style.hamburger} ${openedNav&&style.hamburgerX}`} 
             onClick={handleHamburgerClick}
@@ -126,7 +138,7 @@ const NavBar: FC<NavBarProps> = () => {
 
             </div>
 
-            {!openedLoupe&&<Link onClick={()=>setOpenedNav(false)} href="/" className={style.logoContainer}>
+            {!openedLoupe&&<Link onClick={handleCloseSearchAndNav} href="/" className={style.logoContainer}>
                 <Image 
                 src={logoIcon} 
                 alt='logo' 
@@ -143,18 +155,7 @@ const NavBar: FC<NavBarProps> = () => {
             </div>}
 
             {(openedLoupe||!mobile)&&
-            <form onSubmit={handleSearch}  className={style.loupeContainer}>
-                <input placeholder='Search...' type="text"/>
-                <button className={style.iconContainer}>
-                    <Image 
-                    src={loupe} 
-                    alt='loupe' 
-                    width={24} 
-                    height={24} 
-                    priority={false}
-                    />
-                </button>
-            </form>
+            <input placeholder='Search...' type="text" onChange={(e)=>setSearch(e.target.value)} value={search}/>
             }
 
             <ul className={`${openedNav&&style.activeNav}`}>
@@ -177,7 +178,6 @@ const NavBar: FC<NavBarProps> = () => {
                     </Link>
                 </div>}
             </ul>
-
         </motion.div>
     )
 }
