@@ -3,6 +3,7 @@
     margin-top: 65px;
     padding: 20px;
     text-align: left;
+    min-height: calc(100vh - 65px);
 
     .title{
         display: flex;

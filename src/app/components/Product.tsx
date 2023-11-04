@@ -80,8 +80,8 @@ const Product: FC<ProductProps> = ({id, img, category, name, price}) => {
         <Image 
         src={imgUrl} 
         alt="product image"
-        width={50}
-        height={50}
+        width={150}
+        height={150}
         priority={true}
         />
       </div>

@@ -6,6 +6,7 @@
     flex-direction: column;
     align-items: center;
     width: 100vw;
+    min-height: calc(100vh - 65px);
 
     .title{
         user-select: none;
