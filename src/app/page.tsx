@@ -44,7 +44,7 @@ export default function Home() {
         <ButtonAnimation>See all products</ButtonAnimation>
       </Link>
 
-      <Chat />
+      {/* <Chat /> */}
     </main>
   );
 }
