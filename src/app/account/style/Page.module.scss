@@ -1,129 +1,126 @@
-.Page{
-    margin-top: 65px;
-    padding: 20px;
-    text-align: left;
+.Page {
+  margin-top: 65px;
+  padding: 20px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  min-height: calc(100vh - 65px);
+
+  .title {
+    user-select: none;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: flex-start;
     align-items: center;
-    width: 100vw;
-    min-height: calc(100vh - 65px);
+    align-self: flex-start;
+    margin-bottom: 40px;
 
-    .title{
-        user-select: none;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
-        align-self: flex-start;
-        margin-bottom: 40px;
-
-        .iconContainer{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 40px;
-            height: 40px;
-            img{
-                width: 100%;
-                height: 100%;
-            }
-        }
-    
-        span{
-            font-size: 27px;
-        }
-    }
-
-    
-
-    .accountForms{
+    .iconContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      img {
         width: 100%;
-        height: calc(100vh - 65px - 40px);
-        min-height: 500px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        .left{
-            width: calc(50% - .5px);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-        }
-
-        .line{
-            align-self: center;
-            width: 1px;
-            height: 430px;
-            background-color: rgba(0, 0, 0, 0.2);
-        }
-        
-        .right{
-            width: calc(50% - .5px);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-        }
+        height: 100%;
+      }
     }
 
-    .back{
-        user-select: none;
-        margin-left: 20px;
-        align-self: flex-start;
-        background-color: #d9d9d9;
-        width: 100px;
-        height: 40px;
-        border-radius: 50px;
-        display: flex;
-        align-items: center;
-        padding: 5px;
-        cursor: pointer;
-
-        img{
-            transform: scaleX(-1);
-        }
-        span{
-            justify-self: center;
-            margin-left: 13px;
-            font-size: 15px;
-        }
+    span {
+      font-size: 27px;
     }
-    
+  }
 
-    @media (min-width: 768px){
-        .title{
-            align-items: center;
-            align-self: auto;
-        }
+  .accountForms {
+    width: 100%;
+    height: calc(100vh - 65px - 40px);
+    min-height: 500px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .left {
+      width: calc(50% - 0.5px);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
     }
+
+    .line {
+      align-self: center;
+      width: 1px;
+      height: 430px;
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .right {
+      width: calc(50% - 0.5px);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+    }
+  }
+
+  .back {
+    user-select: none;
+    margin-left: 20px;
+    align-self: flex-start;
+    background-color: #d9d9d9;
+    width: 100px;
+    height: 40px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    cursor: pointer;
+
+    img {
+      transform: scaleX(-1);
+    }
+    span {
+      justify-self: center;
+      margin-left: 13px;
+      font-size: 15px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .title {
+      align-items: center;
+      align-self: auto;
+    }
+  }
 }
 
-@media (min-width: 768px){
-    .Page{
-         flex-direction: row;
-         justify-content: space-between;
-         align-items: flex-start;
+@media (min-width: 768px) {
+  .Page {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
 
-         .line{
-            width: 1px;
-            height: calc(100vh - 105px);
-            background-color: rgba(0, 0, 0, 0.2);
-         }
-
-         .desktopRightContainer{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: calc(100% - 309px);
-            padding: 0 20px;
-
-            .title{
-                align-self: flex-start;
-                margin-bottom: 0;
-            }
-         }
+    .line {
+      width: 1px;
+      height: calc(100vh - 105px);
+      background-color: rgba(0, 0, 0, 0.2);
     }
+
+    .desktopRightContainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: calc(100% - 309px);
+      padding: 0 20px;
+
+      .title {
+        align-self: flex-start;
+        margin-bottom: 0;
+      }
+    }
+  }
 }

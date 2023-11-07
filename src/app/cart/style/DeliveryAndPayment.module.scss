@@ -1,145 +1,145 @@
-@import '../../variables.scss';
+@import "../../variables.scss";
 
 $maxWidth: 600px;
 $marginBottom: 30px;
 
-.DeliveryAndPayment{
-    width: 100%;
-    padding: 0 20px;
-    margin-bottom: 100px;
+.DeliveryAndPayment {
+  width: 100%;
+  padding: 0 20px;
+  margin-bottom: 100px;
 
-    span.title{
-        font-size: 20px;
+  span.title {
+    font-size: 20px;
+  }
+
+  .tableContainer {
+    margin-bottom: 40px;
+
+    span.title {
+      font-size: 20px;
     }
+    form {
+      z-index: 0;
+      margin-top: 10px;
+      position: relative;
+      height: calc(var(--height) * 49px);
 
-    .tableContainer{
-        margin-bottom: 40px;
+      .container {
+        z-index: 1;
+        position: absolute;
+        top: calc(var(--top) * 49px);
+        width: 100%;
+        height: 50px;
+        border: 1px solid #808080;
+        display: flex;
+        justify-content: flex-start;
+        border-radius: 5px;
 
-        span.title{
-            font-size: 20px;
+        transition: 0.1s border;
+        .radioConatiner {
+          width: 50px;
+          height: 50px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
-        form{
-            z-index: 0;
-            margin-top: 10px;
-            position: relative;
-            height: calc(var(--height) * 49px);
+        .informationContainer {
+          width: calc(100% - 50px);
+          height: 50px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
 
-            .container{
-                z-index: 1;
-                position: absolute;
-                top: calc(var(--top) * 49px);
-                width: 100%;
-                height: 50px;
-                border: 1px solid #808080;
-                display: flex;
-                justify-content: flex-start;
-                border-radius: 5px;
-                
-                transition: .1s border;
-                .radioConatiner{
-                    width: 50px;
-                    height: 50px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                }
-                .informationContainer{
-                    width: calc(100% - 50px);
-                    height: 50px;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-    
-                    div:nth-child(1){
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: space-between;
-                        align-items: flex-start;
-                        font-size: 10px;
-                        height: 50px;
-                        padding: 6px 0;
-                        span:nth-child(2){
-                            color: #808080;
-                        }
-                    }
-
-                    div.center{
-                        justify-content: center;
-                    }
-    
-                    .iconContainer{
-                        width: 50px;
-                        height: 50px;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                    }
-                }
-            }
-
-            .active{
-                border: 2px solid $green;
-                z-index: 2;
-            }
-        }
-    }
-
-    .recipientDataContainer{
-        margin-bottom: 40px;
-        
-        .container{
-            margin-top: 10px;
-            width: 100%;
-            border-radius: 10px;
-            border: 1px solid black;
+          div:nth-child(1) {
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
             align-items: flex-start;
-            padding: 15px 13px;
-            position: relative;
+            font-size: 10px;
+            height: 50px;
+            padding: 6px 0;
+            span:nth-child(2) {
+              color: #808080;
+            }
+          }
 
-            span{
-                font-size: 10px;
-                color: #808080;
-                margin-top: 5px;
-                &:nth-child(1){
-                    color: black;
-                    margin-top: 0;
-                }
-            }
-            
-            span.change{
-                position: absolute;
-                right: 13px;
-                top: 10px;
-                color: $green;
-                cursor: pointer;
-            }
+          div.center {
+            justify-content: center;
+          }
+
+          .iconContainer {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
         }
+      }
+
+      .active {
+        border: 2px solid $green;
+        z-index: 2;
+      }
     }
+  }
+
+  .recipientDataContainer {
+    margin-bottom: 40px;
+
+    .container {
+      margin-top: 10px;
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid black;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 15px 13px;
+      position: relative;
+
+      span {
+        font-size: 10px;
+        color: #808080;
+        margin-top: 5px;
+        &:nth-child(1) {
+          color: black;
+          margin-top: 0;
+        }
+      }
+
+      span.change {
+        position: absolute;
+        right: 13px;
+        top: 10px;
+        color: $green;
+        cursor: pointer;
+      }
+    }
+  }
 }
 
-@media (min-width: 768px){
-    .DeliveryAndPayment{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: flex-start;
+@media (min-width: 768px) {
+  .DeliveryAndPayment {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
 
-        .left{
-            width: 40%;
-            max-width: $maxWidth;
-        }
-        .right{
-            width: 40%;
-            max-width: $maxWidth;
-        }
-
-        .recipientDataContainer{
-            max-width: $maxWidth;
-        }
-        .tableContainer{
-            max-width: $maxWidth;
-        }
+    .left {
+      width: 40%;
+      max-width: $maxWidth;
     }
+    .right {
+      width: 40%;
+      max-width: $maxWidth;
+    }
+
+    .recipientDataContainer {
+      max-width: $maxWidth;
+    }
+    .tableContainer {
+      max-width: $maxWidth;
+    }
+  }
 }

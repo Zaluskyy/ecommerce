@@ -1,101 +1,101 @@
-@import '../../variables.scss';
-.ConfirmPopUp{
-    position: absolute;
-    background-color: white;
-    border-radius: 12px;
-    width: 300px;
-    height: 190px;
-    max-height: 90vh;
-    left: 50%;
-    top: 50%;
-    overflow: hidden;
+@import "../../variables.scss";
+.ConfirmPopUp {
+  position: absolute;
+  background-color: white;
+  border-radius: 12px;
+  width: 300px;
+  height: 190px;
+  max-height: 90vh;
+  left: 50%;
+  top: 50%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  z-index: 101;
+
+  .titleContainer {
+    width: 100%;
+    height: calc(33.3% * 0.8);
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding: 15px;
-    z-index: 101;
 
-    .titleContainer{
-        width: 100%;
-        height: calc(33.3% * .8);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        
-        .title{
-            font-size: 20px;
-            font-weight: 500;
-        }
-
-        .exit{
-            cursor: pointer;
-            width: 20px;
-            height: 20px;
-            position: relative;
-
-            div{
-                position: absolute;
-                width: 28.3px;
-                height: 2px;
-                background-color: black;
-            }
-            div:nth-child(1){
-                transform-origin: right;
-                right: 0;
-                transform: rotate(-45deg);
-            }
-            div:nth-child(2){
-                transform-origin: left;
-                transform: rotate(45deg);
-            }
-        }
+    .title {
+      font-size: 20px;
+      font-weight: 500;
     }
-    .contentContainer{
-        width: 100%;
-        height: calc(33.3% * 1.4);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        p{
-            font-size: 10px;
-        }
-    }
-    .buttonsContainer{
-        width: 100%;
-        height: calc(33.3% * .8);
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
 
-        button{
-            width: 45%;
-            height: 100%;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
+    .exit {
+      cursor: pointer;
+      width: 20px;
+      height: 20px;
+      position: relative;
 
-            &:first-child{
-                background-color: transparent;
-                border: 1px solid $green;
-                color: $green;
-            }
-            &:last-child{
-                background-color: $green;
-                color: white;
-            }
-        }
+      div {
+        position: absolute;
+        width: 28.3px;
+        height: 2px;
+        background-color: black;
+      }
+      div:nth-child(1) {
+        transform-origin: right;
+        right: 0;
+        transform: rotate(-45deg);
+      }
+      div:nth-child(2) {
+        transform-origin: left;
+        transform: rotate(45deg);
+      }
     }
+  }
+  .contentContainer {
+    width: 100%;
+    height: calc(33.3% * 1.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    p {
+      font-size: 10px;
+    }
+  }
+  .buttonsContainer {
+    width: 100%;
+    height: calc(33.3% * 0.8);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    button {
+      width: 45%;
+      height: 100%;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+
+      &:first-child {
+        background-color: transparent;
+        border: 1px solid $green;
+        color: $green;
+      }
+      &:last-child {
+        background-color: $green;
+        color: white;
+      }
+    }
+  }
 }
 
-.background{
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(1px);
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 100;
+.background {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(1px);
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 100;
 }

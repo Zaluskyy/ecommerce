@@ -1,83 +1,83 @@
-.Banner{
+.Banner {
+  width: 100%;
+  height: 30vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 60px;
+
+  .swiperContainer {
     width: 100%;
-    height: 30vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 60px;
-    
-    .swiperContainer{
+    height: 100%;
+    position: relative;
+
+    .slide {
+      position: relative;
+      img {
+        width: 100%;
+        height: 30vw;
+        object-fit: cover;
+      }
+      &::after {
+        //overlay
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
         width: 100%;
         height: 100%;
-        position: relative;
-        
-        .slide{
-            position: relative;
-            img{
-                width: 100%;
-                height: 30vw;
-                object-fit: cover;
-            }
-            &::after{
-                //overlay
-                content: '';
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.2);
-            }
-        }
-
-        .swiperButtonPrev, .swiperButtonNext{
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 24px;
-            height: 24px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1;
-            cursor: pointer;
-            
-            img{
-                filter: invert(100%);
-                width: 100%;
-                height: 100%;
-            }
-        }
-
-        .swiperButtonPrev{
-            left: 10px;
-            img{
-                rotate: 180deg;
-            }
-        }
-
-        .swiperButtonNext{
-            right: 10px;
-        }
+        background-color: rgba(0, 0, 0, 0.2);
+      }
     }
+
+    .swiperButtonPrev,
+    .swiperButtonNext {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+      cursor: pointer;
+
+      img {
+        filter: invert(100%);
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .swiperButtonPrev {
+      left: 10px;
+      img {
+        rotate: 180deg;
+      }
+    }
+
+    .swiperButtonNext {
+      right: 10px;
+    }
+  }
 }
 
-@media (min-width: 768px){
-    .Banner{
-        .swiperContainer{
+@media (min-width: 768px) {
+  .Banner {
+    .swiperContainer {
+      .swiperButtonPrev,
+      .swiperButtonNext {
+        width: 50px;
+        height: 50px;
+      }
 
-            .swiperButtonPrev, .swiperButtonNext{
-                width: 50px;
-                height: 50px;
-            }
-
-            .swiperButtonPrev{
-                left: 50px;
-            }
-            .swiperButtonNext{
-                right: 50px;
-            }
-            
-        }
+      .swiperButtonPrev {
+        left: 50px;
+      }
+      .swiperButtonNext {
+        right: 50px;
+      }
     }
+  }
 }

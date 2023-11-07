@@ -1,307 +1,307 @@
-@import '../../variables.scss';
+@import "../../variables.scss";
 
 $navHeight: 65px;
 
 $loupeMobileWidth: 220px;
 $loupeMobileHeight: 35px;
 
-.NavBar{
-    width: 100%;
-    height: $navHeight;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    position: fixed;
-    top: 0;
-    background-color: white;
+.NavBar {
+  width: 100%;
+  height: $navHeight;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  z-index: 100;
+
+  .hamburger {
+    width: 24px;
+    height: 24px;
+    position: relative;
+
+    div {
+      width: 17px;
+      height: 1px;
+      background-color: black;
+      border-radius: 50px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      transition: 0.2s;
+    }
+
+    div:nth-child(1) {
+      top: 20%;
+    }
+    div:nth-child(2) {
+      top: 40%;
+    }
+    div:nth-child(3) {
+      top: 60%;
+    }
+    div:nth-child(4) {
+      top: 80%;
+    }
+  }
+
+  .hamburgerX {
+    div {
+      width: 33.9px;
+    }
+
+    div:nth-child(2) {
+      top: 50%;
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    div:nth-child(3) {
+      top: 50%;
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+
+    div:nth-child(1),
+    div:nth-child(4) {
+      opacity: 0;
+    }
+  }
+
+  .logoContainer {
+    width: 24px;
+    height: auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    padding: 0 20px;
-    z-index: 100;
-
-    .hamburger{
-        width: 24px;
-        height: 24px;
-        position: relative;
-
-        div{
-            width: 17px;
-            height: 1px;
-            background-color: black;
-            border-radius: 50px;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            transition: .2s;
-        }
-
-        div:nth-child(1){
-            top: 20%;
-        }
-        div:nth-child(2){
-            top: 40%;
-        }
-        div:nth-child(3){
-            top: 60%;
-        }
-        div:nth-child(4){
-            top: 80%;
-        }
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
+  }
 
-    .hamburgerX{
-        div{
-            width: 33.9px;
-        }
+  .toggleLoupe {
+    width: 24px;
+    height: 24px;
+    position: relative;
 
-        div:nth-child(2){
-            top: 50%;
-            transform: translate(-50%, -50%) rotate(45deg);
-        }
-
-        div:nth-child(3){
-            top: 50%;
-            transform: translate(-50%, -50%) rotate(-45deg);
-        }
-
-        div:nth-child(1), div:nth-child(4){
-            opacity: 0;
-        }
+    div:nth-child(1) {
+      width: 16px;
+      height: 16px;
+      border: 1.5px solid black;
+      border-radius: 50px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
     }
+    div:nth-child(2) {
+      position: absolute;
+      width: 5px;
+      height: 1.5px;
+      right: 7px;
+      bottom: 7px;
+      background-color: black;
+      transform-origin: right;
+      transform: rotate(-135deg);
+      border-top-left-radius: 50px;
+      border-bottom-left-radius: 50px;
+    }
+    div:nth-child(3) {
+      position: absolute;
+      width: 33.9px;
+      height: 2px;
+      bottom: -1px;
+      left: 1px;
+      background-color: red;
+      transform-origin: bottom left;
+      transform: rotate(-45deg);
+      border-radius: 50px;
+    }
+  }
 
-    .logoContainer{
-        width: 24px;
-        height: auto;
+  input {
+    background-color: #858585;
+    width: $loupeMobileWidth;
+    height: $loupeMobileHeight;
+    padding: 0 10px;
+    border-radius: 50px;
+    color: white;
+    border: none;
+    position: absolute;
+    left: 50%;
+    top: calc($navHeight / 2);
+    transform: translate(-50%, -50%);
+
+    &::placeholder {
+      color: white;
+      opacity: 0.5;
+    }
+  }
+
+  ul {
+    position: absolute;
+    width: 100%;
+    height: calc(100vh - $navHeight);
+    height: calc(100svh - $navHeight);
+    background-color: white;
+    left: 0;
+    top: $navHeight;
+    transition: 0.2s;
+    padding: 40px 20px;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 108;
+
+    a {
+      text-decoration: none;
+      color: black;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      margin-bottom: 40px;
+      position: relative;
+
+      .newProduct {
+        position: absolute;
+        left: 10px;
+        bottom: 0;
+        width: 13px;
+        height: 13px;
+        border-radius: 50px;
+        background-color: red;
         display: flex;
         justify-content: center;
         align-items: center;
-        img{
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-    }
-
-    .toggleLoupe{
-        width: 24px;
-        height: 24px;
-        position: relative;
-
-        div:nth-child(1){
-            width: 16px;
-            height: 16px;
-            border: 1.5px solid black;
-            border-radius: 50px;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-        }
-        div:nth-child(2){
-            position: absolute;
-            width: 5px;
-            height: 1.5px;
-            right: 7px;
-            bottom: 7px;
-            background-color: black;
-            transform-origin: right;
-            transform: rotate(-135deg);
-            border-top-left-radius: 50px;
-            border-bottom-left-radius: 50px;
-        }
-        div:nth-child(3){
-            position: absolute;
-            width: 33.9px;
-            height: 2px;
-            bottom: -1px;
-            left: 1px;
-            background-color: red;
-            transform-origin: bottom left;
-            transform: rotate(-45deg);
-            border-radius: 50px;
-        }
-    }
-
-    input{
-        background-color: #858585;
-        width: $loupeMobileWidth;
-        height: $loupeMobileHeight;
-        padding: 0 10px;
-        border-radius: 50px;
+        font-size: 8px;
         color: white;
-        border: none;
-        position: absolute;
-        left: 50%;
-        top: calc($navHeight / 2);
-        transform: translate(-50%, -50%);
+      }
 
-        &::placeholder{
-            color: white;
-            opacity: .5;
+      .iconContainer {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          width: 100%;
+          height: 100%;
         }
+      }
+
+      span {
+        font-size: 20px;
+
+        &::first-letter {
+          text-transform: uppercase;
+        }
+      }
     }
 
-    ul{
-        position: absolute;
-        width: 100%;
-        height: calc(100vh - $navHeight);
-        height: calc(100svh - $navHeight);
-        background-color: white;
-        left: 0;
-        top: $navHeight;
-        transition: .2s;
-        padding: 40px 20px;
-        visibility: hidden;
-        opacity: 0;
-        z-index: 108;
+    .loginContainer {
+      position: absolute;
+      width: 100%;
+      height: 120px;
+      bottom: 40px;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
 
-        a{
-            text-decoration: none;
-            color: black;
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            align-items: center;
-            margin-bottom: 40px;
-            position: relative;
-
-            .newProduct{
-                position: absolute;
-                left: 10px;
-                bottom: 0;
-                width: 13px;
-                height: 13px;
-                border-radius: 50px;
-                background-color: red;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                font-size: 8px;
-                color: white;
-            }
-
-            .iconContainer{
-                width: 40px;
-                height: 40px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-
-                img{
-                    width: 100%;
-                    height: 100%;
-                }
-            }
-
-            span{
-                font-size: 20px;
-
-                &::first-letter{
-                    text-transform: uppercase;
-                }
-            }
+      a {
+        margin: 0;
+        div {
+          width: 150px;
+          height: 50px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: $green;
+          font-size: 20px;
+          border: 1px solid $green;
+          border-radius: 5px;
         }
-
-        .loginContainer{
-            position: absolute;
-            width: 100%;
-            height: 120px;
-            bottom: 40px;
-            left: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-
-            a{
-                margin: 0;
-                div{
-                    width: 150px;
-                    height: 50px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    color: $green;
-                    font-size: 20px;
-                    border: 1px solid $green;
-                    border-radius: 5px;
-                }
-                .login{
-                        border-color: transparent;
-                        background-color: $green;
-                        color: white;
-
-                }
-            }
+        .login {
+          border-color: transparent;
+          background-color: $green;
+          color: white;
         }
+      }
     }
+  }
 
-    .activeNav{
-        visibility: visible;
-        opacity: 1;
-    }
+  .activeNav {
+    visibility: visible;
+    opacity: 1;
+  }
 }
 
-@media (min-width: 768px){
-    .NavBar{
-        .hamburger{
-            display: none;
-        }
-
-        input{
-            position: static;
-            transform: none;
-            width: 150px;
-        }
-        
-        ul{
-            position: static;
-            width: 70%;
-            height: 100%;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            visibility: visible;
-            opacity: 1;
-            background-color: transparent;
-
-            a{
-                margin-bottom: 0;
-
-                .iconContainer{
-                    width: 18px;
-                    height: 18px;
-                }
-                span{
-                    font-size: 15px;
-                }
-            }
-
-            .loginContainer{
-                display: none;
-            }
-        }
+@media (min-width: 768px) {
+  .NavBar {
+    .hamburger {
+      display: none;
     }
+
+    input {
+      position: static;
+      transform: none;
+      width: 150px;
+    }
+
+    ul {
+      position: static;
+      width: 70%;
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      visibility: visible;
+      opacity: 1;
+      background-color: transparent;
+
+      a {
+        margin-bottom: 0;
+
+        .iconContainer {
+          width: 18px;
+          height: 18px;
+        }
+        span {
+          font-size: 15px;
+        }
+      }
+
+      .loginContainer {
+        display: none;
+      }
+    }
+  }
 }
 
-@media (min-width: 850px){
-    .NavBar{
-        input{
-            width: 200px;
-        }
+@media (min-width: 850px) {
+  .NavBar {
+    input {
+      width: 200px;
     }
+  }
 }
-@media (min-width: 1000px){
-    .NavBar{
-        padding: 0 60px;
-    }
+@media (min-width: 1000px) {
+  .NavBar {
+    padding: 0 60px;
+  }
 }
-@media (max-height: 550px){
-    .NavBar{
-        ul{
-            .loginContainer{
-                top: 325px;
-            }
-        }
+@media (max-height: 550px) {
+  .NavBar {
+    ul {
+      .loginContainer {
+        top: 325px;
+      }
     }
+  }
 }

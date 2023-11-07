@@ -1,214 +1,211 @@
-@import '../../variables.scss';
-.Cart{
+@import "../../variables.scss";
+.Cart {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 100px;
+
+  .productContainer {
     width: 100%;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+
+    .top {
+      width: 100%;
+      height: 70px;
+      display: flex;
+      justify-content: space-between;
+
+      .left {
+        width: 85px;
+        height: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #e8e8e8;
+        padding: 4px;
+
+        .imageContainer {
+          border-radius: 5px;
+          width: 100%;
+          height: 100%;
+          background-color: white;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          img {
+            object-fit: contain;
+            width: 80%;
+            height: 80%;
+          }
+        }
+      }
+      .right {
+        width: calc(100% - 85px);
+        height: 70px;
+        background-color: #e8e8e8;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        span.name {
+          align-self: flex-start;
+          font-size: 14px;
+        }
+        span.price {
+          text-align: right;
+          width: 65px;
+          font-size: 10px;
+          font-weight: 500;
+        }
+      }
+    }
+    .bottom {
+      width: 100%;
+      height: 30px;
+      background-color: #d9d9d9;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 0 10px;
+      position: relative;
+
+      .quantityContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        button {
+          width: 30px;
+          height: 20px;
+          border-radius: 3px;
+          border: none;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        div {
+          width: 20px;
+          height: 20px;
+          background-color: $green;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 3px;
+          margin: 0 5px;
+          span {
+            color: white;
+            font-size: 10px;
+          }
+        }
+      }
+
+      .removeContainer {
+        position: absolute;
+        right: 10px;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+
+  .emptyCart {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 100px;
-
-    .productContainer{
-        width: 100%;
-        height: 100px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        border-radius: 10px;
-        overflow: hidden;
-        margin-bottom: 20px;
-
-        .top{
-            width: 100%;
-            height: 70px;
-            display: flex;
-            justify-content: space-between;
-
-            .left{
-                width: 85px;
-                height: 70px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background-color: #E8E8E8;
-                padding: 4px;
-
-                .imageContainer{
-                    border-radius: 5px;
-                    width: 100%;
-                    height: 100%;
-                    background-color: white;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    img{
-                        object-fit: contain;
-                        width: 80%;
-                        height: 80%;
-                    }
-                }
-            }
-            .right{
-                width: calc(100% - 85px);
-                height: 70px;
-                background-color: #E8E8E8;
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-                padding: 10px;
-                span.name{
-                    align-self: flex-start;
-                    font-size: 14px;
-                }
-                span.price{
-                    text-align: right;
-                    width: 65px;
-                    font-size: 10px;
-                    font-weight: 500;
-                }
-            }
-        }
-        .bottom{
-
-            width: 100%;
-            height: 30px;
-            background-color: #d9d9d9;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            padding: 0 10px;
-            position: relative;
-
-            .quantityContainer{
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
-                align-items: center;
-
-                button{
-                    width: 30px;
-                    height: 20px;
-                    border-radius: 3px;
-                    border: none;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                }
-                div{
-                    width: 20px;
-                    height: 20px;
-                    background-color: $green;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    border-radius: 3px;
-                    margin: 0 5px;
-                    span{
-                        color: white;
-                        font-size: 10px;
-                    }
-                }
-            }
-
-            .removeContainer{
-                position: absolute;
-                right: 10px;
-                width: 20px;
-                height: 20px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background-color: transparent;
-                border: none;
-                cursor: pointer;
-
-                img{
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                }
-            }
-        }
+    span {
+      text-align: center;
+      color: rgba(0, 0, 0, 0.6);
+      font-size: 20px;
+      margin-bottom: 20px;
     }
-    
-    .emptyCart{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        span{
-            text-align: center;
-            color: rgba(0, 0, 0, 0.6);
-            font-size: 20px;
-            margin-bottom: 20px;
-        }
-        a{
-            text-decoration: none;
-            button{
-                border: none;
-                padding: 15px 30px;
-                background-color: $green;
-                color: white;
-                border-radius: 50px;
-                cursor: pointer;
-                font-size: 20px;
-            }
-        }
+    a {
+      text-decoration: none;
+      button {
+        border: none;
+        padding: 15px 30px;
+        background-color: $green;
+        color: white;
+        border-radius: 50px;
+        cursor: pointer;
+        font-size: 20px;
+      }
     }
+  }
 }
 
-@media (min-width: 768px){
-    .Cart{
-        .productContainer{
-            height: 150px;
-            .top{
-                height: 100px;
+@media (min-width: 768px) {
+  .Cart {
+    .productContainer {
+      height: 150px;
+      .top {
+        height: 100px;
 
-                .left{
-                    padding: 5px;
-                    width: 121px;
-                    height: 100px;
-                }
-
-                .right{
-                    height: 100px;
-                    width: calc(100% - 121px);
-                    span.name{
-                        font-size: 16px;
-                    }
-                    span.price{
-                        font-size: 14px;
-                    }
-                }
-            }
-            .bottom{
-                height: 50px;
-
-                .quantityContainer{
-                    
-                    button{
-                        height: 30px;
-                        width: 40px;
-                        border-radius: 5px;
-                        font-size: 17px;
-                    }
-                    div{
-                        height: 30px;
-                        width: 30px;
-                        margin: 0 7px;
-                        border-radius: 5px;
-                        span{
-                            font-size: 17px;
-                        }
-                    }
-                }
-
-                .removeContainer{
-                    width: 30px;
-                    height: 30px;
-                }
-
-            }
+        .left {
+          padding: 5px;
+          width: 121px;
+          height: 100px;
         }
+
+        .right {
+          height: 100px;
+          width: calc(100% - 121px);
+          span.name {
+            font-size: 16px;
+          }
+          span.price {
+            font-size: 14px;
+          }
+        }
+      }
+      .bottom {
+        height: 50px;
+
+        .quantityContainer {
+          button {
+            height: 30px;
+            width: 40px;
+            border-radius: 5px;
+            font-size: 17px;
+          }
+          div {
+            height: 30px;
+            width: 30px;
+            margin: 0 7px;
+            border-radius: 5px;
+            span {
+              font-size: 17px;
+            }
+          }
+        }
+
+        .removeContainer {
+          width: 30px;
+          height: 30px;
+        }
+      }
     }
+  }
 }

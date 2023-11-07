@@ -1,125 +1,124 @@
-@import '../../variables.scss';
-.CartPage{
-    width: 100vw;
-    margin-top: 65px;
-    padding: 20px;
-    text-align: left;
+@import "../../variables.scss";
+.CartPage {
+  width: 100vw;
+  margin-top: 65px;
+  padding: 20px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: calc(100vh - 65px);
+
+  .top {
+    width: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    min-height: calc(100vh - 65px);
 
-    .top{
-        width: 100%;
+    .title {
+      user-select: none;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      align-self: flex-start;
+      margin-bottom: 40px;
+
+      .iconContainer {
         display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
-        
-        .title{
-            user-select: none;
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            align-items: center;
-            align-self: flex-start;
-            margin-bottom: 40px;
-    
-            .iconContainer{
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 40px;
-                height: 40px;
-                img{
-                    width: 100%;
-                    height: 100%;
-                }
-            }
-        
-            span{
-                font-size: 26px;
-            }
+        width: 40px;
+        height: 40px;
+        img {
+          width: 100%;
+          height: 100%;
         }
+      }
+
+      span {
+        font-size: 26px;
+      }
+    }
+  }
+
+  .buttonContainer {
+    width: 100%;
+    height: 75px;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+
+    button {
+      z-index: 110;
+      width: 150px;
+      height: 45px;
+      border-radius: 50px;
+      border: none;
+      font-size: 20px;
+    }
+    .prev {
+      background: white;
+      color: $green;
+      border: 2px solid $green;
+      transition: background-color 0.2s color 0.2s;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $green500;
+        color: white;
+      }
+    }
+    .smallerText {
+      font-size: 18px;
     }
 
-    .buttonContainer{
-        width: 100%;
-        height: 75px;
-        position: fixed;
-        bottom: 0;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: flex-start;
+    .next {
+      background-color: $green;
+      color: white;
+      transition: background-color 0.2s;
+      border: 2px solid transparent;
+      cursor: pointer;
 
-        button{
-            z-index: 110;
-            width: 150px;
-            height: 45px;
-            border-radius: 50px;
-            border: none;
-            font-size: 20px;
-        }
-        .prev{
-            background: white;
-            color: $green;
-            border: 2px solid $green;
-            transition: background-color .2s color .2s;
-            cursor: pointer;
-
-            &:hover{
-                background-color: $green500;
-                color: white;
-            }
-        }
-        .smallerText{
-            font-size: 18px;
-        }
-
-        .next{
-            background-color: $green;
-            color: white;
-            transition: background-color .2s;
-            border: 2px solid transparent;
-            cursor: pointer;
-
-            &:hover{
-                border-color: $green;
-                background-color: $green500;
-            }
-        }
-        .bigger{
-            width: 260px;
-        }
+      &:hover {
+        border-color: $green;
+        background-color: $green500;
+      }
     }
+    .bigger {
+      width: 260px;
+    }
+  }
 }
-    
 
-    @media (min-width: 768px){
-        .CartPage{
-            .top{
-                flex-direction: row;
-                margin: 40px 0;
-    
-                .title{
-                    order: 1;
-                    align-self: center;
-                    margin-bottom: 0;
-                }
-            }
-            
-            .buttonContainer{
-                button{
-                    width: 250px;
-                    height: 50px;
-                }
-            }
-        }
+@media (min-width: 768px) {
+  .CartPage {
+    .top {
+      flex-direction: row;
+      margin: 40px 0;
+
+      .title {
+        order: 1;
+        align-self: center;
+        margin-bottom: 0;
+      }
     }
 
-    @media (min-width: 1000px){
-        .CartPage{
-            padding: 0 60px;
-        }
+    .buttonContainer {
+      button {
+        width: 250px;
+        height: 50px;
+      }
     }
+  }
+}
+
+@media (min-width: 1000px) {
+  .CartPage {
+    padding: 0 60px;
+  }
+}

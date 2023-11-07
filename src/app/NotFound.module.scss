@@ -1,25 +1,26 @@
-@import './variables.scss';
-.NotFound{
-    margin-top: 200px;    
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    span{
-        text-align: center;
-        color: rgba(0, 0, 0, 0.6);
-        font-size: 30px;
-        margin-bottom: 20px;
+@import "./variables.scss";
+.NotFound {
+  min-height: 100vh;
+  padding-top: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  span {
+    text-align: center;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
+  a {
+    text-decoration: none;
+    button {
+      border: none;
+      padding: 15px 30px;
+      background-color: $green;
+      color: white;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 25px;
     }
-    a{
-        text-decoration: none;
-        button{
-            border: none;
-            padding: 15px 30px;
-            background-color: $green;
-            color: white;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 25px;
-        }
-    }
+  }
 }

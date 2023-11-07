@@ -1,66 +1,66 @@
-@import '../../variables.scss';
+@import "../../variables.scss";
 
-.ProgressBar{
-    width: 100%;
-    height: 62px;
+.ProgressBar {
+  width: 100%;
+  height: 62px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 400px;
+  user-select: none;
+
+  .line {
+    width: 20px;
+    height: 1px;
     margin-top: 20px;
-    margin-bottom: 20px;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  .numberContainer {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    max-width: 400px;
-    user-select: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 40px;
+    height: 62px;
 
-    .line{
-        width: 20px;
-        height: 1px;
-        margin-top: 20px;
-        background-color: rgba(0, 0, 0, 0.3);
+    div {
+      width: 40px;
+      height: 40px;
+      background-color: hsla(0, 0%, 0%, 0.4);
+      border-radius: 50px;
+      font-size: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      margin-bottom: 2px;
     }
+    span {
+      font-size: 7px;
+      color: rgba(0, 0, 0, 0.4);
+      text-align: center;
+    }
+  }
 
-    .numberContainer{
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        width: 40px;
-        height: 62px;
-
-        div{
-            width: 40px;
-            height: 40px;
-            background-color: hsla(0, 0%, 0%, 0.4);
-            border-radius: 50px;
-            font-size: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            margin-bottom: 2px;
-        }
-        span{
-            font-size: 7px;
-            color: rgba(0, 0, 0, 0.4);
-            text-align: center;
-        }
+  .current {
+    div {
+      background-color: $green;
     }
-
-    .current{
-        div{
-            background-color: $green;
-        }
+  }
+  .past {
+    div {
+      background-color: hsla(0, 0%, 0%, 0.8);
+      cursor: pointer;
     }
-    .past{
-        div{
-            background-color: hsla(0, 0%, 0%, 0.8);
-            cursor: pointer;
-        }
-    }
+  }
 }
 
-@media (min-width: 768px){
-    .ProgressBar{
-        margin: 0;
-        order: 2;
-    }       
+@media (min-width: 768px) {
+  .ProgressBar {
+    margin: 0;
+    order: 2;
+  }
 }

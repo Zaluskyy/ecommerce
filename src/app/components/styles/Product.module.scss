@@ -1,262 +1,262 @@
-@import '../../variables.scss';
+@import "../../variables.scss";
 
 $productWidth: calc(50vw - 25px);
 $productHeight: calc(#{$productWidth} * 1.533123028391167);
 
-.Product{
-    width: $productWidth;
-    height: $productHeight;
-    background-color: $green;
+.Product {
+  width: $productWidth;
+  height: $productHeight;
+  background-color: $green;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  border-radius: 10px;
+
+  .imgContainer {
+    width: 100%;
+    height: calc($productWidth * 0.75);
+    background-color: white;
+    border-radius: 5px;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      object-fit: contain;
+      width: 80%;
+      height: 80%;
+    }
+  }
+
+  .category {
+    font-size: calc($productWidth * 0.050473186119874);
+    color: #7cc3e2;
+    align-self: flex-start;
+    text-transform: capitalize;
+  }
+  .title {
+    width: 100%;
+    height: calc($productWidth * 0.215384615384615);
+    font-size: calc($productWidth * 0.069400630914826);
+    color: white;
+    text-align: left;
+    overflow: hidden;
+  }
+
+  div.bottom {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 8px;
-    border-radius: 10px;
-    
-    .imgContainer{
-        width: 100%;
-        height: calc($productWidth * .75);
-        background-color: white;
-        border-radius: 5px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        
-        img{
-            object-fit: contain;
-            width: 80%;
-            height: 80%;
-        }
+
+    .price {
+      color: white;
+      font-size: calc($productWidth * 0.075709779179811);
     }
 
-    .category{
-        font-size: calc($productWidth * 0.050473186119874);
-        color: #7CC3E2;
-        align-self: flex-start;
-        text-transform: capitalize;
+    .addToCartContainer {
+      background-color: $green;
+      width: calc($productWidth * 0.189274447949527);
+      height: calc($productWidth * 0.189274447949527);
+      border-radius: 50px;
+      border: 1px solid white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: 0.2s background-color;
+      cursor: pointer;
+      img {
+        transition: 0.2s;
+        width: 60%;
+        height: 60%;
+      }
+
+      &:hover {
+        background-color: $green500;
+      }
     }
-    .title{
-        width: 100%;
-        height: calc($productWidth * 0.215384615384615);
-        font-size: calc($productWidth * 0.069400630914826);
-        color: white;
-        text-align: left;
-        overflow: hidden;
-    }
-
-    div.bottom{
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-
-        .price{
-            color: white;
-            font-size: calc($productWidth * 0.075709779179811);
-        }
-
-        .addToCartContainer{
-            background-color: $green;
-            width: calc($productWidth * 0.189274447949527);
-            height: calc($productWidth * 0.189274447949527);
-            border-radius: 50px;
-            border: 1px solid white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: .2s background-color;
-            cursor: pointer;
-            img{
-                transition: .2s;
-                width: 60%;
-                height: 60%;
-            }
-
-            &:hover{
-                background-color: $green500;
-            }
-        }
-    }
+  }
 }
 
-@media (min-width: 450px){
-    $productWidth: calc(33.333vw - 20px);
-    $productHeight: calc(#{$productWidth} * 1.533123028391167);
+@media (min-width: 450px) {
+  $productWidth: calc(33.333vw - 20px);
+  $productHeight: calc(#{$productWidth} * 1.533123028391167);
 
-    .Product{
-        width: $productWidth;
-        height: $productHeight;
+  .Product {
+    width: $productWidth;
+    height: $productHeight;
 
-        .imgContainer{
-            height: calc($productWidth * .75);
-        }
-        .category{
-            font-size: calc($productWidth * 0.050473186119874);
-        }
-        .title{
-            height: calc($productWidth * 0.215384615384615);
-            font-size: calc($productWidth * 0.069400630914826);
-        }
-        div.bottom{
-            .price{
-                font-size: calc($productWidth * 0.075709779179811);
-            }
-            .addToCartContainer{
-                width: calc($productWidth * 0.189274447949527);
-                height: calc($productWidth * 0.189274447949527);
-            }
-        }
+    .imgContainer {
+      height: calc($productWidth * 0.75);
     }
+    .category {
+      font-size: calc($productWidth * 0.050473186119874);
+    }
+    .title {
+      height: calc($productWidth * 0.215384615384615);
+      font-size: calc($productWidth * 0.069400630914826);
+    }
+    div.bottom {
+      .price {
+        font-size: calc($productWidth * 0.075709779179811);
+      }
+      .addToCartContainer {
+        width: calc($productWidth * 0.189274447949527);
+        height: calc($productWidth * 0.189274447949527);
+      }
+    }
+  }
 }
-@media (min-width: 600px){
-    $productWidth: calc(33.333vw - 46.666666666666667px);
-    $productHeight: calc(#{$productWidth} * 1.533123028391167);
+@media (min-width: 600px) {
+  $productWidth: calc(33.333vw - 46.666666666666667px);
+  $productHeight: calc(#{$productWidth} * 1.533123028391167);
 
-    .Product{
-        width: $productWidth;
-        height: $productHeight;
+  .Product {
+    width: $productWidth;
+    height: $productHeight;
 
-        .imgContainer{
-            height: calc($productWidth * .75);
-        }
-        .category{
-            font-size: calc($productWidth * 0.050473186119874);
-        }
-        .title{
-            height: calc($productWidth * 0.215384615384615);
-            font-size: calc($productWidth * 0.069400630914826);
-        }
-        div.bottom{
-            .price{
-                font-size: calc($productWidth * 0.075709779179811);
-            }
-            .addToCartContainer{
-                width: calc($productWidth * 0.189274447949527);
-                height: calc($productWidth * 0.189274447949527);
-            }
-        }
+    .imgContainer {
+      height: calc($productWidth * 0.75);
     }
+    .category {
+      font-size: calc($productWidth * 0.050473186119874);
+    }
+    .title {
+      height: calc($productWidth * 0.215384615384615);
+      font-size: calc($productWidth * 0.069400630914826);
+    }
+    div.bottom {
+      .price {
+        font-size: calc($productWidth * 0.075709779179811);
+      }
+      .addToCartContainer {
+        width: calc($productWidth * 0.189274447949527);
+        height: calc($productWidth * 0.189274447949527);
+      }
+    }
+  }
 }
-@media (min-width: 700px){
-    $productWidth: calc(25vw - 37.5px);
-    $productHeight: calc(#{$productWidth} * 1.533123028391167);
+@media (min-width: 700px) {
+  $productWidth: calc(25vw - 37.5px);
+  $productHeight: calc(#{$productWidth} * 1.533123028391167);
 
-    .Product{
-        width: $productWidth;
-        height: $productHeight;
+  .Product {
+    width: $productWidth;
+    height: $productHeight;
 
-        .imgContainer{
-            height: calc($productWidth * .75);
-        }
-        .category{
-            font-size: calc($productWidth * 0.050473186119874);
-        }
-        .title{
-            height: calc($productWidth * 0.215384615384615);
-            font-size: calc($productWidth * 0.069400630914826);
-        }
-        div.bottom{
-            .price{
-                font-size: calc($productWidth * 0.075709779179811);
-            }
-            .addToCartContainer{
-                width: calc($productWidth * 0.189274447949527);
-                height: calc($productWidth * 0.189274447949527);
-            }
-        }
+    .imgContainer {
+      height: calc($productWidth * 0.75);
     }
+    .category {
+      font-size: calc($productWidth * 0.050473186119874);
+    }
+    .title {
+      height: calc($productWidth * 0.215384615384615);
+      font-size: calc($productWidth * 0.069400630914826);
+    }
+    div.bottom {
+      .price {
+        font-size: calc($productWidth * 0.075709779179811);
+      }
+      .addToCartContainer {
+        width: calc($productWidth * 0.189274447949527);
+        height: calc($productWidth * 0.189274447949527);
+      }
+    }
+  }
 }
-@media (min-width: 950px){
-    $productWidth: calc(20vw - 32px);
-    $productHeight: calc(#{$productWidth} * 1.533123028391167);
+@media (min-width: 950px) {
+  $productWidth: calc(20vw - 32px);
+  $productHeight: calc(#{$productWidth} * 1.533123028391167);
 
-    .Product{
-        width: $productWidth;
-        height: $productHeight;
+  .Product {
+    width: $productWidth;
+    height: $productHeight;
 
-        .imgContainer{
-            height: calc($productWidth * .75);
-        }
-        .category{
-            font-size: calc($productWidth * 0.050473186119874);
-        }
-        .title{
-            height: calc($productWidth * 0.215384615384615);
-            font-size: calc($productWidth * 0.069400630914826);
-        }
-        div.bottom{
-            .price{
-                font-size: calc($productWidth * 0.075709779179811);
-            }
-            .addToCartContainer{
-                width: calc($productWidth * 0.189274447949527);
-                height: calc($productWidth * 0.189274447949527);
-            }
-        }
+    .imgContainer {
+      height: calc($productWidth * 0.75);
     }
+    .category {
+      font-size: calc($productWidth * 0.050473186119874);
+    }
+    .title {
+      height: calc($productWidth * 0.215384615384615);
+      font-size: calc($productWidth * 0.069400630914826);
+    }
+    div.bottom {
+      .price {
+        font-size: calc($productWidth * 0.075709779179811);
+      }
+      .addToCartContainer {
+        width: calc($productWidth * 0.189274447949527);
+        height: calc($productWidth * 0.189274447949527);
+      }
+    }
+  }
 }
-@media (min-width: 1150px){
-    $productWidth: calc(16.666666666666667vw - 28.333333333333333px);
-    $productHeight: calc(#{$productWidth} * 1.533123028391167);
+@media (min-width: 1150px) {
+  $productWidth: calc(16.666666666666667vw - 28.333333333333333px);
+  $productHeight: calc(#{$productWidth} * 1.533123028391167);
 
-    .Product{
-        width: $productWidth;
-        height: $productHeight;
+  .Product {
+    width: $productWidth;
+    height: $productHeight;
 
-        .imgContainer{
-            height: calc($productWidth * .75);
-        }
-        .category{
-            font-size: calc($productWidth * 0.050473186119874);
-        }
-        .title{
-            height: calc($productWidth * 0.215384615384615);
-            font-size: calc($productWidth * 0.069400630914826);
-        }
-        div.bottom{
-            .price{
-                font-size: calc($productWidth * 0.075709779179811);
-            }
-            .addToCartContainer{
-                width: calc($productWidth * 0.189274447949527);
-                height: calc($productWidth * 0.189274447949527);
-            }
-        }
+    .imgContainer {
+      height: calc($productWidth * 0.75);
     }
+    .category {
+      font-size: calc($productWidth * 0.050473186119874);
+    }
+    .title {
+      height: calc($productWidth * 0.215384615384615);
+      font-size: calc($productWidth * 0.069400630914826);
+    }
+    div.bottom {
+      .price {
+        font-size: calc($productWidth * 0.075709779179811);
+      }
+      .addToCartContainer {
+        width: calc($productWidth * 0.189274447949527);
+        height: calc($productWidth * 0.189274447949527);
+      }
+    }
+  }
 }
-@media (min-width: 1550px){
-    $productWidth: calc(258.333333333333333px - 28.333333333333333px);
-    $productHeight: calc(#{$productWidth} * 1.533123028391167);
-    .Product{
-        width: $productWidth;
-        height: $productHeight;
+@media (min-width: 1550px) {
+  $productWidth: calc(258.333333333333333px - 28.333333333333333px);
+  $productHeight: calc(#{$productWidth} * 1.533123028391167);
+  .Product {
+    width: $productWidth;
+    height: $productHeight;
 
-        .imgContainer{
-            height: calc($productWidth * .75);
-        }
-        .category{
-            font-size: calc($productWidth * 0.050473186119874);
-        }
-        .title{
-            height: calc($productWidth * 0.215384615384615);
-            font-size: calc($productWidth * 0.069400630914826);
-        }
-        div.bottom{
-            .price{
-                font-size: calc($productWidth * 0.075709779179811);
-            }
-            .addToCartContainer{
-                width: calc($productWidth * 0.189274447949527);
-                height: calc($productWidth * 0.189274447949527);
-            }
-        }
+    .imgContainer {
+      height: calc($productWidth * 0.75);
     }
+    .category {
+      font-size: calc($productWidth * 0.050473186119874);
+    }
+    .title {
+      height: calc($productWidth * 0.215384615384615);
+      font-size: calc($productWidth * 0.069400630914826);
+    }
+    div.bottom {
+      .price {
+        font-size: calc($productWidth * 0.075709779179811);
+      }
+      .addToCartContainer {
+        width: calc($productWidth * 0.189274447949527);
+        height: calc($productWidth * 0.189274447949527);
+      }
+    }
+  }
 }
 
-.messageSpan{
-    a{
-        color: $green;
-    }
+.messageSpan {
+  a {
+    color: $green;
+  }
 }

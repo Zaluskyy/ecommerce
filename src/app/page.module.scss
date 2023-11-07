@@ -1,33 +1,33 @@
-@import './variables.scss';
+@import "./variables.scss";
 
-.main{
-    width: 100%;
-    min-height: calc(100vh - 65px);
-    margin-top: 65px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 100px;
+.main {
+  width: 100%;
+  min-height: calc(100vh - 65px);
+  margin-top: 65px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 100px;
 
-    .title{
-        font-size: 26px;
+  .title {
+    font-size: 26px;
+  }
+
+  a {
+    outline: none;
+    button {
+      padding: 10px 20px;
+      border: 2px solid $green;
+      border-radius: 12px;
+      margin-top: 40px;
+      color: $green;
+      background-color: transparent;
+      transition: background-color 0.2s, color 0.2s;
+
+      &:hover {
+        background-color: $green500;
+        color: white;
+      }
     }
-
-    a{
-        outline: none;
-        button{
-            padding: 10px 20px;
-            border: 2px solid $green;
-            border-radius: 12px;
-            margin-top: 40px;
-            color: $green;
-            background-color: transparent;
-            transition: background-color .2s, color .2s;
-
-            &:hover{
-                background-color: $green500;
-                color: white;
-            }
-        }
-    }
+  }
 }
