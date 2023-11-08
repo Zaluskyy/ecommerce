@@ -14,7 +14,7 @@ export const metadata = {
   title: "Zaluskyy shop",
   description: "The best shop",
   verification: {
-    google: "tRsEUBkFRrQ_dehZlRf-uSYPHdQZ5KUri1KPBPRYiP0",
+    google: "VxhVBS9PD1d3IF0B3-bOFskK2NNjdBjZI1bqZe4Je3E",
   },
 };
 
