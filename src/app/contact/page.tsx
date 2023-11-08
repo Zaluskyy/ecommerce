@@ -23,21 +23,21 @@ export default function Contact() {
     {
       name: "Phone",
       icon: callIcon,
-      href: "tel: +48 213 701 488",
-      text: "+48 213 701 488",
+      href: "tel: +48 123 456 789",
+      text: "+48 123 456 789",
     },
     {
       name: "Email",
       icon: mailIcon,
-      href: "mailto: papwat2137@gmail.com",
-      text: "papwat2137@gmail.com",
+      href: "mailto: example@gmail.com",
+      text: "example@gmail.com",
     },
     {
       name: "Adress",
       icon: locationIcon,
-      href: "https://www.google.com/maps/place/00120+Vatican+City,+Watykan/@41.9038163,12.4520612,16z/data=!3m1!4b1!4m6!3m5!1s0x1325890a57d42d3d:0x94f9ab23a7eb0!8m2!3d41.902916!4d12.453389!16zL20vMDd5dHQ?entry=ttu",
-      text: "Ul. Papieska 21/37",
-      text2: "69-420 Watykan",
+      href: "https://www.google.com/maps/place/Warszawa/@52.233033,20.8960435,11z/data=!3m1!4b1!4m6!3m5!1s0x471ecc669a869f01:0x72f0be2a88ead3fc!8m2!3d52.2296756!4d21.0122287!16zL20vMDgxbV8?entry=ttu",
+      text: "Ul. Piękna 21",
+      text2: "21-582 Warszawa",
     },
   ];
 
