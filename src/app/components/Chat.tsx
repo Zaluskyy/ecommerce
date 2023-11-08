@@ -1,24 +1,76 @@
 "use client";
 
-import React, { FC, FormEvent, useEffect, useState } from "react";
+import React, { FC, FormEvent, useEffect, useRef, useState } from "react";
 import style from "./styles/Chat.module.scss";
 import Image from "next/image";
 
 import chatIcon from "../../../public/img/icon/chat.svg";
 import sendIcon from "../../../public/img/icon/send.svg";
 import minimalizeIcon from "../../../public/img/icon/minimalize.svg";
-import backIcon from "../../../public/img/icon/back.svg";
 import logo from "../../../public/img/icon/logo.svg";
 import user from "../../../public/img/icon/user.svg";
 
 import ButtonAnimation from "../UI/ButtonAnimation";
 
+import { useCookies } from "react-cookie";
+
+import { db } from "../firebase";
+import {
+  collection,
+  addDoc,
+  query,
+  where,
+  orderBy,
+  onSnapshot,
+} from "firebase/firestore";
+import toast from "react-hot-toast";
+
 interface ChatProps {}
 
 const Chat: FC<ChatProps> = () => {
+  interface ImessagesArr {
+    createdAt: Date;
+    text: string;
+    token: string;
+    user: boolean;
+  }
+
+  const contentRef = useRef<HTMLDivElement | null>(null);
+  const [cookies, setCookie] = useCookies(["conversationToken"]);
+
   const [opened, setOpened] = useState<boolean>(false);
   const [conversation, setConversation] = useState<boolean>(false);
   const [currentStyle, setCurrentStyle] = useState<string>("");
+
+  const [newMessage, setNewMessage] = useState<string>("");
+  const [messagesArr, setMessagesArr] = useState<ImessagesArr[]>([]);
+
+  const [token, setToken] = useState<string>("");
+
+  const messagesRef = collection(db, "messages");
+
+  useEffect(() => {
+    function generateSessionId(length: number) {
+      const charset =
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+      let sessionId = "";
+      for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * charset.length);
+        sessionId += charset[randomIndex];
+      }
+      return sessionId;
+    }
+
+    const tokenFromCookies = cookies.conversationToken || "";
+
+    if (tokenFromCookies == "") {
+      const newToken = generateSessionId(20);
+      setCookie("conversationToken", newToken);
+      setToken(newToken);
+    } else {
+      setToken(tokenFromCookies);
+    }
+  }, []);
 
   const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key == "Escape") setOpened(false);
@@ -39,50 +91,65 @@ const Chat: FC<ChatProps> = () => {
     if (!currentStyle) setOpened(true);
   };
 
-  const handleSendMessage = (e: FormEvent) => {
+  const handleSendMessage = async (e: FormEvent) => {
     e.preventDefault();
+    if (newMessage == "") return;
+    try {
+      await addDoc(messagesRef, {
+        createdAt: new Date(),
+        text: newMessage,
+        token,
+        user: true,
+      });
+      setNewMessage("");
+    } catch {
+      toast.error("something went wrong");
+    }
   };
 
-  interface ImessagesArr {
-    author: "shop" | "me";
-    text: string;
-  }
+  useEffect(() => {
+    const queryMessage = query(
+      messagesRef,
+      where("token", "==", token),
+      orderBy("createdAt")
+    );
 
-  const messagesArr: ImessagesArr[] = [
-    {
-      author: "shop",
-      text: "Hello, you are messaging our shop. This is the best shop in Poland",
-    },
-    { author: "me", text: "O siema stary" },
-    {
-      author: "shop",
-      text: "oisajd foaidsj fopasjd foiasdj ofiaj oij asdopf jadiof joaisd joidsa jopfi ajdfo",
-    },
-    { author: "me", text: " oij asdopf jadiof joaisd joidsa jopfi ajdfo" },
-    {
-      author: "shop",
-      text: " ofiaj oij asdopf jadiof joaisd joidsa jopfi ajdfo",
-    },
-    {
-      author: "me",
-      text: "oisajd foaidsj fopasjd foiasdj ofiaj oij asdopf jadiof joaisd joidsa jopfi ajdfooisajd foaidsj fopasjd foiasdj ofiaj oij asdopf jadiof joaisd joidsa jopfi ajdfooisajd foaidsj fopasjd foiasdj ofiaj oij asdopf jadiof joaisd joidsa jopfi ajdfooisajd foaidsj fopasjd foiasdj ofiaj oij asdopf jadiof joaisd joidsa jopfi ajdfooisajd foaidsj fopasjd foiasdj ofiaj oij asdopf jadiof joaisd joidsa jopfi ajdfo",
-    },
-    { author: "shop", text: "O" },
-  ];
+    let timeId: NodeJS.Timeout;
 
-  const messages = messagesArr.map((item, index) => {
+    const unsubscribe = onSnapshot(queryMessage, (snapshot) => {
+      const newMessagesArr: ImessagesArr[] = snapshot.docs.map((doc) => ({
+        createdAt: doc.data().createdAt.toDate(),
+        text: doc.data().text,
+        token: doc.data().token,
+        user: doc.data().user,
+      }));
+
+      setMessagesArr(newMessagesArr);
+      timeId = setTimeout(() => {
+        if (contentRef.current)
+          contentRef.current.scrollTop = contentRef.current.scrollHeight + 100;
+      }, 50);
+    });
+
+    return () => {
+      unsubscribe();
+      clearTimeout(timeId);
+    };
+  }, [token]);
+
+  const messages = messagesArr.map((item) => {
     return (
       <div
-        key={index} //zmień key na time
+        key={item.createdAt.getTime()}
         className={
-          item.author == "shop"
-            ? `${style.messageContainer}`
-            : `${style.messageContainer} ${style.myMessage}`
+          item.user
+            ? `${style.messageContainer} ${style.myMessage}`
+            : `${style.messageContainer}`
         }
       >
         <div className={style.imageContainer}>
           <Image
-            src={item.author == "shop" ? logo : user}
+            src={item.user ? user : logo}
             alt="logo"
             width={24}
             height={24}
@@ -91,7 +158,11 @@ const Chat: FC<ChatProps> = () => {
         </div>
         <div className={style.message}>
           <div className={style.text}>{item.text}</div>
-          <span className={style.time}>21:37</span>
+          <span className={style.time}>{`${item.createdAt.getHours()}:${
+            item.createdAt.getMinutes() < 10
+              ? "0" + item.createdAt.getMinutes()
+              : item.createdAt.getMinutes()
+          }`}</span>
         </div>
       </div>
     );
@@ -157,10 +228,17 @@ const Chat: FC<ChatProps> = () => {
             />
           </div>
 
-          <div className={style.content}>{messages}</div>
+          <div ref={contentRef} className={style.content}>
+            {messages}
+          </div>
 
           <form onClick={handleSendMessage} className={style.writeMessage}>
-            <input type="text" placeholder="Send message..." />
+            <input
+              type="text"
+              placeholder="Send message..."
+              onChange={(e) => setNewMessage(e.target.value)}
+              value={newMessage}
+            />
             <ButtonAnimation className={style.sendContainer}>
               <Image src={sendIcon} alt="send icon" />
             </ButtonAnimation>

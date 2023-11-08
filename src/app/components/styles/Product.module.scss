@@ -25,7 +25,7 @@ $productHeight: calc(#{$productWidth} * 1.533123028391167);
 
     img {
       object-fit: contain;
-      width: 80%;
+      width: auto;
       height: 80%;
     }
   }
