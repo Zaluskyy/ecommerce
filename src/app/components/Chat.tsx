@@ -22,6 +22,8 @@ import {
   where,
   orderBy,
   onSnapshot,
+  setDoc,
+  doc,
 } from "firebase/firestore";
 import toast from "react-hot-toast";
 
@@ -94,14 +96,23 @@ const Chat: FC<ChatProps> = () => {
   const handleSendMessage = async (e: FormEvent) => {
     e.preventDefault();
     if (newMessage == "") return;
+
+    const tokensCollectionRef = collection(db, "tokens");
+
     try {
-      await addDoc(messagesRef, {
-        createdAt: new Date(),
-        text: newMessage,
-        token,
-        user: true,
-      });
-      setNewMessage("");
+      const docRef = doc(tokensCollectionRef, token);
+      await setDoc(docRef, { token, read: false });
+      try {
+        await addDoc(messagesRef, {
+          createdAt: new Date(),
+          text: newMessage,
+          token,
+          user: true,
+        });
+        setNewMessage("");
+      } catch {
+        toast.error("something went wrong");
+      }
     } catch {
       toast.error("something went wrong");
     }
