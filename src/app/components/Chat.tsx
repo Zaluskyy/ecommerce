@@ -101,7 +101,7 @@ const Chat: FC<ChatProps> = () => {
 
     try {
       const docRef = doc(tokensCollectionRef, token);
-      await setDoc(docRef, { token, read: false });
+      await setDoc(docRef, { token, read: false, time: new Date() });
       try {
         await addDoc(messagesRef, {
           createdAt: new Date(),
