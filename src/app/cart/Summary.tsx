@@ -14,8 +14,15 @@ const Summary: FC<SummaryProps> = () => {
   const { cartProducts, selectedDelivery, selectedPayment } = context;
 
   const [displayName, setDisplayName] = useState<string | null>(null);
-  const [displayTelephone, setDisplayTelephone] = useState<number | null>(null);
   const [displayEmail, setDisplayEmail] = useState<string | null>(null);
+
+  const [displayTelephone, setDisplayTelephone] = useState<number | null>(null);
+  const [displayStreet, setDisplayStreet] = useState<string | null>(null);
+  const [displayApartmentNumber, setDisplayApartmentNumber] = useState<
+    string | null
+  >(null);
+  const [displayZipCode, setDisplayZipCode] = useState<string | null>(null);
+  const [displayCity, setDisplayCity] = useState<string | null>(null);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
@@ -27,6 +34,10 @@ const Summary: FC<SummaryProps> = () => {
         if (userDocSnapshot.exists()) {
           const userData = userDocSnapshot.data();
           setDisplayTelephone(userData.telephone);
+          setDisplayStreet(userData.street);
+          setDisplayApartmentNumber(userData.apartmentNumber);
+          setDisplayZipCode(userData.zipCode);
+          setDisplayCity(userData.city);
         }
       }
     });
@@ -133,9 +144,15 @@ const Summary: FC<SummaryProps> = () => {
         <div className={style.recipientDataContainer}>
           <span className={style.title}>Recipient&apos;s data</span>
           <div className={style.container}>
-            <span>{displayName}</span>
-            <span>{`+48 ${displayTelephone}`}</span>
-            <span>{displayEmail}</span>
+            {displayName && <span>{displayName}</span>}
+            {displayTelephone && <span>+48 {displayTelephone}</span>}
+            {displayEmail && <span>{displayEmail}</span>}
+            {displayStreet && displayApartmentNumber && (
+              <span>{`${displayStreet} ${displayApartmentNumber}`}</span>
+            )}
+            {displayZipCode && displayCity && (
+              <span>{`${displayZipCode} ${displayCity}`}</span>
+            )}
           </div>
         </div>
       </div>

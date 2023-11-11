@@ -78,7 +78,8 @@ const Orders: React.FC<OrdersProps> = () => {
               : item.date.getMonth()
           }.${item.date.getFullYear()}`}</span>
           <span>Nr. {item.id}</span>
-          <span className={style.price}>{item.price} zł</span>
+          <span>{item.piece}</span>
+          <span className={style.price}>{item.price * item.piece} zł</span>
         </div>
         <div className={style.right}>
           <span className={style.title}>{item.name}</span>
